@@ -1,0 +1,75 @@
+export const footerData = {
+  company: {
+    title: 'Company',
+    links: [
+      { label: 'About Us', route: 'how-it-works' },
+      { label: 'Our Vision', route: 'quality' },
+      { label: 'Our Mission', route: 'services' },
+      { label: 'Leadership', route: 'why-choose-us' },
+      { label: 'Careers', route: 'trusted-businesses' },
+      { label: 'Contact Us', route: 'contact' },
+    ],
+  },
+  services: {
+    title: 'Services',
+    links: [
+      { label: 'Export Solutions', route: 'services' },
+      { label: 'Import Solutions', route: 'services' },
+      { label: 'Air Freight', route: 'freight' },
+      { label: 'Ocean Freight', route: 'freight' },
+      { label: 'Land Transportation', route: 'freight' },
+      { label: 'Warehousing', route: 'track-shipment' },
+      { label: 'Customs Clearance', route: 'customs-compliance' },
+    ],
+  },
+  products: {
+    title: 'Products',
+    links: [
+      { label: 'Agriculture & Organic', route: 'products' },
+      { label: 'Textiles & Apparel', route: 'products' },
+      { label: 'Automobiles & Vehicles', route: 'products' },
+      { label: 'Handicrafts', route: 'products' },
+      { label: 'Industrial Products', route: 'products' },
+      { label: 'Electronics', route: 'products' },
+      { label: 'Food & Beverages', route: 'products' },
+      { label: 'Consumer Products', route: 'products' },
+    ],
+  },
+  tradeNetwork: {
+    title: 'Trade Network',
+    links: [
+      { label: 'Global Buyers', route: 'buyers' },
+      { label: 'Suppliers', route: 'procurement' },
+      { label: 'Partners', route: 'network' },
+      { label: 'Countries We Serve', route: 'network' },
+      { label: 'Trade Opportunities', route: 'business-global' },
+      { label: 'Become a Supplier', route: 'procurement' },
+      { label: 'Become a Buyer', route: 'buyers' },
+    ],
+  },
+  resources: {
+    title: 'Resources',
+    links: [
+      { label: 'Blog', route: 'documentation' },
+      { label: 'Trade Guide', route: 'documentation' },
+      { label: 'Documentation', route: 'documentation' },
+      { label: 'Shipping Guide', route: 'track-shipment' },
+      { label: 'Market Insights', route: 'documentation' },
+      { label: 'FAQ', route: 'how-it-works' },
+      { label: 'News', route: 'documentation' },
+    ],
+  },
+  contact: {
+    phone: '+91 12345 67890',
+    email: 'info@globallinktradesolutions.com',
+    website: 'www.globallinktradesolutions.com',
+    location: 'Hyderabad, India',
+  },
+  legalLinks: [
+    { label: 'Privacy Policy', route: 'privacy' },
+    { label: 'Terms & Conditions', route: 'terms' },
+    { label: 'Cookie Policy', route: 'cookies' },
+    { label: 'Shipping Policy', route: 'shipping-policy' },
+    { label: 'Refund Policy', route: 'refund-policy' },
+  ],
+};

@@ -1,0 +1,1472 @@
+@import './styles/variables.css';
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  background-color: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: clip;
+}
+
+section {
+  scroll-margin-top: 72px;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--white);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input, select {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--navy);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Page Frame Container */
+.page-viewport {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 678px;
+  position: relative;
+  background-color: var(--navy);
+  overflow-x: clip;
+}
+
+/* Sticky Fixed Navigation Bar */
+.global-link-header-fixed {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+}
+
+.global-link-header-fixed.header-scrolled {
+  background: rgba(2, 15, 38, 0.98) !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6) !important;
+  border-bottom-color: rgba(83, 137, 197, 0.4) !important;
+}
+
+/* Utility Gold Text & Details */
+.text-gold {
+  color: var(--gold) !important;
+}
+
+.bg-gold {
+  background-color: var(--gold) !important;
+}
+
+.serif-font {
+  font-family: var(--font-heading);
+}
+
+.sans-font {
+  font-family: var(--font-body);
+}
+
+/* Hover effects */
+.freight-card:hover, .product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(8, 38, 83, 0.14) !important;
+}
+
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  background: #FAF8F3 !important;
+}
+
+.procurement-step-circle:hover {
+  transform: translateY(-3px);
+  border-color: #F2A922 !important;
+  box-shadow: 0 8px 20px rgba(242, 169, 34, 0.25) !important;
+}
+
+.procurement-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 24px rgba(242, 169, 34, 0.45) !important;
+}
+
+.procurement-benefit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(8, 38, 83, 0.12) !important;
+  border-color: #C3D0E0 !important;
+}
+
+.procurement-flow-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.doc-category-item:hover .doc-category-circle {
+  transform: translateY(-3px);
+  border-color: #082653 !important;
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.14) !important;
+}
+
+.doc-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.compliance-benefit-item {
+  transition: transform 0.2s ease;
+}
+
+.compliance-benefit-item:hover {
+  transform: translateY(-2px);
+}
+
+.quality-process-item:hover .quality-process-circle {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(8, 38, 83, 0.14) !important;
+}
+
+.quality-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.quality-assurance-item {
+  transition: transform 0.2s ease;
+}
+
+.quality-assurance-item:hover {
+  transform: translateY(-2px);
+}
+
+.clay-service-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: inset 4px 4px 8px rgba(255, 255, 255, 0.18), inset -5px -5px 10px rgba(0, 0, 0, 0.65), 0 18px 32px rgba(0, 0, 0, 0.50), 0 0 24px rgba(242, 181, 47, 0.20) !important;
+  border-color: rgba(242, 181, 47, 0.5) !important;
+}
+
+.clay-service-card:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: inset 5px 5px 12px rgba(0, 0, 0, 0.8), inset -3px -3px 6px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.clay-service-card:hover .clay-service-icon-wrap {
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.7), inset -2.5px -2.5px 5px rgba(110, 60, 0, 0.5), 0 10px 24px rgba(242, 181, 47, 0.55) !important;
+}
+
+.clay-cta-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: inset 2.5px 2.5px 6px rgba(255, 255, 255, 0.75), inset -3px -3px 6px rgba(110, 60, 0, 0.55), 0 14px 28px rgba(222, 151, 27, 0.55) !important;
+}
+
+.clay-cta-btn:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: inset 4px 4px 8px rgba(110, 60, 0, 0.8), inset -2px -2px 4px rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.clay-benefits-banner,
+.clay-stats-row {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.clay-benefits-banner:hover {
+  box-shadow: inset 3px 3px 8px rgba(255, 255, 255, 0.18), inset -5px -5px 12px rgba(0, 0, 0, 0.65), 0 20px 42px rgba(0, 0, 0, 0.55), 0 0 24px rgba(242, 181, 47, 0.12) !important;
+}
+
+.services-benefit-item:hover {
+  transform: translateY(-2px);
+}
+
+.process-step-item:hover .process-step-circle {
+  transform: translateY(-3px);
+  border-color: #E8A52A !important;
+  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.14) !important;
+}
+
+.process-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.process-trust-item:hover {
+  transform: translateY(-2px);
+}
+
+.track-now-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.view-all-shipments-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.warehousing-capability-item:hover .warehousing-circle {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.12) !important;
+}
+
+.warehousing-cta-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.portfolio-category-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.14) !important;
+}
+
+.portfolio-category-card:hover .portfolio-card-img {
+  transform: scale(1.03);
+}
+
+.portfolio-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+.portfolio-trust-item:hover {
+  transform: translateY(-2px);
+}
+
+.buyer-category-item:hover {
+  transform: translateY(-3px);
+}
+
+.buyer-category-item:hover .buyer-circle-container {
+  border-color: #E8A52A !important;
+  box-shadow: 0 6px 18px rgba(8, 38, 83, 0.14) !important;
+}
+
+.buyer-action-card:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+}
+
+.customs-service-item:hover {
+  transform: translateY(-3px);
+}
+
+.customs-service-item:hover .customs-circle-container {
+  border-color: #E8A52A !important;
+  box-shadow: 0 6px 18px rgba(8, 38, 83, 0.14) !important;
+}
+
+.customs-cta-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+}
+
+@keyframes hubPulseAnim {
+  0% {
+    r: 8;
+    opacity: 0.8;
+  }
+  50% {
+    r: 16;
+    opacity: 0.2;
+  }
+  100% {
+    r: 8;
+    opacity: 0.8;
+  }
+}
+
+.hub-pulse-ring {
+  animation: hubPulseAnim 2.8s infinite ease-in-out;
+}
+
+.network-stat-item {
+  transition: transform 0.22s ease;
+}
+
+.network-stat-item:hover {
+  transform: translateY(-3px);
+}
+
+.network-primary-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 28px rgba(10, 79, 199, 0.40) !important;
+}
+
+.advantage-item:hover {
+  transform: translateY(-3px);
+}
+
+.advantage-item:hover .advantage-circle {
+  border-color: #F5B73A !important;
+  box-shadow: 0 0 20px rgba(245, 183, 58, 0.50) !important;
+  transform: scale(1.04);
+}
+
+.cta-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 20px rgba(242, 181, 47, 0.50) !important;
+}
+
+.cta-btn-secondary:hover {
+  transform: translateY(-2px);
+  background-color: rgba(242, 181, 47, 0.12) !important;
+  border-color: #FFC340 !important;
+}
+
+.carousel-nav-btn:hover {
+  background-color: rgba(35, 70, 115, 0.95) !important;
+  border-color: rgba(242, 181, 47, 0.6) !important;
+  transform: scale(1.06);
+}
+
+.partner-logo-item:hover {
+  opacity: 1 !important;
+  transform: translateY(-2px);
+}
+
+.footer-nav-link:hover,
+.footer-legal-link:hover {
+  color: #F2B52F !important;
+}
+
+.footer-social-icon:hover {
+  transform: translateY(-3px) scale(1.1);
+  filter: brightness(1.15);
+}
+
+.footer-subscribe-btn:hover {
+  background-color: #FFC340 !important;
+  transform: translateY(-1px);
+}
+
+.nav-link-btn:hover {
+  color: #F2B52F !important;
+}
+
+.dropdown-item-btn:hover {
+  background-color: rgba(242, 181, 47, 0.14) !important;
+  color: #F2B52F !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (MOBILE & TABLET OPTIMIZATIONS)
+   ========================================================================== */
+
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+  
+  .statistics-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+  
+  .statistics-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 8px;
+  }
+  
+  .service-highlights-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  
+  .service-highlights-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+  }
+
+  /* Freight Services Screen 2 Tablet Grid */
+  .freight-cards-grid, .featured-products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .trust-bar-container, .product-trust-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .trust-bar-container > div, .product-trust-container > div {
+    border-right: none !important;
+    border-bottom: 1px solid #D9E0E8;
+    padding-bottom: 8px !important;
+  }
+
+  .dark-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .carousel-arrow {
+    display: none !important;
+  }
+
+  /* Procurement Responsive Tablet */
+  .procurement-flow-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px 16px !important;
+  }
+
+  .procurement-connector {
+    display: none !important;
+  }
+
+  .procurement-benefits-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .procurement-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Documentation Responsive Tablet */
+  .doc-hero-wrapper {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+
+  .doc-hero-image-container {
+    max-width: 320px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .doc-categories-grid {
+    justify-content: center !important;
+    gap: 18px !important;
+  }
+
+  .compliance-benefits-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px 14px !important;
+  }
+
+  .brand-value-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  /* Quality Assurance Responsive Tablet */
+  .quality-hero-wrapper {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+
+  .quality-hero-image-container {
+    max-width: 340px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .quality-process-grid {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  .quality-assurance-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 18px 14px !important;
+  }
+
+  .supporting-features-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px 12px !important;
+  }
+
+  /* Services Overview Responsive Tablet */
+  .services-hero-wrapper {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+
+  .services-hero-image-container {
+    max-width: 340px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .global-services-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .services-benefits-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 18px 14px !important;
+  }
+
+  .services-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* How It Works Responsive Tablet */
+  .process-hero-wrapper {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+
+  .process-hero-image-container {
+    max-width: 340px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .process-flow-container {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  .process-step-arrow {
+    display: none !important;
+  }
+
+  .process-trust-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 18px 14px !important;
+  }
+
+  .process-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  /* Tracking & Warehousing Responsive Tablet */
+  .tracking-hero-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .tracking-visual-area {
+    max-width: 500px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+  }
+
+  .tracking-timeline-grid {
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+    justify-content: center !important;
+  }
+
+  .timeline-connecting-line {
+    display: none !important;
+  }
+
+  .warehousing-main-grid {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .warehousing-capabilities-grid {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  .warehousing-info-area {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-top: 24px !important;
+  }
+
+  .warehouse-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .why-choose-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Global Product Portfolio Tablet Responsive */
+  .portfolio-category-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .portfolio-trust-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .portfolio-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  /* Global Buyers Tablet Responsive */
+  .buyer-categories-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px 14px !important;
+  }
+
+  .buyer-actions-wrapper {
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  .buyer-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .buyer-trust-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Customs Compliance Tablet Responsive */
+  .customs-services-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px 14px !important;
+  }
+
+  .customs-column-divider {
+    border-right: none !important;
+  }
+
+  .customs-lower-section {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .customs-image-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  .customs-stats-wrapper {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .customs-stats-card {
+    max-width: 100% !important;
+  }
+
+  /* Global Network Tablet Responsive */
+  .network-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px 14px !important;
+  }
+
+  .network-stat-item {
+    border-right: none !important;
+  }
+
+  .network-primary-cta {
+    width: 85% !important;
+  }
+
+  /* Why Businesses Choose Us Tablet Responsive */
+  .advantages-six-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px 14px !important;
+  }
+
+  .advantage-column-divider {
+    border-right: none !important;
+  }
+
+  .why-choose-us-stats-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px 10px !important;
+  }
+
+  .why-choose-us-stat-item {
+    border-right: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 24px 16px 20px 16px !important;
+    min-height: auto !important;
+  }
+  
+  .hero-heading {
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .hero-description {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-feature-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    max-width: 100% !important;
+    margin: 18px 0 !important;
+  }
+  
+  .cta-buttons-container {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  
+  .cta-buttons-container button {
+    width: 100% !important;
+  }
+  
+  /* Trade Search Bar Mobile Stack */
+  .trade-search-panel {
+    margin: 12px 14px 0 14px !important;
+    padding: 14px 12px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  .trade-search-options {
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  
+  .trade-search-options button {
+    flex: 1 1 40% !important;
+    justify-content: center !important;
+  }
+  
+  .trade-search-form {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  .trade-search-form > div,
+  .trade-search-form input,
+  .trade-search-form button {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+  
+  /* Statistics Bar Mobile 2-Column Grid */
+  .statistics-grid, .dark-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 14px 10px !important;
+  }
+
+  .statistics-grid > div, .dark-stats-grid > div {
+    justify-content: flex-start !important;
+    padding: 6px 4px !important;
+  }
+
+  /* Bottom Highlights Mobile Stack */
+  .service-highlights-grid {
+    margin: 12px 14px 20px 14px !important;
+    grid-template-columns: 1fr !important;
+    padding: 14px 12px !important;
+  }
+
+  .service-highlights-grid > div {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px !important;
+  }
+  
+  .service-highlights-grid > div:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Freight & Products Mobile Adjustments */
+  .freight-cards-grid, .featured-products-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .trust-bar-container, .product-trust-container {
+    grid-template-columns: 1fr !important;
+    padding: 14px !important;
+  }
+
+  .trust-bar-container > div, .product-trust-container > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Procurement Mobile Responsive */
+  .procurement-flow-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 24px !important;
+  }
+
+  .procurement-benefits-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .procurement-message-pill {
+    height: auto !important;
+    padding: 14px 16px !important;
+    border-radius: 16px !important;
+    font-size: 14px !important;
+  }
+
+  .procurement-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .procurement-stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding-bottom: 10px !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Documentation Mobile Responsive */
+  .doc-hero-wrapper {
+    padding: 0 14px !important;
+  }
+
+  .doc-cta-btn {
+    width: 100% !important;
+    font-size: 20px !important;
+    height: 56px !important;
+    padding: 0 20px !important;
+  }
+
+  .compliance-benefit-panel {
+    margin: 24px 14px 0 14px !important;
+    padding: 20px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .compliance-benefits-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .compliance-benefit-item {
+    border-right: none !important;
+    border-bottom: 1px solid #DDE3EA;
+    padding: 0 0 16px 0 !important;
+  }
+
+  .compliance-benefit-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .brand-value-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .brand-value-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding-bottom: 8px !important;
+    justify-content: flex-start !important;
+  }
+
+  .brand-value-item:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Quality Assurance Mobile Responsive */
+  .quality-hero-wrapper {
+    padding: 0 14px !important;
+  }
+
+  .quality-cta-btn {
+    width: 100% !important;
+    font-size: 15px !important;
+    height: 48px !important;
+    padding: 0 18px !important;
+  }
+
+  .quality-process-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .quality-assurance-banner {
+    margin: 24px 14px 0 14px !important;
+    padding: 20px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .quality-assurance-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .quality-assurance-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 0 14px 0 !important;
+  }
+
+  .quality-assurance-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .supporting-features-section {
+    margin: 20px 14px 0 14px !important;
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .supporting-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .supporting-feature-item {
+    border-right: none !important;
+    border-bottom: 1px solid #DDE3EA;
+    padding: 0 0 10px 0 !important;
+  }
+
+  .supporting-feature-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Services Overview Mobile Responsive */
+  .services-hero-wrapper {
+    padding: 0 14px !important;
+  }
+
+  .services-cta-btn {
+    width: 100% !important;
+    font-size: 15px !important;
+    height: 48px !important;
+    padding: 0 18px !important;
+  }
+
+  .global-services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .services-benefits-banner {
+    margin: 20px 14px 0 14px !important;
+    padding: 20px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .services-benefits-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .services-benefit-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 0 14px 0 !important;
+  }
+
+  .services-benefit-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .services-stats-row {
+    margin: 18px 14px 0 14px !important;
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .services-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .services-stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid #DDE3EA;
+    padding: 0 0 10px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .services-stat-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* How It Works Mobile Responsive */
+  .process-hero-wrapper {
+    padding: 0 14px !important;
+  }
+
+  .process-cta-btn {
+    width: 100% !important;
+    font-size: 15px !important;
+    height: 48px !important;
+    padding: 0 18px !important;
+  }
+
+  .process-flow-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .process-step-arrow {
+    display: none !important;
+  }
+
+  .process-trust-banner {
+    margin: 20px 14px 0 14px !important;
+    padding: 20px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .process-trust-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .process-trust-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 0 14px 0 !important;
+  }
+
+  .process-trust-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .process-stats-row {
+    margin: 18px 14px 0 14px !important;
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .process-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .process-stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid #DDE3EA;
+    padding: 0 0 10px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .process-stat-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Tracking & Warehousing Mobile Responsive */
+  .tracking-hero-grid {
+    padding: 0 !important;
+  }
+
+  .tracking-timeline-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .tracking-timeline-step {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  .tracking-timeline-step h4 {
+    text-align: left !important;
+    white-space: normal !important;
+  }
+
+  .timeline-connecting-line {
+    display: none !important;
+  }
+
+  .tracking-feature-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .warehousing-capabilities-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+
+  .warehousing-cta-btn,
+  .view-all-shipments-btn {
+    width: 100% !important;
+    font-size: 15px !important;
+    height: 48px !important;
+  }
+
+  .warehouse-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .why-choose-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .why-choose-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding-bottom: 6px !important;
+  }
+
+  .why-choose-grid > div:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Global Product Portfolio Mobile Responsive */
+  .portfolio-category-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .portfolio-trust-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .portfolio-trust-item {
+    border-right: none !important;
+    border-bottom: 1px solid #DDE3EA;
+    padding: 0 0 8px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .portfolio-trust-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .portfolio-cta-btn {
+    width: 100% !important;
+    font-size: 15px !important;
+    height: 48px !important;
+  }
+
+  .portfolio-stats-banner {
+    margin: 20px 0 0 0 !important;
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .portfolio-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .portfolio-stats-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 0 10px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .portfolio-stats-grid > div:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Global Buyers Mobile Responsive */
+  .buyer-categories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+
+  .buyer-circle-container {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .buyer-action-card {
+    width: 100% !important;
+    height: 80px !important;
+    padding: 0 16px !important;
+  }
+
+  .buyer-stats-banner {
+    margin: 20px 0 0 0 !important;
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .buyer-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .buyer-stats-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 0 10px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .buyer-stats-grid > div:last-child {
+    border-bottom: none !important;
+  }
+
+  .buyer-trust-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .buyer-trust-item {
+    border-right: none !important;
+    border-bottom: 1px solid #D6DCE4;
+    padding: 0 0 8px 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .buyer-trust-item:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Customs Compliance Mobile Responsive */
+  .customs-services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .customs-column-divider {
+    border-right: none !important;
+    border-bottom: 1px solid #D7DEE7;
+    padding-bottom: 16px !important;
+  }
+
+  .customs-column-divider:last-child {
+    border-bottom: none !important;
+  }
+
+  .customs-circle-container {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  .customs-cta-btn {
+    width: 100% !important;
+    font-size: 16px !important;
+    height: 48px !important;
+  }
+
+  .customs-lower-section {
+    flex-direction: column !important;
+    padding: 14px !important;
+    gap: 16px !important;
+  }
+
+  .customs-image-wrapper {
+    height: 180px !important;
+    max-width: 100% !important;
+  }
+
+  .customs-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .customs-stats-card {
+    padding: 16px 10px !important;
+  }
+
+  /* Global Network Mobile Responsive */
+  .network-map-container {
+    height: 260px !important;
+    margin: 12px auto 20px auto !important;
+  }
+
+  .network-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px 10px !important;
+  }
+
+  .network-primary-cta {
+    width: 100% !important;
+    font-size: 16px !important;
+    height: 52px !important;
+    padding: 0 18px !important;
+  }
+
+  /* Why Businesses Choose Us Mobile Responsive */
+  .advantages-six-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px 10px !important;
+  }
+
+  .advantage-circle {
+    width: 76px !important;
+    height: 76px !important;
+  }
+
+  .why-choose-us-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 10px !important;
+  }
+
+  /* Business Global CTA Mobile Responsive */
+  .business-global-cta-section {
+    padding: 32px 20px !important;
+    margin: 25px 16px 0 16px !important;
+  }
+
+  .business-global-split-container {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+    text-align: center;
+  }
+
+  .business-global-left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .business-global-btn-group {
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  .cta-btn-primary,
+  .cta-btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Trusted Businesses Mobile Responsive */
+  .testimonial-glass-card {
+    padding: 20px 18px !important;
+  }
+
+  .carousel-nav-btn.prev-btn {
+    left: -10px !important;
+  }
+
+  .carousel-nav-btn.next-btn {
+    right: -10px !important;
+  }
+
+  .partner-logos-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 14px 8px !important;
+  }
+
+  .partner-logo-item {
+    border-right: none !important;
+  }
+
+  .trust-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px 10px !important;
+  }
+
+  .trust-stat-item {
+    border-right: none !important;
+  }
+
+  /* Global Link Footer Mobile Responsive */
+  .footer-columns-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 26px 16px !important;
+  }
+
+  .footer-columns-grid > div:first-child {
+    grid-column: span 2;
+  }
+
+  .footer-columns-grid > div:last-child {
+    grid-column: span 2;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 14px !important;
+  }
+
+  .footer-legal-links {
+    justify-content: center !important;
+  }
+}
