@@ -10,7 +10,8 @@
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
     "dev": "concurrently -k -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run dev:server\" \"npm run dev:client\"",
-    "build": "npm run build --prefix client"
+    "build": "npm run build --prefix client",
+    "push": "node scripts/git-push.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
