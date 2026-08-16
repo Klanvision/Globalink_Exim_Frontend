@@ -1,0 +1,160 @@
+import {
+  ArrowUpRight,
+  ArrowDownLeft,
+  Plane,
+  Ship,
+  Truck,
+  ClipboardCheck,
+  Warehouse,
+  ShieldCheck,
+  FileText,
+  Network,
+  Award,
+  LockKeyhole,
+  Headphones,
+  TrendingUp,
+  Globe2,
+  Handshake,
+  Package,
+  Clock3,
+  Users,
+} from 'lucide-react';
+
+export const globalServices = [
+  {
+    id: 1,
+    title: 'Export Solutions',
+    description: 'Complete export\nmanagement\nservices',
+    icon: ArrowUpRight,
+    route: 'export',
+  },
+  {
+    id: 2,
+    title: 'Import Solutions',
+    description: 'Efficient import\nmanagement\nservices',
+    icon: ArrowDownLeft,
+    route: 'import',
+  },
+  {
+    id: 3,
+    title: 'Air Freight',
+    description: 'Fast & secure\nair cargo\nsolutions',
+    icon: Plane,
+    route: 'services',
+  },
+  {
+    id: 4,
+    title: 'Ocean Freight',
+    description: 'Cost-effective\nocean freight\nservices',
+    icon: Ship,
+    route: 'services',
+  },
+  {
+    id: 5,
+    title: 'Land Transport',
+    description: 'Reliable land\ntransportation\nservices',
+    icon: Truck,
+    route: 'services',
+  },
+  {
+    id: 6,
+    title: 'Procurement',
+    description: 'Smart sourcing &\nprocurement\nsolutions',
+    icon: ClipboardCheck,
+    route: 'procurement',
+  },
+  {
+    id: 7,
+    title: 'Warehousing',
+    description: 'Secure storage &\ninventory\nmanagement',
+    icon: Warehouse,
+    route: 'warehousing',
+  },
+  {
+    id: 8,
+    title: 'Customs Clearance',
+    description: 'Smooth customs\nclearance &\ncompliance',
+    icon: ShieldCheck,
+    route: 'customs',
+  },
+  {
+    id: 9,
+    title: 'Documentation',
+    description: 'End-to-end trade\ndocumentation\nsupport',
+    icon: FileText,
+    route: 'documentation',
+  },
+  {
+    id: 10,
+    title: 'Supply Chain',
+    description: 'End-to-end supply\nchain management',
+    icon: Network,
+    route: 'supply-chain',
+  },
+];
+
+export const serviceBenefits = [
+  {
+    id: 1,
+    title: 'Global Network',
+    description: 'Presence in 100+ countries\nwith trusted partners.',
+    icon: ShieldCheck,
+  },
+  {
+    id: 2,
+    title: 'Cost Efficiency',
+    description: 'Optimized solutions to\nreduce costs and time.',
+    icon: Award,
+  },
+  {
+    id: 3,
+    title: 'Secure & Compliant',
+    description: 'Adherence to international\nstandards and regulations.',
+    icon: LockKeyhole,
+  },
+  {
+    id: 4,
+    title: '24/7 Support',
+    description: 'Dedicated support\nwhenever you need.',
+    icon: Headphones,
+  },
+  {
+    id: 5,
+    title: 'Reliable & Timely',
+    description: 'On-time delivery with\ncomplete reliability.',
+    icon: TrendingUp,
+  },
+];
+
+export const serviceStatistics = [
+  {
+    id: 1,
+    value: '100+',
+    label: 'Countries Served',
+    icon: Globe2,
+  },
+  {
+    id: 2,
+    value: '5000+',
+    label: 'Happy Clients',
+    icon: Handshake,
+  },
+  {
+    id: 3,
+    value: '1M+',
+    label: 'Shipments Delivered',
+    icon: Package,
+  },
+  {
+    id: 4,
+    value: '98%',
+    label: 'On-Time Delivery',
+    icon: Clock3,
+  },
+  {
+    id: 5,
+    value: '24/7',
+    label: 'Customer Support',
+    icon: Users,
+  },
+];
