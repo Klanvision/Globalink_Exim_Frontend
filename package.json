@@ -1,20 +1,24 @@
 {
-  "name": "import-and-export-project",
-  "version": "1.0.0",
-  "description": "Full-Stack Node.js & React.js Professional Architecture",
+  "name": "import-and-export-client",
   "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "setup": "npm run setup:server && npm run setup:client",
-    "setup:server": "cd server && npm install",
-    "setup:client": "cd client && npm install",
-    "dev:server": "npm run dev --prefix server",
-    "dev:client": "npm run dev --prefix client",
-    "dev": "concurrently -k -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run dev:server\" \"npm run dev:client\"",
-    "build": "npm run build --prefix client",
-    "push": "node scripts/git-push.js",
-    "pull": "node scripts/git-pull.js"
+    "dev": "vite",
+    "build": "vite build",
+    "push": "node scripts/git-push.cjs",
+    "pull": "node scripts/git-pull.cjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.378.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.2.11"
   }
 }
