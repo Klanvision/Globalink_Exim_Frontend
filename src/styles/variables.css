@@ -3,24 +3,24 @@
    ========================================================================== */
 
 :root {
-  /* Global Color System */
-  --navy: #001229;
-  --navy-dark: #000d1e;
-  --navy-light: #001a35;
-  --navy-panel: #00152d;
-  --navy-card: #061c35;
+  /* Global Color System (Professional Light Theme) */
+  --navy: #ffffff;
+  --navy-dark: #f8fafc;
+  --navy-light: #f1f5f9;
+  --navy-panel: #ffffff;
+  --navy-card: #ffffff;
   
-  --gold: #faae2b;
-  --gold-hover: #e59d1f;
-  --gold-glow: rgba(250, 174, 43, 0.25);
+  --gold: #d97706;
+  --gold-hover: #b45309;
+  --gold-glow: rgba(217, 119, 6, 0.18);
   
-  --white: #ffffff;
-  --text-secondary: #e7eaf0;
-  --text-muted: #b9c1cc;
+  --white: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
   
-  --border: #29415d;
-  --border-bright: #3b5068;
-  --border-subtle: rgba(255, 255, 255, 0.18);
+  --border: #e2e8f0;
+  --border-bright: #cbd5e1;
+  --border-subtle: rgba(15, 23, 42, 0.08);
   
   /* Typography */
   --font-heading: 'Georgia', Georgia, serif;

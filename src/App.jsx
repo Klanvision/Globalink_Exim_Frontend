@@ -15,6 +15,7 @@ import { GlobalNetwork } from './pages/GlobalNetwork';
 import { WhyBusinessesChooseUs } from './pages/WhyBusinessesChooseUs';
 import { BusinessGlobal } from './pages/BusinessGlobal';
 import { TrustedBusinesses } from './pages/TrustedBusinesses';
+import { PortalLogin } from './pages/PortalLogin';
 
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
@@ -23,6 +24,20 @@ export default function App() {
     setCurrentRoute(route);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const portalRoutes = [
+    'client-access',
+    'strategic-partners',
+    'global-export',
+    'global-import',
+    'supplier-network',
+    'logistics-operations',
+    'enterprise-employee'
+  ];
+
+  if (portalRoutes.includes(currentRoute)) {
+    return <PortalLogin onNavigate={handleNavigate} type={currentRoute} />;
+  }
 
   if (currentRoute === 'trusted-businesses' || currentRoute === 'testimonials') {
     return <TrustedBusinesses onNavigate={handleNavigate} />;
