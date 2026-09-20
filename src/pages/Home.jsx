@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { Hero } from '../components/home/Hero';
+import { HeroBanner } from '../components/home/HeroBanner';
 import { TradeSearch } from '../components/home/TradeSearch';
 import { StatisticsBar } from '../components/home/StatisticsBar';
 import { ServiceHighlights } from '../components/home/ServiceHighlights';
@@ -202,52 +203,61 @@ export const Home = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="page-viewport">
-      {/* 1. Shared Navigation Header */}
-      <Header
-        onTrackClick={() => scrollToSection('tracking-warehousing-section')}
-        onQuoteClick={() => openModal('quote')}
-        currentRoute="home"
-        onNavigate={(route) => {
-          if (route === 'trusted-businesses' || route === 'testimonials') {
-            scrollToSection('trusted-businesses-section');
-          } else if (route === 'business-global' || route === 'cta') {
-            scrollToSection('business-global-cta');
-          } else if (route === 'why-choose-us' || route === 'advantages') {
-            scrollToSection('why-choose-us-section');
-          } else if (route === 'network' || route === 'global-network') {
-            scrollToSection('global-network-section');
-          } else if (route === 'customs-compliance' || route === 'compliance') {
-            scrollToSection('customs-compliance-section');
-          } else if (route === 'buyers' || route === 'global-buyers') {
-            scrollToSection('buyers-section');
-          } else if (route === 'track-shipment' || route === 'tracking' || route === 'warehousing') {
-            scrollToSection('tracking-warehousing-section');
-          } else if (route === 'how-it-works' || route === 'about') {
-            scrollToSection('how-it-works-section');
-          } else if (route === 'quality' || route === 'quality-assurance') {
-            scrollToSection('quality-section');
-          } else if (route === 'resources' || route === 'documentation') {
-            scrollToSection('documentation-section');
-          } else if (route === 'procurement') {
-            scrollToSection('procurement-section');
-          } else if (route === 'services' || route === 'services-overview') {
-            scrollToSection('services-overview-section');
-          } else if (route === 'logistics' || route === 'freight') {
-            scrollToSection('services-section');
-          } else if (route === 'products' || route === 'portfolio') {
-            scrollToSection('global-portfolio-section');
-          } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        }}
-      />
+    <>
+      {/* ── Header sits inside page-viewport for sticky/max-width behaviour ── */}
+      <div className="page-viewport" style={{ paddingBottom: 0, minHeight: 'unset' }}>
+        {/* 1. Shared Navigation Header */}
+        <Header
+          onTrackClick={() => scrollToSection('tracking-warehousing-section')}
+          onQuoteClick={() => openModal('quote')}
+          currentRoute="home"
+          onNavigate={(route) => {
+            if (route === 'trusted-businesses' || route === 'testimonials') {
+              scrollToSection('trusted-businesses-section');
+            } else if (route === 'business-global' || route === 'cta') {
+              scrollToSection('business-global-cta');
+            } else if (route === 'why-choose-us' || route === 'advantages') {
+              scrollToSection('why-choose-us-section');
+            } else if (route === 'network' || route === 'global-network') {
+              scrollToSection('global-network-section');
+            } else if (route === 'customs-compliance' || route === 'compliance') {
+              scrollToSection('customs-compliance-section');
+            } else if (route === 'buyers' || route === 'global-buyers') {
+              scrollToSection('buyers-section');
+            } else if (route === 'track-shipment' || route === 'tracking' || route === 'warehousing') {
+              scrollToSection('tracking-warehousing-section');
+            } else if (route === 'how-it-works' || route === 'about') {
+              scrollToSection('how-it-works-section');
+            } else if (route === 'quality' || route === 'quality-assurance') {
+              scrollToSection('quality-section');
+            } else if (route === 'resources' || route === 'documentation') {
+              scrollToSection('documentation-section');
+            } else if (route === 'procurement') {
+              scrollToSection('procurement-section');
+            } else if (route === 'services' || route === 'services-overview') {
+              scrollToSection('services-overview-section');
+            } else if (route === 'logistics' || route === 'freight') {
+              scrollToSection('services-section');
+            } else if (route === 'products' || route === 'portfolio') {
+              scrollToSection('global-portfolio-section');
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        />
+      </div>
 
-      {/* 2. Hero Section */}
-      <Hero
-        onExploreServices={() => scrollToSection('services-overview-section')}
-        onExploreProducts={() => scrollToSection('products-section')}
-      />
+      {/* 2. Full-Width Image Banner – OUTSIDE page-viewport to escape max-width & overflow constraints */}
+      <HeroBanner />
+
+      {/* ── All remaining content back inside page-viewport ── */}
+      <div className="page-viewport">
+
+        {/* 3. Hero Section */}
+        <Hero
+          onExploreServices={() => scrollToSection('services-overview-section')}
+          onExploreProducts={() => scrollToSection('products-section')}
+        />
 
       {/* 3. Trade Search & Filter Bar */}
       <TradeSearch
@@ -2118,6 +2128,7 @@ export const Home = ({ onNavigate }) => {
         onClose={() => setModalOpen(false)}
         defaultType={modalType}
       />
-    </div>
+    </div> {/* end second page-viewport */}
+    </>
   );
 };

@@ -368,14 +368,22 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
           </div>
         </div>
 
-        {/* SECTION 2: PRIMARY NAVIGATION BAR (FULL WIDTH EDGE-TO-EDGE - GLOSSY SHINY WHITE) */}
+        {/* SECTION 2: PRIMARY NAVIGATION BAR */}
         <div
           style={{
             width: '100%',
             height: '50px',
-            background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
-            borderBottom: '1px solid #E2E8F0',
-            boxShadow: '0 4px 16px rgba(15, 23, 42, 0.05)',
+            background: (currentRoute === 'home' && !isScrolled) 
+              ? 'rgba(255, 255, 255, 0.08)' 
+              : 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)',
+            backdropFilter: (currentRoute === 'home' && !isScrolled) ? 'blur(12px)' : 'none',
+            WebkitBackdropFilter: (currentRoute === 'home' && !isScrolled) ? 'blur(12px)' : 'none',
+            borderBottom: (currentRoute === 'home' && !isScrolled)
+              ? '1px solid rgba(255, 255, 255, 0.15)'
+              : '1px solid #E2E8F0',
+            boxShadow: (currentRoute === 'home' && !isScrolled)
+              ? 'none'
+              : '0 4px 16px rgba(15, 23, 42, 0.05)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -396,6 +404,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
           >
             {primaryNavItems.map((item) => {
               const active = isItemActive(item);
+              const isTransparent = currentRoute === 'home' && !isScrolled;
 
               return (
                 <div
@@ -425,7 +434,9 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
                       cursor: 'pointer',
                       fontSize: '13px',
                       fontWeight: active ? '700' : '500',
-                      color: active ? '#D97706' : '#1E293B',
+                      color: isTransparent 
+                        ? (active ? '#FFE082' : '#FFFFFF') 
+                        : (active ? '#D97706' : '#1E293B'),
                       fontFamily: 'var(--font-body)',
                       transition: 'color 0.15s ease',
                       whiteSpace: 'nowrap',
@@ -435,7 +446,9 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
                     {item.hasDropdown && (
                       <ChevronDown
                         size={12}
-                        color={active ? '#D97706' : '#64748B'}
+                        color={isTransparent 
+                          ? (active ? '#FFE082' : 'rgba(255, 255, 255, 0.7)') 
+                          : (active ? '#D97706' : '#64748B')}
                         style={{
                           transform: openDropdown === item.label ? 'rotate(180deg)' : 'none',
                           transition: 'transform 0.18s ease',
@@ -452,7 +465,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
                           left: 0,
                           right: 0,
                           height: '3px',
-                          backgroundColor: '#D97706',
+                          backgroundColor: isTransparent ? '#FFE082' : '#D97706',
                           borderRadius: '2px 2px 0 0',
                         }}
                       />
