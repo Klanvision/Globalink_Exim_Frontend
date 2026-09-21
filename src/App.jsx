@@ -17,6 +17,8 @@ import { BusinessGlobal } from './pages/BusinessGlobal';
 import { TrustedBusinesses } from './pages/TrustedBusinesses';
 import { PortalLogin } from './pages/PortalLogin';
 
+import { AirplaneScrollbar } from './components/common/AirplaneScrollbar';
+
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
 
@@ -35,70 +37,80 @@ export default function App() {
     'enterprise-employee'
   ];
 
-  if (portalRoutes.includes(currentRoute)) {
-    return <PortalLogin onNavigate={handleNavigate} type={currentRoute} />;
-  }
+  const renderContent = () => {
+    if (portalRoutes.includes(currentRoute)) {
+      return <PortalLogin onNavigate={handleNavigate} type={currentRoute} />;
+    }
 
-  if (currentRoute === 'trusted-businesses' || currentRoute === 'testimonials') {
-    return <TrustedBusinesses onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'trusted-businesses' || currentRoute === 'testimonials') {
+      return <TrustedBusinesses onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'business-global' || currentRoute === 'cta') {
-    return <BusinessGlobal onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'business-global' || currentRoute === 'cta') {
+      return <BusinessGlobal onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'why-choose-us' || currentRoute === 'advantages') {
-    return <WhyBusinessesChooseUs onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'why-choose-us' || currentRoute === 'advantages') {
+      return <WhyBusinessesChooseUs onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'network' || currentRoute === 'global-network') {
-    return <GlobalNetwork onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'network' || currentRoute === 'global-network') {
+      return <GlobalNetwork onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'customs-compliance' || currentRoute === 'compliance' || currentRoute === 'services/customs-compliance') {
-    return <CustomsCompliance onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'customs-compliance' || currentRoute === 'compliance' || currentRoute === 'services/customs-compliance') {
+      return <CustomsCompliance onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'buyers' || currentRoute === 'global-buyers') {
-    return <Buyers onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'buyers' || currentRoute === 'global-buyers') {
+      return <Buyers onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'track-shipment' || currentRoute === 'tracking' || currentRoute === 'warehousing') {
-    return <TrackShipment onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'track-shipment' || currentRoute === 'tracking' || currentRoute === 'warehousing') {
+      return <TrackShipment onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'how-it-works' || currentRoute === 'how-global-link-works') {
-    return <HowItWorks onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'how-it-works' || currentRoute === 'how-global-link-works') {
+      return <HowItWorks onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'quality' || currentRoute === 'quality-assurance') {
-    return <QualityAssurance onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'quality' || currentRoute === 'quality-assurance') {
+      return <QualityAssurance onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'documentation' || currentRoute === 'resources') {
-    return <Documentation onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'documentation' || currentRoute === 'resources') {
+      return <Documentation onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'procurement') {
-    return <Procurement onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'procurement') {
+      return <Procurement onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'services' || currentRoute === 'services-overview') {
-    return <Services onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'services' || currentRoute === 'services-overview') {
+      return <Services onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'freight') {
-    return <FreightServices onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'freight') {
+      return <FreightServices onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'products' || currentRoute === 'portfolio') {
-    return <Products onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'products' || currentRoute === 'portfolio') {
+      return <Products onNavigate={handleNavigate} />;
+    }
 
-  if (currentRoute === 'featured-products') {
-    return <FeaturedProducts onNavigate={handleNavigate} />;
-  }
+    if (currentRoute === 'featured-products') {
+      return <FeaturedProducts onNavigate={handleNavigate} />;
+    }
 
-  return <Home onNavigate={handleNavigate} />;
+    return <Home onNavigate={handleNavigate} />;
+  };
+
+  return (
+    <>
+      <AirplaneScrollbar />
+      {renderContent()}
+    </>
+  );
 }
+
 

@@ -1,0 +1,436 @@
+/* ==========================================================================
+   Aviation Flight Path Edge Scrollbar (Compact Glass HUD with Large Jet)
+   ========================================================================== */
+
+/* Disable text selection while dragging scrollbar */
+body.aviation-scrollbar-dragging {
+  user-select: none !important;
+  cursor: grabbing !important;
+}
+
+.airplane-scroll-hud-edge {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 14px;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: -1px 0 8px rgba(0, 0, 0, 0.02);
+  padding: 3px 0;
+  user-select: none;
+  box-sizing: border-box;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.airplane-scroll-hud-edge:hover,
+.airplane-scroll-hud-edge.is-dragging {
+  background: rgba(255, 255, 255, 0.18);
+  border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   Start & End Stage Terminal Nodes (Departure & Landing Buttons)
+   ========================================================================== */
+.flight-edge-node {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  color: #64748b;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.flight-edge-node:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+.origin-node .node-ico {
+  color: #d97706;
+}
+
+.origin-node:hover .node-ico {
+  color: #ffffff;
+}
+
+.destination-node .node-ico {
+  color: #059669;
+}
+
+.destination-node:hover .node-ico {
+  color: #ffffff;
+}
+
+.runway-edge-lights {
+  position: absolute;
+  top: -4px;
+  display: flex;
+  gap: 1.5px;
+}
+
+.edge-light {
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: rgba(203, 213, 225, 0.8);
+}
+
+.edge-light.green {
+  background: #10b981;
+}
+
+.destination-node.runway-active .edge-light.green {
+  box-shadow: 0 0 3px #10b981;
+  animation: blink-light 0.6s infinite alternate;
+}
+
+@keyframes blink-light {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+/* ==========================================================================
+   Full-Height Flight Corridor (Slim Line, Offset Bounds)
+   ========================================================================== */
+.flight-edge-track {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  margin: 1px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Center dashed flight corridor */
+.track-centerline {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: 1.5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(148, 163, 184, 0.35) 0px,
+    rgba(148, 163, 184, 0.35) 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* Progress Fill Line */
+.track-progress-fill {
+  position: absolute;
+  top: 4px;
+  width: 1.5px;
+  background: linear-gradient(
+    to bottom,
+    #d97706 0%,
+    #0284c7 40%,
+    #059669 85%,
+    #10b981 100%
+  );
+  box-shadow: 0 0 4px rgba(2, 132, 199, 0.4);
+  transition: height 0.05s linear;
+}
+
+/* ==========================================================================
+   Route Waypoint Dots (Dynamic Blinking when Crossed by Airplane)
+   ========================================================================== */
+.edge-waypoint {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Dormant dot before plane crosses */
+.waypoint-dormant .waypoint-pip {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.4);
+  border: 0.5px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.25s ease;
+}
+
+/* Active blinking beacon dot once crossed by plane */
+.waypoint-crossed .waypoint-pip {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 6px #10b981, 0 0 10px rgba(16, 185, 129, 0.8);
+  animation: beacon-blink 1s ease-in-out infinite alternate;
+}
+
+@keyframes beacon-blink {
+  0% {
+    background: #0284c7;
+    box-shadow: 0 0 3px #0284c7;
+    transform: scale(0.9);
+  }
+  50% {
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981, 0 0 12px rgba(16, 185, 129, 0.9);
+    transform: scale(1.35);
+  }
+  100% {
+    background: #f59e0b;
+    box-shadow: 0 0 6px #f59e0b, 0 0 10px rgba(245, 158, 11, 0.8);
+    transform: scale(1.1);
+  }
+}
+
+/* Pulsating radar wave ring */
+.waypoint-radar-ring {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #10b981;
+  pointer-events: none;
+  animation: radar-pulse-wave 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radar-pulse-wave {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+    border-color: #10b981;
+  }
+  60% {
+    border-color: #0284c7;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+    border-color: #38bdf8;
+  }
+}
+
+/* ==========================================================================
+   Moving Airplane Thumb (Large, Prominent & Attractive)
+   ========================================================================== */
+.flight-airplane-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 26px;
+  height: 26px;
+  z-index: 8;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.is-dragging .flight-airplane-thumb,
+.flight-airplane-thumb:active {
+  cursor: grabbing;
+}
+
+.plane-svg-container {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 3px 6px rgba(15, 23, 42, 0.35));
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cargo-plane-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.flight-airplane-thumb:hover .plane-svg-container {
+  transform: scale(1.25);
+  filter: drop-shadow(0 4px 12px rgba(2, 132, 199, 0.6));
+}
+
+/* Contrail Exhaust Particles */
+.plane-exhaust-trail {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.exhaust-dot {
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 4px #38bdf8;
+  opacity: 0.85;
+  animation: exhaust-fade-edge 0.5s infinite ease-out;
+}
+
+.exhaust-dot.e2 {
+  animation-delay: 0.18s;
+  width: 1.5px;
+  height: 1.5px;
+}
+
+.exhaust-dot.e3 {
+  animation-delay: 0.36s;
+  width: 1px;
+  height: 1px;
+}
+
+@keyframes exhaust-fade-edge {
+  0% { transform: translateY(0); opacity: 0.85; }
+  100% { transform: translateY(-7px); opacity: 0; }
+}
+
+/* Touchdown Landing Halo */
+.landing-touchdown-halo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.9) 0%, rgba(245, 158, 11, 0.6) 60%, transparent 80%);
+  animation: halo-pulse 0.7s infinite alternate;
+}
+
+@keyframes halo-pulse {
+  0% { transform: translateX(-50%) scale(0.7); opacity: 0.6; }
+  100% { transform: translateX(-50%) scale(1.4); opacity: 1; }
+}
+
+/* ==========================================================================
+   Telemetry HUD Popup (Compact Glass Readout)
+   ========================================================================== */
+.flight-hud-popup {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%) translateX(4px) rotate(180deg);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+}
+
+.flight-hud-popup::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  background: #0f172a;
+  border-right: 1px solid rgba(56, 189, 248, 0.25);
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.hud-popup-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0) rotate(180deg);
+}
+
+.hud-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.hud-popup-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.pulse-icon {
+  color: #10b981;
+}
+
+.hud-popup-pct {
+  font-size: 9px;
+  font-weight: 800;
+  color: #f59e0b;
+}
+
+.hud-popup-alt {
+  font-size: 9px;
+  font-weight: 600;
+  color: #f8fafc;
+  letter-spacing: 0.2px;
+}
+
+.hud-popup-route {
+  font-size: 7.5px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  color: #94a3b8;
+  margin-top: 1px;
+}
+
+/* Hide HUD on small mobile screens */
+@media (max-width: 640px) {
+  .airplane-scroll-hud-edge {
+    width: 12px;
+  }
+  .flight-hud-popup {
+    display: none;
+  }
+}
