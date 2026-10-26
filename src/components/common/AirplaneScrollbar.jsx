@@ -83,7 +83,7 @@ export function AirplaneScrollbar() {
   const scrollToClientY = useCallback((clientY) => {
     if (!trackRef.current) return;
     const rect = trackRef.current.getBoundingClientRect();
-    const inset = 16; // Inset in px matching larger plane
+    const inset = 16;
     const usableHeight = Math.max(rect.height - inset * 2, 1);
     const offsetY = clientY - rect.top - inset;
     const ratio = Math.min(Math.max(offsetY / usableHeight, 0), 1);
@@ -95,12 +95,10 @@ export function AirplaneScrollbar() {
     });
   }, []);
 
-  // Track Click Navigation
   const handleTrackClick = (e) => {
     scrollToClientY(e.clientY);
   };
 
-  // Drag-to-Scroll Functionality
   const handleMouseDown = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -140,11 +138,11 @@ export function AirplaneScrollbar() {
 
   // Multiple radar checkpoint dots along international flight route
   const waypoints = [
-    { pos: 0.18, label: 'Export Clearance' },
-    { pos: 0.38, label: 'Trans-Pacific Flight' },
-    { pos: 0.58, label: 'Air Freight Transit' },
-    { pos: 0.78, label: 'Customs Arrival' },
-    { pos: 0.92, label: 'Runway Approach' }
+    { pos: 0.16, label: 'Export Port Clearance' },
+    { pos: 0.36, label: 'Air Freight Corridors' },
+    { pos: 0.56, label: 'Trans-Pacific Flight' },
+    { pos: 0.76, label: 'Customs & Inspection' },
+    { pos: 0.92, label: 'Arrival Runway Approach' }
   ];
 
   const handleWaypointClick = (e, pos) => {
@@ -167,7 +165,7 @@ export function AirplaneScrollbar() {
       }}
       aria-label="Aviation Flight Path Scrollbar"
     >
-      {/* Top Departure Node (Start Stage) */}
+      {/* Top Departure Node */}
       <button 
         type="button"
         className="flight-edge-node origin-node"
@@ -175,38 +173,46 @@ export function AirplaneScrollbar() {
         title="Origin Airport (Start / Top)"
       >
         <PlaneTakeoff size={11} className="node-ico" />
+        <span className="node-beacon-ring" />
       </button>
 
-      {/* Full-Height Flight Track Corridor with Safe Offset (No Overlap) */}
+      {/* Full-Height Flight Track Corridor */}
       <div 
         className="flight-edge-track" 
         ref={trackRef}
         onMouseDown={handleMouseDown}
         onClick={handleTrackClick}
       >
-        {/* Fine 1.5px Trade Centerline */}
+        {/* Animated Flowing Centerline Dotted Corridor */}
         <div className="track-centerline" />
 
-        {/* Dynamic Flight Progress Line (Stops perfectly at plane) */}
+        {/* Dynamic Flight Progress Line */}
         <div 
           className="track-progress-fill"
           style={{ height: `calc(16px + ${scrollProgress} * (100% - 32px))` }}
         />
 
-        {/* Route Waypoint Dots (Blinking once crossed by the airplane) */}
+        {/* Route Waypoint Dots with Radiant Blinking & Sonar Wave Animations */}
         {waypoints.map((wp, idx) => {
           const crossed = scrollProgress >= wp.pos;
+          const isNextTarget = !crossed && (idx === 0 || scrollProgress >= waypoints[idx - 1].pos);
+          
           return (
             <div
               key={idx}
-              className={`edge-waypoint ${crossed ? 'waypoint-crossed' : 'waypoint-dormant'}`}
+              className={`edge-waypoint ${crossed ? 'waypoint-crossed' : isNextTarget ? 'waypoint-targeting' : 'waypoint-dormant'}`}
               style={{ top: `calc(16px + ${wp.pos} * (100% - 32px))` }}
               onClick={(e) => handleWaypointClick(e, wp.pos)}
               title={wp.label}
             >
-              {/* Radar Beacon Pulse Ring when crossed */}
-              {crossed && <span className="waypoint-radar-ring" />}
-              <span className="waypoint-pip" />
+              {/* Multi-tier animated radar pulse rings */}
+              <span className="waypoint-radar-ring outer" />
+              <span className="waypoint-radar-ring inner" />
+              
+              {/* Core blinking jewel beacon */}
+              <span className="waypoint-pip">
+                <span className="waypoint-glow-sparkle" />
+              </span>
             </div>
           );
         })}
@@ -217,7 +223,7 @@ export function AirplaneScrollbar() {
           style={{ top: `calc(16px + ${scrollProgress} * (100% - 32px))` }}
           onMouseDown={handleMouseDown}
         >
-          {/* Contrail / Jet Exhaust */}
+          {/* Contrail / Jet Exhaust Sparkles */}
           <div className="plane-exhaust-trail">
             <span className="exhaust-dot e1" />
             <span className="exhaust-dot e2" />
@@ -302,7 +308,7 @@ export function AirplaneScrollbar() {
         </div>
       </div>
 
-      {/* Bottom Destination Runway Node (End Stage) */}
+      {/* Bottom Destination Runway Node */}
       <button 
         type="button" 
         className={`flight-edge-node destination-node ${isLanding ? 'runway-active' : ''}`}
@@ -310,6 +316,7 @@ export function AirplaneScrollbar() {
         title="Destination Runway 09L (End / Touchdown)"
       >
         <PlaneLanding size={11} className="node-ico" />
+        <span className="node-beacon-ring runway" />
         <div className="runway-edge-lights">
           <span className="edge-light" />
           <span className="edge-light green" />

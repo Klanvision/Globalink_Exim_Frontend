@@ -247,17 +247,14 @@ export const Home = ({ onNavigate }) => {
         />
       </div>
 
-      {/* 2. Full-Width Image Banner – OUTSIDE page-viewport to escape max-width & overflow constraints */}
-      <HeroBanner />
+      {/* 2. Full-Width Hero Banner – OUTSIDE page-viewport, edge-to-edge with text overlay */}
+      <HeroBanner
+        onExploreServices={() => scrollToSection('services-overview-section')}
+        onExploreProducts={() => scrollToSection('products-section')}
+      />
 
       {/* ── All remaining content back inside page-viewport ── */}
       <div className="page-viewport">
-
-        {/* 3. Hero Section */}
-        <Hero
-          onExploreServices={() => scrollToSection('services-overview-section')}
-          onExploreProducts={() => scrollToSection('products-section')}
-        />
 
       {/* 3. Trade Search & Filter Bar */}
       <TradeSearch
