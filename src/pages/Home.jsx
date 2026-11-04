@@ -1,10 +1,9 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Header } from '../components/layout/Header';
 import { Hero } from '../components/home/Hero';
 import { HeroBanner } from '../components/home/HeroBanner';
-import { TradeSearch } from '../components/home/TradeSearch';
-import { StatisticsBar } from '../components/home/StatisticsBar';
-import { ServiceHighlights } from '../components/home/ServiceHighlights';
 import { TopDecoration } from '../components/freight/TopDecoration';
 import { FreightCard } from '../components/freight/FreightCard';
 import { TrustBar } from '../components/freight/TrustBar';
@@ -107,9 +106,10 @@ import {
   trustStatsData,
 } from '../data/trustedBusinessesData';
 import { BusinessGlobalCTA } from '../components/businessglobal/BusinessGlobalCTA';
-import { Plane, Ship, Truck, TrainFront, Globe, ArrowRight, ChevronRight, ChevronDown } from 'lucide-react';
+import { Plane, Ship, Truck, TrainFront, Globe, ArrowRight, ChevronRight, ChevronDown, Sparkles } from 'lucide-react';
 
 export const Home = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('track');
   const [productsList, setProductsList] = useState(featuredProducts);
@@ -251,35 +251,27 @@ export const Home = ({ onNavigate }) => {
       <HeroBanner
         onExploreServices={() => scrollToSection('services-overview-section')}
         onExploreProducts={() => scrollToSection('products-section')}
+        onSearch={(id) => openModal('track')}
+        onNavigate={onNavigate}
+        onQuote={() => openModal('quote')}
+        onTrack={(id) => openModal('track')}
       />
 
-      {/* ── All remaining content back inside page-viewport ── */}
-      <div className="page-viewport">
 
-      {/* 3. Trade Search & Filter Bar */}
-      <TradeSearch
-        onSearch={() => openModal('track')}
-      />
-
-      {/* 4. Statistics Bar */}
-      <StatisticsBar />
-
-      {/* 5. Service Highlights */}
-      <ServiceHighlights />
-
-      {/* 6. Freight Services Section */}
+      {/* ── 6. Freight Services Section: Full 100% width edge-to-edge (matching HeroBanner above) ── */}
       <section
         id="services-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '50px 24px 35px 24px',
-          background: '#FFFFFF',
-          color: '#092554',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100vw',
+          boxSizing: 'border-box',
+          margin: '0',
+          padding: '38px 24px 32px 24px',
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(255, 111, 0, 0.07) 0%, #FFFFFF 65%)',
+          color: '#0F172A',
           overflow: 'hidden',
-          border: '1px solid #D9E0E8',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
+          borderBottom: '1px solid rgba(255, 111, 0, 0.18)',
         }}
       >
         <TopDecoration />
@@ -289,12 +281,12 @@ export const Home = ({ onNavigate }) => {
             position: 'absolute',
             top: '20px',
             right: '20px',
-            color: 'rgba(9, 37, 84, 0.04)',
+            color: 'rgba(255, 111, 0, 0.05)',
             pointerEvents: 'none',
             zIndex: 1
           }}
         >
-          <Globe size={420} strokeWidth={0.75} />
+          <Globe size={380} strokeWidth={0.75} />
         </div>
 
         <div
@@ -302,44 +294,124 @@ export const Home = ({ onNavigate }) => {
             textAlign: 'center',
             position: 'relative',
             zIndex: 2,
-            marginBottom: '32px'
+            marginBottom: '30px'
           }}
         >
-          <h2
+          {/* Animated Eyebrow badge - White & Orange */}
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            whileHover={{ scale: 1.04 }}
             style={{
-              fontSize: '50px',
-              fontWeight: '800',
-              color: '#092554',
-              lineHeight: '1.1',
-              letterSpacing: '-0.5px',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '10px'
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '7px',
+              padding: '6px 16px',
+              borderRadius: '24px',
+              background: '#FFFFFF',
+              border: '1.5px solid rgba(255, 111, 0, 0.4)',
+              marginBottom: '10px',
+              boxShadow: '0 4px 12px rgba(255, 111, 0, 0.12)',
+              cursor: 'default',
             }}
           >
-            Your Global Freight, Our Priority
-          </h2>
+            <Sparkles size={13} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '10.5px',
+                fontWeight: '700',
+                letterSpacing: '0.07em',
+                textTransform: 'uppercase',
+                color: '#FF6F00',
+                fontFamily: 'var(--font-body)'
+              }}
+            >
+              Multi-Modal Logistics &amp; Freight Forwarding
+            </span>
+          </motion.div>
 
-          <div
+          {/* Luxury Main Heading with reduced proportional size */}
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+            style={{
+              fontSize: 'clamp(24px, 2.3vw, 34px)',
+              fontWeight: '900',
+              color: '#092554',
+              lineHeight: '1.18',
+              letterSpacing: '-0.3px',
+              fontFamily: 'var(--font-heading)',
+              marginBottom: '8px'
+            }}
+          >
+            Your Global Freight,{' '}
+            <span
+              style={{
+                background: 'linear-gradient(90deg, #FF6F00 0%, #FFA800 60%, #FFB700 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}
+            >
+              Our Priority
+            </span>
+          </motion.h2>
+
+          {/* Subtitle with High-End Glowing Dividers */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '16px'
+              gap: '14px'
             }}
           >
-            <div style={{ width: '45px', height: '1.5px', backgroundColor: '#F5AD24' }} />
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              style={{
+                width: '42px',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent 0%, #FF8C00 70%, #FFD000 100%)',
+                borderRadius: '1px',
+                transformOrigin: 'right center',
+              }}
+            />
             <span
               style={{
-                fontSize: '26px',
-                fontWeight: '400',
-                color: '#4A5568',
-                fontFamily: 'var(--font-body)'
+                fontSize: '15px',
+                fontWeight: '500',
+                color: '#475569',
+                fontFamily: 'var(--font-body)',
+                letterSpacing: '-0.1px'
               }}
             >
               Fast. Reliable. Worldwide.
             </span>
-            <div style={{ width: '45px', height: '1.5px', backgroundColor: '#F5AD24' }} />
-          </div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              style={{
+                width: '42px',
+                height: '2px',
+                background: 'linear-gradient(90deg, #FFD000 0%, #FF8C00 30%, transparent 100%)',
+                borderRadius: '1px',
+                transformOrigin: 'left center',
+              }}
+            />
+          </motion.div>
         </div>
 
         <div
@@ -353,78 +425,98 @@ export const Home = ({ onNavigate }) => {
             zIndex: 2
           }}
         >
-          {freightCardsData.map((card) => (
+          {freightCardsData.map((card, idx) => (
             <FreightCard
               key={card.id}
+              loading={isLoading}
               title={card.title}
               subtitle={card.subtitle}
               icon={card.icon}
               bullets={card.bullets}
               image={card.image}
               buttonText={card.buttonText}
+              delay={idx * 0.08}
               onExplore={() => openModal('quote')}
             />
           ))}
         </div>
 
-        <TrustBar style={{ margin: '25px 0 0 0' }} />
+        <TrustBar style={{ margin: '24px 0 0 0' }} />
       </section>
+
+      {/* ── All remaining content inside page-viewport ── */}
+      {/* ── All remaining content inside full-width container ── */}
+      <div className="page-viewport" style={{ width: '100%', maxWidth: '100%', padding: 0 }}>
 
       {/* 7. Featured Products Section (Screen 3) */}
       <section
         id="products-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '45px 24px 35px 24px',
-          background: '#FAF8F3',
-          color: '#082653',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          color: '#0F172A',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE1E6',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.12)'
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)'
         }}
       >
-        {/* Top Decorative Label */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            marginBottom: '6px'
-          }}
-        >
-          <div style={{ width: '40px', height: '1.5px', backgroundColor: '#D99A20' }} />
-          <span
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
             style={{
-              fontSize: '18px',
-              fontWeight: '600',
-              color: '#D99A20',
-              letterSpacing: '0.04em',
-              fontFamily: 'var(--font-body)'
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
           >
-            QUALITY PRODUCTS. GLOBAL REACH.
-          </span>
-          <div style={{ width: '40px', height: '1.5px', backgroundColor: '#D99A20' }} />
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)'
+              }}
+            >
+              QUALITY PRODUCTS. GLOBAL REACH.
+            </span>
+          </div>
         </div>
 
         {/* Main Section Heading */}
         <h2
           style={{
-            fontSize: '56px',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
             fontWeight: '800',
-            color: '#082653',
+            color: '#0F172A',
             textAlign: 'center',
-            lineHeight: '1.05',
-            letterSpacing: '-1px',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
             fontFamily: 'var(--font-body)',
-            marginBottom: '8px'
+            marginBottom: '6px'
           }}
         >
-          Featured Products
+          Featured <span style={{ color: '#FF6F00' }}>Products</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Tagline */}
         <div
@@ -433,17 +525,17 @@ export const Home = ({ onNavigate }) => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '12px',
-            fontSize: '19px',
+            fontSize: '14.5px',
             fontWeight: '500',
-            color: '#082653',
-            marginBottom: '32px',
+            color: '#475569',
+            marginBottom: '26px',
             flexWrap: 'wrap'
           }}
         >
           <span>Handpicked Quality</span>
-          <span style={{ color: '#D99A20', fontSize: '14px' }}>•</span>
+          <span style={{ color: '#FF6F00', fontSize: '12px' }}>•</span>
           <span>Trusted Suppliers</span>
-          <span style={{ color: '#D99A20', fontSize: '14px' }}>•</span>
+          <span style={{ color: '#FF6F00', fontSize: '12px' }}>•</span>
           <span>Global Delivery</span>
         </div>
 
@@ -453,75 +545,82 @@ export const Home = ({ onNavigate }) => {
             className="featured-products-grid"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '16px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '18px',
               position: 'relative'
             }}
           >
-            {productsList.map((product) => (
+            {productsList.map((product, idx) => (
               <ProductCard
                 key={product.id}
+                loading={isLoading}
                 product={product}
+                delay={idx * 0.08}
                 onViewDetails={() => openModal('quote')}
               />
             ))}
           </div>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleCarouselNext}
             aria-label="Next Products"
             style={{
               position: 'absolute',
-              right: '-18px',
+              right: '-14px',
               top: '42%',
               transform: 'translateY(-50%)',
-              width: '50px',
-              height: '50px',
+              width: '44px',
+              height: '44px',
               borderRadius: '50%',
               background: '#FFFFFF',
-              border: '1px solid #DDE1E6',
-              color: '#D99A20',
+              border: '1px solid rgba(255, 111, 0, 0.35)',
+              color: '#FF6F00',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 6px 20px rgba(8, 38, 83, 0.15)',
+              boxShadow: '0 6px 20px rgba(255, 111, 0, 0.18)',
               zIndex: 10,
               cursor: 'pointer'
             }}
             className="carousel-arrow"
           >
-            <ChevronRight size={24} strokeWidth={2.5} />
-          </button>
+            <ChevronRight size={22} strokeWidth={2.5} />
+          </motion.button>
         </div>
 
         {/* Centered Explore Button */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => openModal('quote')}
             style={{
-              width: '345px',
-              height: '48px',
-              background: '#102D5A',
+              padding: '11px 28px',
+              background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
               color: '#FFFFFF',
-              borderRadius: '8px',
-              fontSize: '19px',
+              borderRadius: '999px',
+              fontSize: '14.5px',
               fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '12px',
-              boxShadow: '0 4px 16px rgba(16, 45, 90, 0.25)'
+              gap: '10px',
+              boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
+              border: 'none',
+              cursor: 'pointer'
             }}
           >
             <span>Explore All Products</span>
-            <ArrowRight size={20} strokeWidth={2.5} />
-          </button>
+            <ArrowRight size={18} strokeWidth={2.5} />
+          </motion.button>
         </div>
 
         {/* Product Trust Bar */}
         <ProductTrustBar />
 
-        {/* Dark Navy Statistics Banner */}
+        {/* Statistics Banner */}
         <DarkStatsBanner />
       </section>
 
@@ -530,80 +629,79 @@ export const Home = ({ onNavigate }) => {
         id="global-portfolio-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '36px 28px 30px 28px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Top Gold Label with decorative lines */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            marginBottom: '10px',
-          }}
-        >
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '45px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '15px',
-              fontWeight: '600',
-              color: '#D99A1E',
-              letterSpacing: '0.5px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-body)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
           >
-            PREMIUM QUALITY. TRUSTED GLOBALLY
-          </span>
-          <div
-            style={{
-              width: '45px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              PREMIUM QUALITY. TRUSTED GLOBALLY
+            </span>
+          </div>
         </div>
 
-        {/* Main Serif Heading */}
+        {/* Main Heading */}
         <h2
           style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '44px',
-            fontWeight: '700',
-            color: '#082653',
-            lineHeight: '1.1',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
             letterSpacing: '-0.5px',
             textAlign: 'center',
-            marginBottom: '12px',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
           }}
         >
-          Explore Our Global Product Portfolio
+          Explore Our <span style={{ color: '#FF6F00' }}>Global Product Portfolio</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle Description */}
         <p
           style={{
-            maxWidth: '840px',
-            margin: '0 auto 16px auto',
-            fontSize: '15.5px',
-            lineHeight: '1.45',
+            maxWidth: '740px',
+            margin: '0 auto 20px auto',
+            fontSize: '14.5px',
+            lineHeight: '1.5',
             fontWeight: '400',
-            color: '#40516D',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
           }}
@@ -614,41 +712,42 @@ export const Home = ({ onNavigate }) => {
         {/* 5-Item Trust Features Row */}
         <ProductTrustRow items={portfolioTrustFeatures} />
 
-        {/* 4 × 2 Product Category Grid */}
+        {/* 4 x 2 Product Category Grid */}
         <ProductCategoryGrid
           categories={globalProductCategories}
+          loading={isLoading}
           onCategoryClick={() => openModal('quote')}
         />
 
         {/* Centered View All Products CTA */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '22px', marginBottom: '14px' }}>
-          <button
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px', marginBottom: '14px' }}>
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => openModal('quote')}
             className="portfolio-cta-btn"
             style={{
-              width: '290px',
-              height: '48px',
-              backgroundColor: '#082653',
-              borderRadius: '8px',
+              padding: '11px 28px',
+              background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+              borderRadius: '999px',
               color: '#FFFFFF',
-              fontSize: '16px',
-              fontWeight: '600',
+              fontSize: '14.5px',
+              fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '0 22px',
-              boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+              justifyContent: 'center',
+              gap: '12px',
+              boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
               border: 'none',
             }}
           >
             <span>View All Products</span>
-            <ArrowRight size={18} strokeWidth={2.5} color="#F5B73A" />
-          </button>
+            <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+          </motion.button>
         </div>
 
-        {/* Bottom Dark Navy Statistics Banner */}
+        {/* Bottom Statistics Banner */}
         <PortfolioStatsBanner statistics={portfolioStatistics} />
       </section>
 
@@ -657,240 +756,268 @@ export const Home = ({ onNavigate }) => {
         id="procurement-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          backgroundImage: "url('/procurement-bg.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'top center',
-          backgroundRepeat: 'no-repeat',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.12)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Soft White Readability Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 50%, rgba(255,255,255,0.85) 100%)',
-            backdropFilter: 'blur(1px)',
-            zIndex: 1,
-          }}
-        />
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
+            }}
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              END-TO-END SOURCING & PROCUREMENT
+            </span>
+          </div>
+        </div>
 
-        {/* Content Container on top of overlay */}
-        <div
+        {/* Main Heading */}
+        <h2
           style={{
-            position: 'relative',
-            zIndex: 2,
-            padding: '38px 24px 0 24px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            textAlign: 'center',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
           }}
         >
-          {/* Main Heading */}
-          <h2
-            style={{
-              fontSize: '56px',
-              fontWeight: '800',
-              color: '#082653',
-              textAlign: 'center',
-              lineHeight: '1.05',
-              letterSpacing: '-1px',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '6px',
-            }}
-          >
-            Procurement Solutions
-          </h2>
+          Procurement <span style={{ color: '#FF6F00' }}>Solutions</span>
+        </h2>
 
-          {/* Subtitle with Navy & Gold Styling */}
-          <div
-            style={{
-              fontSize: '27px',
-              fontWeight: '500',
-              textAlign: 'center',
-              color: '#082653',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '10px',
-              letterSpacing: '-0.2px',
-            }}
-          >
-            <span>Source </span>
-            <span style={{ color: '#E3A026', fontWeight: '600' }}>Smarter.</span>
-            <span> Buy </span>
-            <span style={{ color: '#E3A026', fontWeight: '600' }}>Better.</span>
-          </div>
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
-          {/* Subtle Decorative Gold Line & Downward Chevron */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              marginBottom: '32px',
-            }}
-          >
-            <div style={{ width: '48px', height: '1.5px', backgroundColor: '#E3A026' }} />
-            <ChevronDown size={14} color="#E3A026" strokeWidth={2.5} />
-            <div style={{ width: '48px', height: '1.5px', backgroundColor: '#E3A026' }} />
-          </div>
+        {/* Subtitle */}
+        <p
+          style={{
+            fontSize: '14.5px',
+            fontWeight: '500',
+            textAlign: 'center',
+            color: '#475569',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '26px',
+          }}
+        >
+          Source Smarter. Buy Better. <span style={{ color: '#FF6F00', fontWeight: '600' }}>Global Reach.</span>
+        </p>
 
-          {/* 9-Step Horizontal Procurement Process Flow */}
-          <div style={{ width: '100%', maxWidth: '1160px', marginBottom: '28px' }}>
-            <ProcessFlow steps={procurementSteps} />
-          </div>
+        {/* Horizontal Procurement Process Flow */}
+        <div style={{ width: '100%', marginBottom: '26px' }}>
+          <ProcessFlow steps={procurementSteps} loading={isLoading} />
+        </div>
 
-          {/* Start Procurement CTA Button */}
-          <button
+        {/* Start Procurement CTA Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '18px' }}>
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => openModal('quote')}
             className="procurement-cta-btn"
             style={{
-              width: '325px',
-              height: '50px',
-              backgroundColor: '#F2A922',
-              color: '#082653',
-              borderRadius: '7px',
-              fontSize: '20px',
+              padding: '11px 28px',
+              background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+              color: '#FFFFFF',
+              borderRadius: '999px',
+              fontSize: '14.5px',
               fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '14px',
-              boxShadow: '0 4px 16px rgba(242, 169, 34, 0.35)',
+              gap: '12px',
+              boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
               border: 'none',
             }}
           >
             <span>Start Procurement</span>
-            <ArrowRight size={22} strokeWidth={2.5} color="#082653" />
-          </button>
-
-          {/* Why Choose Our Procurement Solutions Section (6 Cards) */}
-          <BenefitSection benefits={procurementBenefits} />
-
-          {/* Procurement Message Bar */}
-          <ProcurementMessage />
+            <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+          </motion.button>
         </div>
 
-        {/* Bottom Dark Navy Statistics Banner */}
+        {/* Why Choose Our Procurement Solutions Section */}
+        <BenefitSection benefits={procurementBenefits} />
+
+        {/* Procurement Message Bar */}
+        <ProcurementMessage />
+
+        {/* Bottom Statistics Banner */}
         <ProcurementStats stats={procurementStats} />
       </section>
 
-      {/* 9. Documentation & Compliance Section (Screen 5) */}
+      {/* 10. Documentation & Compliance Section (Screen 5) */}
       <section
         id="documentation-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          paddingTop: '40px',
-          background: '#FAFBFC',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DCE2E9',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Subtle Watermark Trade Lines */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(8, 38, 83, 0.035) 0%, transparent 60%),
-                              radial-gradient(ellipse at 20% 80%, rgba(8, 38, 83, 0.025) 0%, transparent 50%)`,
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
+            }}
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              COMPLIANCE & REGULATORY EXCELLENCE
+            </span>
+          </div>
+        </div>
 
-        {/* Hero Top Grid: Left (Text, Categories, CTA) & Right (Realistic Illustration) */}
+        {/* Main Heading */}
+        <h2
+          style={{
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
+          }}
+        >
+          Documentation & <span style={{ color: '#FF6F00' }}>Compliance</span>
+        </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
+
+        {/* Subtitle */}
+        <p
+          style={{
+            fontSize: '14.5px',
+            fontWeight: '400',
+            color: '#475569',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '24px',
+          }}
+        >
+          Trade Documentation Made Simple, Fast & Fully Compliant
+        </p>
+
+        {/* Hero Top Grid */}
         <div
           className="doc-hero-wrapper"
           style={{
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 36px',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '24px',
+            flexWrap: 'wrap',
           }}
         >
           {/* Left Hero Content Area */}
-          <div style={{ flex: '1 1 68%', maxWidth: '780px' }}>
-            <h2
-              style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
-                fontSize: '44px',
-                fontWeight: '700',
-                color: '#082653',
-                lineHeight: '1.08',
-                letterSpacing: '-0.5px',
-                marginBottom: '8px',
-              }}
-            >
-              Documentation & Compliance
-            </h2>
-
-            <p
-              style={{
-                fontSize: '18px',
-                fontWeight: '400',
-                color: '#40516D',
-                fontFamily: 'var(--font-body)',
-                marginBottom: '6px',
-                letterSpacing: '-0.2px',
-              }}
-            >
-              Trade Documentation Made Simple
-            </p>
-
+          <div style={{ flex: '1 1 540px' }}>
             <DocumentationGrid
               categories={documentationCategories}
+              loading={isLoading}
               onItemClick={() => openModal('quote')}
             />
 
-            <button
-              onClick={() => openModal('quote')}
-              className="doc-cta-btn"
-              style={{
-                width: '320px',
-                height: '46px',
-                backgroundColor: '#082653',
-                borderRadius: '7px',
-                color: '#FFFFFF',
-                fontSize: '15px',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 20px',
-                boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                border: 'none',
-              }}
-            >
-              <span>Explore Documentation</span>
-              <ArrowRight size={18} strokeWidth={2.5} color="#F4B52E" />
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '12px' }}>
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => openModal('quote')}
+                className="doc-cta-btn"
+                style={{
+                  padding: '11px 26px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  borderRadius: '999px',
+                  color: '#FFFFFF',
+                  fontSize: '14.5px',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
+                  cursor: 'pointer',
+                  border: 'none',
+                }}
+              >
+                <span>Explore Documentation</span>
+                <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+              </motion.button>
+            </div>
           </div>
 
           {/* Right Hero Image Container */}
           <div
             className="doc-hero-image-container"
             style={{
-              flex: '0 0 32%',
+              flex: '0 0 320px',
               maxWidth: '380px',
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 6px 20px rgba(15, 23, 42, 0.08)',
             }}
           >
             <img
@@ -899,9 +1026,8 @@ export const Home = ({ onNavigate }) => {
               style={{
                 width: '100%',
                 height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
+                objectFit: 'cover',
+                display: 'block',
               }}
             />
           </div>
@@ -910,253 +1036,273 @@ export const Home = ({ onNavigate }) => {
         {/* 5-Column Compliance Benefit Panel */}
         <BenefitPanel benefits={complianceBenefits} />
 
-        {/* Bottom 4-Item Brand Value Strip */}
+        {/* Bottom Brand Value Strip */}
         <BrandValueBar items={brandValues} />
       </section>
 
-      {/* 10. Customs & Trade Compliance Section (Screen 12) */}
+      {/* 11. Customs & Trade Compliance Section (Screen 12) */}
       <section
         id="customs-compliance-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '36px 28px 24px 28px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Top Gold Label with decorative lines */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '12px',
-            marginBottom: '8px',
-          }}
-        >
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '32px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '13.5px',
-              fontWeight: '600',
-              color: '#D99A1E',
-              letterSpacing: '0.4px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-body)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
           >
-            TRUSTED • COMPLIANT • GLOBAL
-          </span>
-          <div
-            style={{
-              width: '32px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              TRUSTED • COMPLIANT • GLOBAL
+            </span>
+          </div>
         </div>
 
-        {/* Main Serif Heading */}
+        {/* Main Heading */}
         <h2
           style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '34px',
-            fontWeight: '700',
-            color: '#082653',
-            lineHeight: '1.1',
-            letterSpacing: '-0.4px',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
             textAlign: 'center',
+            fontFamily: 'var(--font-body)',
             marginBottom: '6px',
           }}
         >
-          Customs & Trade Compliance
+          Customs & Trade <span style={{ color: '#FF6F00' }}>Compliance</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle */}
         <p
           style={{
-            fontSize: '15px',
+            fontSize: '14.5px',
             fontWeight: '400',
-            color: '#40516D',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
-            marginBottom: '10px',
+            marginBottom: '20px',
           }}
         >
-          Simplifying Cross-Border Trade
+          Simplifying Cross-Border Trade With Complete Regulatory Assurance
         </p>
-
-        {/* Centered Gold Divider */}
-        <div
-          style={{
-            width: '45px',
-            height: '2.5px',
-            backgroundColor: '#E8A52A',
-            margin: '0 auto 14px auto',
-            borderRadius: '1.5px',
-          }}
-        />
 
         {/* 6 Service Categories Grid */}
         <CustomsServiceGrid
           services={customsComplianceServices}
+          loading={isLoading}
           onServiceClick={() => openModal('quote')}
         />
 
         {/* Centered Learn More CTA */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '18px', marginBottom: '6px' }}>
-          <button
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '22px', marginBottom: '6px' }}>
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => openModal('quote')}
             className="customs-cta-btn"
             style={{
-              width: '220px',
-              height: '44px',
-              backgroundColor: '#082653',
-              borderRadius: '10px',
+              padding: '11px 28px',
+              background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+              borderRadius: '999px',
               color: '#FFFFFF',
               fontSize: '14.5px',
-              fontWeight: '600',
+              fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '0 20px',
-              boxShadow: '0 3px 12px rgba(8, 38, 83, 0.20)',
+              justifyContent: 'center',
+              gap: '12px',
+              boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
               cursor: 'pointer',
-              transition: 'all 0.2s ease',
               border: 'none',
             }}
           >
             <span>Learn More</span>
-            <ArrowRight size={18} strokeWidth={2.4} color="#F5B73A" />
-          </button>
+            <ArrowRight size={18} strokeWidth={2.4} color="#FFFFFF" />
+          </motion.button>
         </div>
 
         {/* Bottom Logistics Visual & Statistics Section */}
         <CustomsLogisticsSection stats={customsComplianceStats} />
       </section>
 
-      {/* 11. Quality Assurance Section (Screen 6) */}
+      {/* 12. Quality Assurance Section (Screen 6) */}
       <section
         id="quality-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          paddingTop: '40px',
-          paddingBottom: '20px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Subtle Watermark Gradients */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `radial-gradient(ellipse at 85% 20%, rgba(8, 47, 98, 0.04) 0%, transparent 60%),
-                              radial-gradient(ellipse at 15% 85%, rgba(232, 165, 42, 0.03) 0%, transparent 50%)`,
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
+            }}
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              CERTIFIED QUALITY. ZERO DEFECTS.
+            </span>
+          </div>
+        </div>
 
-        {/* Hero Top Grid: Left (Heading, Subtitle, 5 Process Items, CTA) & Right (Hero Image) */}
+        {/* Main Heading */}
+        <h2
+          style={{
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
+          }}
+        >
+          Quality <span style={{ color: '#FF6F00' }}>Assurance</span>
+        </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
+
+        {/* Subtitle */}
+        <p
+          style={{
+            fontSize: '14.5px',
+            fontWeight: '400',
+            color: '#475569',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '24px',
+          }}
+        >
+          Quality You Can Trade With Utmost Confidence Across Every Border
+        </p>
+
+        {/* Hero Top Grid */}
         <div
           className="quality-hero-wrapper"
           style={{
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 36px',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '20px',
+            gap: '24px',
+            flexWrap: 'wrap',
           }}
         >
           {/* Left Hero Content Area */}
-          <div style={{ flex: '1 1 62%', maxWidth: '720px' }}>
-            <h2
-              style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
-                fontSize: '44px',
-                fontWeight: '700',
-                color: '#082653',
-                lineHeight: '1.08',
-                letterSpacing: '-0.5px',
-                marginBottom: '8px',
-              }}
-            >
-              Quality Assurance
-            </h2>
-
-            <p
-              style={{
-                fontSize: '18px',
-                fontWeight: '400',
-                color: '#2F5D96',
-                fontFamily: 'var(--font-body)',
-                marginBottom: '6px',
-                letterSpacing: '-0.2px',
-              }}
-            >
-              Quality You Can Trade With Confidence
-            </p>
-
+          <div style={{ flex: '1 1 540px' }}>
             <QualityProcess
               steps={qualityProcessSteps}
+              loading={isLoading}
               onItemClick={() => openModal('quote')}
             />
 
-            <button
-              onClick={() => openModal('quote')}
-              className="quality-cta-btn"
-              style={{
-                width: '320px',
-                height: '46px',
-                backgroundColor: '#082653',
-                borderRadius: '7px',
-                color: '#FFFFFF',
-                fontSize: '15px',
-                fontWeight: '600',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 20px',
-                boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                border: 'none',
-              }}
-            >
-              <span>Our Quality Process</span>
-              <ArrowRight size={18} strokeWidth={2.5} color="#E8A52A" />
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '14px' }}>
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => openModal('quote')}
+                className="quality-cta-btn"
+                style={{
+                  padding: '11px 26px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  borderRadius: '999px',
+                  color: '#FFFFFF',
+                  fontSize: '14.5px',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
+                  cursor: 'pointer',
+                  border: 'none',
+                }}
+              >
+                <span>Our Quality Process</span>
+                <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+              </motion.button>
+            </div>
           </div>
 
           {/* Right Hero Image Container */}
           <div
             className="quality-hero-image-container"
             style={{
-              flex: '0 0 38%',
-              maxWidth: '430px',
+              flex: '0 0 320px',
+              maxWidth: '380px',
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 6px 20px rgba(15, 23, 42, 0.08)',
             }}
           >
             <img
@@ -1165,117 +1311,121 @@ export const Home = ({ onNavigate }) => {
               style={{
                 width: '100%',
                 height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
+                objectFit: 'cover',
+                display: 'block',
               }}
             />
           </div>
         </div>
 
-        {/* 3. Main Dark Navy Assurance Banner */}
+        {/* Main Assurance Banner */}
         <QualityAssuranceBanner items={qualityAssuranceBannerItems} />
 
-        {/* 4. Bottom 5 Supporting Capabilities Section */}
+        {/* Supporting Capabilities Section */}
         <SupportingFeatures features={supportingCapabilities} />
       </section>
 
-      {/* 11. End-to-End Global Trade Solutions Section (Screen 7) */}
+      {/* 13. End-to-End Global Trade Solutions Section (Screen 7) */}
       <section
         id="services-overview-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          paddingTop: '38px',
-          paddingBottom: '28px',
-          background: 'linear-gradient(145deg, #051A3B 0%, #020F28 100%)',
-          borderRadius: '28px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: 'inset 4px 4px 10px rgba(255, 255, 255, 0.10), inset -6px -6px 14px rgba(0, 0, 0, 0.70), 0 20px 48px rgba(0, 0, 0, 0.50)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Subtle Ambient Clay Top Highlight */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '120px',
-            background: 'radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-
-        {/* Heading & Subtitle Header */}
-        <div
-          style={{
-            textAlign: 'center',
-            position: 'relative',
-            zIndex: 1,
-            marginBottom: '20px',
-            padding: '0 20px',
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontSize: '38px',
-              fontWeight: '700',
-              color: '#FFFFFF',
-              lineHeight: '1.1',
-              letterSpacing: '-0.4px',
-              marginBottom: '6px',
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
-            }}
-          >
-            End-to-End Global Trade Solutions
-          </h2>
-
-          <p
-            style={{
-              fontSize: '15px',
-              fontWeight: '400',
-              color: 'rgba(255, 255, 255, 0.88)',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '10px',
-            }}
-          >
-            Integrated Services. Global Reach. Seamless Trade.
-          </p>
-
-          {/* Centered Decorative 3D Gold Clay Pill */}
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '64px',
-              height: '5px',
-              background: 'linear-gradient(145deg, #FFC94A 0%, #DE971B 100%)',
-              boxShadow: 'inset 1px 1px 2px rgba(255, 255, 255, 0.6), 0 2px 6px rgba(222, 151, 27, 0.4)',
-              margin: '0 auto',
-              borderRadius: '3px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
-          />
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              FULL-SPECTRUM TRADE CAPABILITIES
+            </span>
+          </div>
         </div>
 
-        {/* Hero Top Wrapper: Left (5x2 Service Grid + CTA) & Right (Global Logistics Visual) */}
+        {/* Main Heading */}
+        <h2
+          style={{
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
+          }}
+        >
+          End-to-End <span style={{ color: '#FF6F00' }}>Global Trade Solutions</span>
+        </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
+
+        {/* Subtitle */}
+        <p
+          style={{
+            fontSize: '14.5px',
+            fontWeight: '400',
+            color: '#475569',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '20px',
+          }}
+        >
+          Integrated Services. Global Reach. Seamless Trade.
+        </p>
+
+        {/* Hero Top Wrapper */}
         <div
           className="services-hero-wrapper"
           style={{
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 28px',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '24px',
+            flexWrap: 'wrap',
           }}
         >
           {/* Left Service Cards Area */}
-          <div style={{ flex: '1 1 65%', maxWidth: '750px' }}>
+          <div style={{ flex: '1 1 540px' }}>
             <ServiceGrid
               services={globalServices}
+              loading={isLoading}
               onCardClick={(service) => {
                 if (service.id === 3 || service.id === 4 || service.id === 5) {
                   scrollToSection('services-section');
@@ -1291,51 +1441,46 @@ export const Home = ({ onNavigate }) => {
               }}
             />
 
-            {/* Centered Explore All Services 3D Clay CTA Button */}
+            {/* Explore All Services CTA Button */}
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection('services-section')}
                 className="clay-cta-btn"
                 style={{
-                  width: '320px',
-                  height: '46px',
-                  background: 'linear-gradient(145deg, #FFC94A 0%, #DE971B 100%)',
-                  borderRadius: '16px',
-                  color: '#03132D',
-                  fontSize: '14px',
+                  padding: '11px 28px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  borderRadius: '999px',
+                  color: '#FFFFFF',
+                  fontSize: '14.5px',
                   fontWeight: '700',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0 22px',
-                  boxShadow: 'inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.6), inset -3px -3px 6px rgba(120, 70, 0, 0.5), 0 10px 24px rgba(222, 151, 27, 0.40)',
+                  justifyContent: 'center',
+                  gap: '12px',
+                  boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   border: 'none',
                   fontFamily: 'var(--font-body)',
                 }}
               >
                 <span>Explore All Services</span>
-                <ArrowRight size={18} strokeWidth={2.5} color="#03132D" />
-              </button>
+                <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+              </motion.button>
             </div>
           </div>
 
-          {/* Right Hero Image Container (3D Clay Pod) */}
+          {/* Right Hero Image Container */}
           <div
             className="services-hero-image-container"
             style={{
-              flex: '0 0 35%',
-              maxWidth: '390px',
+              flex: '0 0 320px',
+              maxWidth: '380px',
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '12px',
-              background: 'linear-gradient(145deg, #092B5C 0%, #041738 100%)',
-              borderRadius: '24px',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              boxShadow: 'inset 4px 4px 8px rgba(255, 255, 255, 0.12), inset -5px -5px 12px rgba(0, 0, 0, 0.65), 0 16px 36px rgba(0, 0, 0, 0.45)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 6px 20px rgba(15, 23, 42, 0.08)',
             }}
           >
             <img
@@ -1345,145 +1490,149 @@ export const Home = ({ onNavigate }) => {
                 width: '100%',
                 height: 'auto',
                 objectFit: 'cover',
-                borderRadius: '16px',
-                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.35)',
+                display: 'block',
               }}
             />
           </div>
         </div>
 
-        {/* 3D Clay Benefits Banner */}
+        {/* Benefits Banner */}
         <ServicesBenefitsBanner benefits={serviceBenefits} />
 
-        {/* Bottom 3D Clay Statistics Row */}
+        {/* Statistics Row */}
         <ServicesStatisticsRow statistics={serviceStatistics} />
       </section>
 
-      {/* 12. How Global Link Works Section (Screen 8) */}
+      {/* 14. How Global Link Works Section (Screen 8) */}
       <section
         id="how-it-works-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          paddingTop: '36px',
-          paddingBottom: '20px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Subtle Watermark Gradients */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `radial-gradient(ellipse at 85% 20%, rgba(8, 47, 98, 0.04) 0%, transparent 60%),
-                              radial-gradient(ellipse at 15% 85%, rgba(232, 165, 42, 0.03) 0%, transparent 50%)`,
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-
-        {/* Heading & Subtitle Header */}
-        <div
-          style={{
-            textAlign: 'center',
-            position: 'relative',
-            zIndex: 1,
-            marginBottom: '18px',
-            padding: '0 20px',
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
-              fontSize: '44px',
-              fontWeight: '700',
-              color: '#082653',
-              lineHeight: '1.08',
-              letterSpacing: '-0.5px',
-              marginBottom: '6px',
-            }}
-          >
-            How Global Link Works
-          </h2>
-
-          <p
-            style={{
-              fontSize: '18px',
-              fontWeight: '400',
-              color: '#082653',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '10px',
-              letterSpacing: '-0.2px',
-            }}
-          >
-            Simple Process. Complete Transparency.{' '}
-            <span style={{ color: '#E8A52A', fontWeight: '500' }}>
-              On-Time Delivery.
-            </span>
-          </p>
-
-          {/* Centered Decorative Gold Line */}
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '95px',
-              height: '3px',
-              backgroundColor: '#E8A52A',
-              margin: '0 auto',
-              borderRadius: '2px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
-          />
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              PROVEN EXECUTION WORKFLOW
+            </span>
+          </div>
         </div>
 
-        {/* Hero Top Wrapper: Left (6 Process Steps + CTA) & Right (Global Logistics Visual) */}
+        {/* Main Heading */}
+        <h2
+          style={{
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
+          }}
+        >
+          How Global Link <span style={{ color: '#FF6F00' }}>Works</span>
+        </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
+
+        {/* Subtitle */}
+        <p
+          style={{
+            fontSize: '14.5px',
+            fontWeight: '400',
+            color: '#475569',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '20px',
+          }}
+        >
+          Simple Process. Complete Transparency. <span style={{ color: '#FF6F00', fontWeight: '600' }}>On-Time Delivery.</span>
+        </p>
+
+        {/* Hero Top Wrapper */}
         <div
           className="process-hero-wrapper"
           style={{
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 24px',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '16px',
+            gap: '24px',
+            flexWrap: 'wrap',
           }}
         >
           {/* Left Process Area */}
-          <div style={{ flex: '1 1 65%', maxWidth: '760px' }}>
+          <div style={{ flex: '1 1 540px' }}>
             <HowItWorksProcessFlow
               steps={howItWorksSteps}
+              loading={isLoading}
               onStepClick={() => openModal('quote')}
             />
 
-            {/* Centered Learn More About Our Process CTA Button */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-              <button
+            {/* Learn More About Our Process CTA Button */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+              <motion.button
+                whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => openModal('quote')}
                 className="process-cta-btn"
                 style={{
-                  width: '380px',
-                  height: '48px',
-                  backgroundColor: '#082653',
-                  borderRadius: '9px',
+                  padding: '11px 28px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  borderRadius: '999px',
                   color: '#FFFFFF',
-                  fontSize: '16px',
-                  fontWeight: '600',
+                  fontSize: '14.5px',
+                  fontWeight: '700',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '0 24px',
-                  boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+                  justifyContent: 'center',
+                  gap: '12px',
+                  boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease',
                   border: 'none',
                 }}
               >
                 <span>Learn More About Our Process</span>
-                <ArrowRight size={18} strokeWidth={2.5} color="#E8A52A" />
-              </button>
+                <ArrowRight size={18} strokeWidth={2.5} color="#FFFFFF" />
+              </motion.button>
             </div>
           </div>
 
@@ -1491,12 +1640,12 @@ export const Home = ({ onNavigate }) => {
           <div
             className="process-hero-image-container"
             style={{
-              flex: '0 0 35%',
-              maxWidth: '390px',
+              flex: '0 0 320px',
+              maxWidth: '380px',
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 6px 20px rgba(15, 23, 42, 0.08)',
             }}
           >
             <img
@@ -1505,46 +1654,109 @@ export const Home = ({ onNavigate }) => {
               style={{
                 width: '100%',
                 height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
+                objectFit: 'cover',
+                display: 'block',
               }}
             />
           </div>
         </div>
 
-        {/* 3. Dark Navy Trust Banner */}
+        {/* Trust Banner */}
         <ProcessTrustBanner items={howItWorksTrustItems} />
 
-        {/* 4. Bottom Clean White Statistics Row */}
+        {/* Statistics Row */}
         <ProcessStatisticsRow statistics={howItWorksStats} />
       </section>
 
-      {/* 13. Track Your Shipment + Warehousing & Distribution Section (Screen 9) */}
+      {/* 15. Track Your Shipment + Warehousing & Distribution Section (Screen 9) */}
       <section
         id="tracking-warehousing-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          background: '#FFFFFF',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* =========================================================================
-            SECTION 1: TRACK YOUR SHIPMENT (Screen 9 Upper)
-            ========================================================================= */}
+        {/* UPPER: TRACK YOUR SHIPMENT */}
         <div
           id="tracking-section"
           style={{
             position: 'relative',
-            padding: '36px 28px 28px 28px',
-            background: '#FAFBFD',
+            padding: '38px 24px 26px 24px',
+            background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%)',
           }}
         >
-          {/* Top Two-Column Grid */}
+          {/* Eyebrow Pill */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '5px 14px',
+                borderRadius: '999px',
+                background: 'rgba(255, 111, 0, 0.08)',
+                border: '1px solid rgba(255, 111, 0, 0.25)',
+              }}
+            >
+              <Sparkles size={12} color="#FF6F00" />
+              <span
+                style={{
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  color: '#FF6F00',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-body)',
+                }}
+              >
+                REAL-TIME CARGO TELEMETRY
+              </span>
+            </div>
+          </div>
+
+          <h2
+            style={{
+              fontSize: 'clamp(24px, 2.3vw, 34px)',
+              fontWeight: '800',
+              color: '#0F172A',
+              lineHeight: '1.2',
+              letterSpacing: '-0.5px',
+              textAlign: 'center',
+              fontFamily: 'var(--font-body)',
+              marginBottom: '6px',
+            }}
+          >
+            Track Your <span style={{ color: '#FF6F00' }}>Shipment</span>
+          </h2>
+
+          {/* Glowing Gradient Divider */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+            <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+            <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+          </div>
+
+          <p
+            style={{
+              fontSize: '14.5px',
+              fontWeight: '400',
+              color: '#475569',
+              textAlign: 'center',
+              fontFamily: 'var(--font-body)',
+              marginBottom: '20px',
+            }}
+          >
+            Real-time updates. Complete visibility across every mile.
+          </p>
+
           <div
             className="tracking-hero-grid"
             style={{
@@ -1552,37 +1764,11 @@ export const Home = ({ onNavigate }) => {
               alignItems: 'flex-start',
               justifyContent: 'space-between',
               gap: '24px',
+              flexWrap: 'wrap',
             }}
           >
             {/* Left Content Area */}
-            <div style={{ flex: '1 1 58%', maxWidth: '680px' }}>
-              <h2
-                style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
-                  fontSize: '34px',
-                  fontWeight: '700',
-                  color: '#082653',
-                  lineHeight: '1.1',
-                  letterSpacing: '-0.4px',
-                  marginBottom: '4px',
-                }}
-              >
-                Track Your Shipment
-              </h2>
-
-              <p
-                style={{
-                  fontSize: '15px',
-                  fontWeight: '400',
-                  color: '#40516D',
-                  fontFamily: 'var(--font-body)',
-                  marginBottom: '2px',
-                  letterSpacing: '-0.1px',
-                }}
-              >
-                Real-time updates. Complete visibility.
-              </p>
-
+            <div style={{ flex: '1 1 540px' }}>
               <TrackingForm
                 onTrack={(query) => {
                   setActiveTrackingStep(Math.floor(Math.random() * 3) + 4);
@@ -1591,34 +1777,34 @@ export const Home = ({ onNavigate }) => {
 
               <TrackingTimeline
                 stages={trackingTimelineStages}
+                loading={isLoading}
                 activeStep={activeTrackingStep}
               />
 
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: '14px' }}>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => openModal('track')}
                   className="view-all-shipments-btn"
                   style={{
-                    width: '260px',
-                    height: '42px',
-                    backgroundColor: '#082653',
-                    borderRadius: '7px',
+                    padding: '10px 24px',
+                    background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                    borderRadius: '999px',
                     color: '#FFFFFF',
                     fontSize: '14px',
-                    fontWeight: '600',
+                    fontWeight: '700',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '0 18px',
-                    boxShadow: '0 4px 14px rgba(8, 38, 83, 0.2)',
+                    gap: '10px',
+                    boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
                     border: 'none',
                   }}
                 >
                   <span>View All Shipments</span>
-                  <ArrowRight size={16} strokeWidth={2.5} color="#E8A52A" />
-                </button>
+                  <ArrowRight size={16} strokeWidth={2.5} color="#FFFFFF" />
+                </motion.button>
               </div>
             </div>
 
@@ -1626,12 +1812,11 @@ export const Home = ({ onNavigate }) => {
             <div
               className="tracking-visual-area"
               style={{
-                flex: '0 0 32%',
-                maxWidth: '330px',
+                flex: '0 0 320px',
+                maxWidth: '380px',
                 width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'stretch',
                 gap: '10px',
               }}
             >
@@ -1643,10 +1828,9 @@ export const Home = ({ onNavigate }) => {
                   height: '175px',
                   objectFit: 'cover',
                   borderRadius: '14px',
-                  border: '1px solid #EDF0F3',
-                  boxShadow: '0 4px 14px rgba(8, 38, 83, 0.06)',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 14px rgba(15, 23, 42, 0.06)',
                   display: 'block',
-                  boxSizing: 'border-box',
                 }}
               />
 
@@ -1655,18 +1839,73 @@ export const Home = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* =========================================================================
-            SECTION 2: WAREHOUSING & DISTRIBUTION (Screen 9 Lower)
-            ========================================================================= */}
+        {/* LOWER: WAREHOUSING & DISTRIBUTION */}
         <div
           id="warehousing-section"
           style={{
             position: 'relative',
-            padding: '36px 28px 30px 28px',
-            backgroundColor: '#F2F7FC',
-            borderTop: '1px solid #DDE3EA',
+            padding: '38px 24px 30px 24px',
+            background: 'linear-gradient(180deg, #FFFDF9 0%, #FFF8F0 100%)',
+            borderTop: '1px solid rgba(255, 111, 0, 0.14)',
           }}
         >
+          {/* Eyebrow Pill */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '5px 14px',
+                borderRadius: '999px',
+                background: 'rgba(255, 111, 0, 0.08)',
+                border: '1px solid rgba(255, 111, 0, 0.25)',
+              }}
+            >
+              <Sparkles size={12} color="#FF6F00" />
+              <span
+                style={{
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  color: '#FF6F00',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-body)',
+                }}
+              >
+                SECURE STORAGE & LOGISTICS HUBS
+              </span>
+            </div>
+          </div>
+
+          <h3
+            style={{
+              fontSize: 'clamp(22px, 2.1vw, 30px)',
+              fontWeight: '800',
+              color: '#0F172A',
+              lineHeight: '1.2',
+              letterSpacing: '-0.4px',
+              textAlign: 'center',
+              fontFamily: 'var(--font-body)',
+              marginBottom: '4px',
+            }}
+          >
+            Warehousing & <span style={{ color: '#FF6F00' }}>Distribution</span>
+          </h3>
+
+          <p
+            style={{
+              fontSize: '14px',
+              fontWeight: '500',
+              color: '#475569',
+              textAlign: 'center',
+              fontFamily: 'var(--font-body)',
+              marginBottom: '20px',
+            }}
+          >
+            Store. Manage. Distribute with precision and climate control.
+          </p>
+
           <div
             className="warehousing-main-grid"
             style={{
@@ -1674,37 +1913,11 @@ export const Home = ({ onNavigate }) => {
               alignItems: 'flex-start',
               justifyContent: 'space-between',
               gap: '24px',
+              flexWrap: 'wrap',
             }}
           >
             {/* Left Capabilities Area */}
-            <div style={{ flex: '1 1 52%', maxWidth: '580px' }}>
-              <h3
-                style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
-                  fontSize: '32px',
-                  fontWeight: '700',
-                  color: '#082653',
-                  lineHeight: '1.1',
-                  letterSpacing: '-0.4px',
-                  marginBottom: '3px',
-                }}
-              >
-                Warehousing & Distribution
-              </h3>
-
-              <p
-                style={{
-                  fontSize: '15px',
-                  fontWeight: '600',
-                  color: '#1C5EA8',
-                  fontFamily: 'var(--font-body)',
-                  marginBottom: '4px',
-                  letterSpacing: '-0.1px',
-                }}
-              >
-                Store. Manage. Distribute.
-              </p>
-
+            <div style={{ flex: '1 1 500px' }}>
               <WarehousingCapabilities
                 capabilities={warehousingCapabilities}
                 onExploreClick={() => openModal('quote')}
@@ -1715,12 +1928,10 @@ export const Home = ({ onNavigate }) => {
             <div
               className="warehousing-info-area"
               style={{
-                flex: '0 0 44%',
-                maxWidth: '500px',
+                flex: '1 1 420px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                paddingTop: '6px',
+                gap: '10px',
               }}
             >
               <WarehouseStatsCard stats={warehouseStats} />
@@ -1730,166 +1941,194 @@ export const Home = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 14. Global Buyers Section (Screen 11 - Placed Last) */}
+      {/* 16. Global Buyers Section (Screen 11) */}
       <section
         id="buyers-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '36px 28px 24px 28px',
-          background: '#FAFBFD',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Top Gold Label with decorative lines */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            marginBottom: '10px',
-          }}
-        >
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '42px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '15px',
-              fontWeight: '600',
-              color: '#D99A1E',
-              letterSpacing: '0.4px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-body)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
           >
-            CONNECTING MARKETS. CREATING OPPORTUNITIES.
-          </span>
-          <div
-            style={{
-              width: '42px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              CONNECTING MARKETS. CREATING OPPORTUNITIES.
+            </span>
+          </div>
         </div>
 
-        {/* Main Serif Heading */}
+        {/* Main Heading */}
         <h2
           style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '48px',
-            fontWeight: '700',
-            color: '#082653',
-            lineHeight: '1.08',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
             letterSpacing: '-0.5px',
             textAlign: 'center',
-            marginBottom: '8px',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
           }}
         >
-          Global Buyers
+          Global <span style={{ color: '#FF6F00' }}>Buyers</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle */}
         <p
           style={{
-            fontSize: '19px',
+            fontSize: '14.5px',
             fontWeight: '400',
-            color: '#40516D',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
-            marginBottom: '12px',
+            marginBottom: '20px',
           }}
         >
-          Connecting Suppliers With Global Buyers
+          Connecting Verified Suppliers With Global Buyers in 120+ International Markets
         </p>
-
-        {/* Centered Gold Divider */}
-        <div
-          style={{
-            width: '65px',
-            height: '3px',
-            backgroundColor: '#E8A52A',
-            margin: '0 auto 20px auto',
-            borderRadius: '2px',
-          }}
-        />
 
         {/* 6 Buyer Categories Row */}
         <BuyerCategoriesRow
           categories={buyerCategories}
+          loading={isLoading}
           onCategoryClick={() => openModal('quote')}
         />
 
-        {/* 2 Large Gold Action Cards */}
+        {/* 2 Large Action Cards */}
         <BuyerActionCards
           actions={buyerActionCards}
           onActionClick={(action) => openModal('quote')}
         />
 
-        {/* Dark Navy Statistics Banner */}
+        {/* Statistics Banner */}
         <BuyerStatsBanner statistics={buyerStatistics} />
 
-        {/* Bottom Clean White Trust Statements Row */}
+        {/* Trust Statements Row */}
         <BuyerTrustRow statements={buyerTrustStatements} />
       </section>
 
-      {/* 15. Global Network Section (Screen 13 - Placed Last) */}
+      {/* 17. Global Network Section (Screen 13) */}
       <section
         id="global-network-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '38px 28px 28px 28px',
-          background: '#F7FAFE',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #DDE3EA',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Main Two-Tone Sans-Serif Heading */}
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
+            }}
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              EXPANSIVE WORLDWIDE LOGISTICS FOOTPRINT
+            </span>
+          </div>
+        </div>
+
+        {/* Main Heading */}
         <h2
           style={{
-            fontFamily: 'Inter, Arial, Helvetica, sans-serif',
-            fontSize: '36px',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
             fontWeight: '800',
-            lineHeight: '1.1',
+            color: '#0F172A',
+            lineHeight: '1.2',
             letterSpacing: '-0.5px',
             textAlign: 'center',
-            marginBottom: '4px',
+            fontFamily: 'var(--font-body)',
+            marginBottom: '6px',
           }}
         >
-          <span style={{ color: '#082653' }}>Global </span>
-          <span style={{ color: '#0A4FC7' }}>Network</span>
+          Global <span style={{ color: '#FF6F00' }}>Network</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle */}
         <p
           style={{
-            fontSize: '15px',
+            fontSize: '14.5px',
             fontWeight: '400',
-            color: '#586579',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
-            marginBottom: '4px',
+            marginBottom: '16px',
           }}
         >
-          One Network. Multiple Markets.
+          One Network. Multiple Markets. Continuous Connectivity.
         </p>
 
-        {/* Large Real World Network Map Graphic */}
-        <NetworkMapGraphic />
+        {/* Large Network Map Graphic */}
+        <NetworkMapGraphic loading={isLoading} />
 
         {/* 4 Network Statistics */}
         <NetworkStatsRow stats={globalNetworkStats} />
@@ -1898,198 +2137,187 @@ export const Home = ({ onNavigate }) => {
         <NetworkCtaButton onClick={() => openModal('quote')} />
       </section>
 
-      {/* 16. Why Businesses Choose Us Section (Screen 14 - Placed Last) */}
+      {/* 18. Why Businesses Choose Us Section (Screen 14) */}
       <section
         id="why-choose-us-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '38px 28px 28px 28px',
-          background: 'linear-gradient(180deg, #020F2D 0%, #03183B 50%, #061B43 100%)',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #1C355E',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Top Gold Label with decorative lines */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            marginBottom: '8px',
-          }}
-        >
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
           <div
             style={{
-              width: '42px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '15px',
-              fontWeight: '600',
-              color: '#E8A52A',
-              letterSpacing: '0.4px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-body)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
             }}
           >
-            OUR ADVANTANTAGES
-          </span>
-          <div
-            style={{
-              width: '42px',
-              height: '2px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '1px',
-            }}
-          />
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              THE GLOBAL LINK ADVANTAGE
+            </span>
+          </div>
         </div>
 
-        {/* Main Serif Heading */}
+        {/* Main Heading */}
         <h2
           style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '36px',
-            fontWeight: '700',
-            color: '#FFFFFF',
-            lineHeight: '1.1',
-            letterSpacing: '-0.4px',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
             textAlign: 'center',
+            fontFamily: 'var(--font-body)',
             marginBottom: '6px',
           }}
         >
-          Why Businesses Choose Us
+          Why Businesses <span style={{ color: '#FF6F00' }}>Choose Us</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle */}
         <p
           style={{
-            fontSize: '15px',
+            fontSize: '14.5px',
             fontWeight: '400',
-            color: 'rgba(255, 255, 255, 0.88)',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
-            marginBottom: '8px',
+            marginBottom: '20px',
           }}
         >
-          Delivering value, reliability, and trust every step of the way
+          Delivering value, reliability, and trust every single step of the way
         </p>
 
         {/* 6 Advantages Grid */}
         <AdvantageGrid
           advantages={whyChooseUsAdvantages}
+          loading={isLoading}
           onAdvantageClick={() => openModal('quote')}
         />
 
-        {/* Bottom Dark Translucent Statistics Banner */}
+        {/* Bottom Statistics Banner */}
         <WhyChooseUsStatsBanner stats={whyChooseUsStats} />
       </section>
 
-      {/* 17. Trusted by Businesses Worldwide Section (Screen 16) */}
+      {/* 19. Trusted by Businesses Worldwide Section (Screen 16) */}
       <section
         id="trusted-businesses-section"
         style={{
           position: 'relative',
-          margin: '35px 28px 0 28px',
-          padding: '38px 28px 28px 28px',
-          background: 'linear-gradient(180deg, #020F2D 0%, #03183B 52%, #02132F 100%)',
-          borderRadius: '12px',
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
+          margin: '0 0 28px 0',
+          padding: '42px 24px 36px 24px',
+          background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 50%, #FFF9F2 100%)',
+          borderRadius: '16px',
           overflow: 'hidden',
-          border: '1px solid #1C355E',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+          border: '1px solid rgba(255, 111, 0, 0.16)',
+          boxShadow: '0 6px 24px rgba(255, 111, 0, 0.06)',
         }}
       >
-        {/* Top Gold Label with decorative lines */}
-        <div
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255, 111, 0, 0.08)',
+              border: '1px solid rgba(255, 111, 0, 0.25)',
+            }}
+          >
+            <Sparkles size={12} color="#FF6F00" />
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '700',
+                color: '#FF6F00',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              CLIENT TESTIMONIALS & GLOBAL PARTNERS
+            </span>
+          </div>
+        </div>
+
+        {/* Main Heading */}
+        <h2
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
+            fontSize: 'clamp(24px, 2.3vw, 34px)',
+            fontWeight: '800',
+            color: '#0F172A',
+            lineHeight: '1.2',
+            letterSpacing: '-0.5px',
+            textAlign: 'center',
+            fontFamily: 'var(--font-body)',
             marginBottom: '6px',
           }}
         >
-          <div
-            style={{
-              width: '32px',
-              height: '2px',
-              backgroundColor: '#F2B52F',
-              borderRadius: '1px',
-            }}
-          />
-          <span
-            style={{
-              fontSize: '13px',
-              fontWeight: '600',
-              color: '#F2B52F',
-              letterSpacing: '0.4px',
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            TRUSTED BY BUSINESSES WORLDWIDE
-          </span>
-          <div
-            style={{
-              width: '32px',
-              height: '2px',
-              backgroundColor: '#F2B52F',
-              borderRadius: '1px',
-            }}
-          />
-        </div>
-
-        {/* Main Serif Heading */}
-        <h2
-          style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: '30px',
-            fontWeight: '700',
-            color: '#FFFFFF',
-            lineHeight: '1.1',
-            letterSpacing: '-0.3px',
-            textAlign: 'center',
-            marginBottom: '4px',
-          }}
-        >
-          Trusted by Businesses Worldwide
+          Trusted by <span style={{ color: '#FF6F00' }}>Businesses Worldwide</span>
         </h2>
+
+        {/* Glowing Gradient Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '0 auto 12px auto' }}>
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, transparent, #FF6F00)' }} />
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6F00' }} />
+          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(90deg, #FF6F00, transparent)' }} />
+        </div>
 
         {/* Subtitle */}
         <p
           style={{
-            fontSize: '13.5px',
+            fontSize: '14.5px',
             fontWeight: '400',
-            color: 'rgba(255, 255, 255, 0.88)',
+            color: '#475569',
             textAlign: 'center',
             fontFamily: 'var(--font-body)',
-            marginBottom: '8px',
+            marginBottom: '16px',
           }}
         >
           Real partnerships. Real results. Real trust.
         </p>
 
-        {/* Centered Gold Underline */}
-        <div
-          style={{
-            width: '42px',
-            height: '2.5px',
-            backgroundColor: '#F2B52F',
-            margin: '0 auto 14px auto',
-            borderRadius: '1.5px',
-          }}
-        />
-
         {/* Customer Testimonial Card with Carousel Navigation */}
         <TestimonialCard
           testimonial={testimonialsData[currentTestimonialIndex]}
+          loading={isLoading}
           onPrev={() =>
             setCurrentTestimonialIndex((prev) =>
               prev === 0 ? testimonialsData.length - 1 : prev - 1
@@ -2102,21 +2330,21 @@ export const Home = ({ onNavigate }) => {
           }
         />
 
-        {/* 7 Partner Logos Row */}
+        {/* Partner Logos Row */}
         <PartnerLogosRow partners={partnerLogos} />
 
-        {/* Bottom 5-Metric Statistics Banner */}
+        {/* Bottom Statistics Banner */}
         <TrustStatsBanner stats={trustStatsData} />
       </section>
 
-      {/* 18. Business Global CTA Section (Screen 15) */}
+      {/* 20. Business Global CTA Section (Screen 15) */}
       <BusinessGlobalCTA
         onQuoteClick={() => openModal('quote')}
         onTradeClick={() => openModal('quote')}
         onPartnerClick={() => openModal('quote')}
       />
 
-      {/* 19. Global Link Common Footer (Screen 17) */}
+      {/* 21. Global Link Common Footer (Screen 17) */}
       <Footer onNavigate={onNavigate} />
 
       {/* Interactive Modal */}

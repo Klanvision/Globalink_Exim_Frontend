@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ProcessFlow } from '../components/process/ProcessFlow';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const HowItWorks = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -133,6 +135,7 @@ export const HowItWorks = ({ onNavigate }) => {
           <div style={{ flex: '1 1 65%', maxWidth: '760px' }}>
             <ProcessFlow
               steps={processSteps}
+              loading={isLoading}
               onStepClick={() => openModal('quote')}
             />
 

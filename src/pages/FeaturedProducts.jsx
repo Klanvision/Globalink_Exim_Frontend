@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLoading } from '../context/LoadingContext';
 import { Header } from '../components/layout/Header';
 import { ProductCard } from '../components/products/ProductCard';
 import { ProductTrustBar } from '../components/products/ProductTrustBar';
@@ -9,23 +10,29 @@ import { featuredProducts } from '../data/productsData';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 
 export const FeaturedProducts = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('track');
   const [productsList, setProductsList] = useState(featuredProducts);
+  const [isRotating, setIsRotating] = useState(false);
 
   const openModal = (type) => {
     setModalType(type);
     setModalOpen(true);
   };
 
-  // Carousel shift handler
+  // Carousel shift handler with real-time skeleton loading
   const handleCarouselNext = () => {
-    setProductsList((prev) => {
-      const next = [...prev];
-      const first = next.shift();
-      next.push(first);
-      return next;
-    });
+    setIsRotating(true);
+    setTimeout(() => {
+      setProductsList((prev) => {
+        const next = [...prev];
+        const first = next.shift();
+        next.push(first);
+        return next;
+      });
+      setIsRotating(false);
+    }, 280);
   };
 
   return (
@@ -134,6 +141,7 @@ export const FeaturedProducts = ({ onNavigate }) => {
               <ProductCard
                 key={product.id}
                 product={product}
+                loading={isLoading || isRotating}
                 onViewDetails={() => openModal('quote')}
               />
             ))}

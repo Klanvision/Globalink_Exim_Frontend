@@ -1,76 +1,109 @@
 import React from 'react';
 import { Star, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const TestimonialCard = ({
   testimonial,
   onPrev,
   onNext,
+  loading = false,
 }) => {
+  if (loading) {
+    return (
+      <div
+        className="premium-skeleton-card"
+        style={{
+          width: '100%',
+          maxWidth: '780px',
+          margin: '22px auto 20px auto',
+          padding: '28px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          textAlign: 'center',
+          borderRadius: '20px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          border: '1.5px solid rgba(255, 111, 0, 0.3)',
+        }}
+      >
+        <div style={{ display: 'flex', gap: '6px', marginBottom: '16px' }}>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="premium-skeleton-base" style={{ width: '20px', height: '20px', borderRadius: '4px' }} />
+          ))}
+        </div>
+        <div className="premium-skeleton-base" style={{ width: '85%', height: '16px', marginBottom: '8px', borderRadius: '4px' }} />
+        <div className="premium-skeleton-base" style={{ width: '70%', height: '14px', marginBottom: '16px', borderRadius: '4px' }} />
+        <div className="premium-skeleton-base premium-skeleton-circle" style={{ width: '48px', height: '48px', marginBottom: '8px' }} />
+        <div className="premium-skeleton-base" style={{ width: '120px', height: '14px', borderRadius: '4px' }} />
+      </div>
+    );
+  }
   return (
     <div
       className="testimonial-carousel-wrapper"
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: '1060px',
-        margin: '28px auto 24px auto',
+        maxWidth: '100%',
+        margin: '22px auto 20px auto',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
       {/* Left Chevron Previous Button */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onPrev}
         aria-label="Previous testimonial"
         className="carousel-nav-btn prev-btn"
         style={{
           position: 'absolute',
-          left: '-26px',
-          width: '42px',
-          height: '42px',
+          left: '-14px',
+          width: '40px',
+          height: '40px',
           borderRadius: '50%',
-          backgroundColor: 'rgba(20, 50, 90, 0.85)',
-          border: '1px solid rgba(100, 150, 210, 0.35)',
-          color: '#FFFFFF',
+          backgroundColor: '#FFFFFF',
+          border: '1px solid rgba(255, 111, 0, 0.35)',
+          color: '#FF6F00',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
           zIndex: 10,
-          boxShadow: '0 4px 14px rgba(0, 0, 0, 0.30)',
-          transition: 'all 0.2s ease',
+          boxShadow: '0 4px 14px rgba(255, 111, 0, 0.18)',
         }}
       >
-        <ChevronLeft size={22} strokeWidth={2.4} />
-      </button>
+        <ChevronLeft size={20} strokeWidth={2.4} />
+      </motion.button>
 
-      {/* Dark Glass Testimonial Card */}
+      {/* Pure White & Radiant Orange Testimonial Card */}
       <div
         className="testimonial-glass-card"
         style={{
           width: '100%',
-          backgroundColor: 'rgba(10, 33, 71, 0.90)',
-          border: '1px solid rgba(83, 137, 197, 0.42)',
+          backgroundColor: '#FFFFFF',
+          border: '1.5px solid rgba(255, 111, 0, 0.22)',
           borderRadius: '16px',
-          padding: '22px 28px 18px 28px',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.30)',
-          backdropFilter: 'blur(10px)',
+          padding: '22px 26px 18px 26px',
+          boxShadow: '0 8px 28px rgba(255, 111, 0, 0.08)',
           position: 'relative',
           overflow: 'hidden',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Large Decorative Gold Quotation Mark */}
+        {/* Large Decorative Orange Quotation Mark */}
         <div
           style={{
             position: 'absolute',
-            top: '6px',
-            left: '22px',
+            top: '4px',
+            left: '20px',
             fontFamily: 'Georgia, serif',
-            fontSize: '56px',
+            fontSize: '52px',
             lineHeight: '1',
-            color: '#F2B52F',
-            opacity: 0.9,
+            color: '#FF6F00',
+            opacity: 0.35,
             userSelect: 'none',
             pointerEvents: 'none',
           }}
@@ -82,14 +115,14 @@ export const TestimonialCard = ({
         <p
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: '14.5px',
-            lineHeight: '1.45',
+            fontSize: '14px',
+            lineHeight: '1.5',
             fontWeight: '400',
-            color: '#FFFFFF',
+            color: '#0F172A',
             textAlign: 'left',
-            paddingLeft: '38px',
-            marginBottom: '14px',
-            minHeight: '44px',
+            paddingLeft: '32px',
+            marginBottom: '12px',
+            minHeight: '40px',
           }}
         >
           {`"${testimonial.quote.replace(/^"|"$/g, '')}"`}
@@ -100,8 +133,8 @@ export const TestimonialCard = ({
           style={{
             width: '100%',
             height: '1px',
-            backgroundColor: 'rgba(255, 255, 255, 0.12)',
-            marginBottom: '14px',
+            backgroundColor: '#F1F5F9',
+            marginBottom: '12px',
           }}
         />
 
@@ -126,34 +159,28 @@ export const TestimonialCard = ({
             {/* Circular Avatar Container */}
             <div
               style={{
-                width: '50px',
-                height: '50px',
+                width: '44px',
+                height: '44px',
                 borderRadius: '50%',
-                border: '2.5px solid rgba(255, 255, 255, 0.85)',
-                boxShadow: '0 3px 10px rgba(0, 0, 0, 0.25)',
+                border: '2px solid rgba(255, 111, 0, 0.3)',
+                boxShadow: '0 2px 8px rgba(255, 111, 0, 0.15)',
                 overflow: 'hidden',
-                backgroundColor: '#0F2C59',
+                background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                color: '#FFFFFF',
                 flexShrink: 0,
               }}
             >
               <div
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: 'linear-gradient(135deg, #1A4480 0%, #0D264D 100%)',
-                  color: '#F2B52F',
                   fontWeight: '700',
-                  fontSize: '16px',
+                  fontSize: '14px',
                   fontFamily: 'var(--font-body)',
                 }}
               >
-                {testimonial.initials || <User size={24} color="#FFFFFF" />}
+                {testimonial.initials || <User size={20} color="#FFFFFF" />}
               </div>
             </div>
 
@@ -161,9 +188,9 @@ export const TestimonialCard = ({
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span
                 style={{
-                  fontSize: '15px',
+                  fontSize: '14px',
                   fontWeight: '700',
-                  color: '#F2B52F',
+                  color: '#0F172A',
                   lineHeight: '1.2',
                   fontFamily: 'var(--font-body)',
                   marginBottom: '1px',
@@ -173,18 +200,18 @@ export const TestimonialCard = ({
               </span>
               <span
                 style={{
-                  fontSize: '12px',
-                  color: '#FFFFFF',
+                  fontSize: '11.5px',
+                  color: '#64748B',
                   lineHeight: '1.3',
                   fontFamily: 'var(--font-body)',
                 }}
               >
-                {testimonial.role} • <span style={{ color: 'rgba(255, 255, 255, 0.85)' }}>{testimonial.location}</span>
+                {testimonial.role} • <span>{testimonial.location}</span>
               </span>
             </div>
           </div>
 
-          {/* Right: Exactly 5 Gold Stars */}
+          {/* Right: Exactly 5 Radiant Orange Stars */}
           <div
             style={{
               display: 'flex',
@@ -195,9 +222,9 @@ export const TestimonialCard = ({
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                size={17}
-                fill="#F2B52F"
-                color="#F2B52F"
+                size={16}
+                fill="#FF6F00"
+                color="#FF6F00"
                 strokeWidth={1}
               />
             ))}
@@ -206,30 +233,31 @@ export const TestimonialCard = ({
       </div>
 
       {/* Right Chevron Next Button */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
         onClick={onNext}
         aria-label="Next testimonial"
         className="carousel-nav-btn next-btn"
         style={{
           position: 'absolute',
-          right: '-26px',
-          width: '42px',
-          height: '42px',
+          right: '-14px',
+          width: '40px',
+          height: '40px',
           borderRadius: '50%',
-          backgroundColor: 'rgba(20, 50, 90, 0.85)',
-          border: '1px solid rgba(100, 150, 210, 0.35)',
-          color: '#FFFFFF',
+          backgroundColor: '#FFFFFF',
+          border: '1px solid rgba(255, 111, 0, 0.35)',
+          color: '#FF6F00',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
           zIndex: 10,
-          boxShadow: '0 4px 14px rgba(0, 0, 0, 0.30)',
-          transition: 'all 0.2s ease',
+          boxShadow: '0 4px 14px rgba(255, 111, 0, 0.18)',
         }}
       >
-        <ChevronRight size={22} strokeWidth={2.4} />
-      </button>
+        <ChevronRight size={20} strokeWidth={2.4} />
+      </motion.button>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BenefitCard } from './BenefitCard';
 
-export const BenefitSection = ({ benefits }) => {
+export const BenefitSection = ({ benefits, loading = false }) => {
   return (
     <section
       style={{
@@ -14,30 +14,35 @@ export const BenefitSection = ({ benefits }) => {
     >
       <h3
         style={{
-          fontSize: '22px',
+          fontSize: '19px',
           fontWeight: '700',
-          color: '#082653',
+          color: '#0F172A',
           textAlign: 'center',
-          marginBottom: '20px',
-          letterSpacing: '-0.2px',
+          marginBottom: '18px',
+          letterSpacing: '-0.3px',
+          fontFamily: 'var(--font-body)',
         }}
       >
-        Why Choose Our Procurement Solutions?
+        Why Choose Our <span style={{ color: '#FF6F00' }}>Procurement Solutions?</span>
       </h3>
 
       <div
         className="procurement-benefits-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
-          gap: '16px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          gap: '14px',
           width: '100%',
-          maxWidth: '1140px',
           justifyContent: 'center',
         }}
       >
-        {benefits.map((benefit) => (
-          <BenefitCard key={benefit.id} benefit={benefit} />
+        {(loading ? Array.from({ length: 6 }) : benefits).map((benefit, index) => (
+          <BenefitCard
+            key={benefit ? benefit.id : index}
+            benefit={benefit}
+            loading={loading}
+            index={index}
+          />
         ))}
       </div>
     </section>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const BuyerTrustRow = ({ statements }) => {
   return (
@@ -7,61 +8,66 @@ export const BuyerTrustRow = ({ statements }) => {
       className="buyer-trust-row"
       style={{
         width: '100%',
-        maxWidth: '1120px',
+        backgroundColor: '#FFFFFF',
+        borderRadius: '14px',
+        border: '1px solid #E2E8F0',
+        boxShadow: '0 4px 14px rgba(15, 23, 42, 0.04)',
         margin: '0 auto 10px auto',
-        padding: '12px 10px',
+        padding: '12px 14px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="buyer-trust-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           alignItems: 'center',
+          gap: '12px',
         }}
       >
         {statements.map((statement, index) => {
           const isLast = index === statements.length - 1;
 
           return (
-            <div
+            <motion.div
               key={index}
               className="buyer-trust-item"
+              whileHover={{ y: -2 }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: '10px',
-                padding: '4px 12px',
-                borderRight: isLast ? 'none' : '1px solid #D6DCE4',
+                padding: '4px 10px',
+                borderRight: isLast ? 'none' : '1px solid #F1F5F9',
               }}
             >
-              {/* Navy Check Icon */}
+              {/* Radiant Orange Check Icon */}
               <div
                 style={{
-                  color: '#082653',
+                  color: '#FF6F00',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                <CheckCircle2 size={24} strokeWidth={2.4} color="#082653" />
+                <CheckCircle2 size={18} strokeWidth={2.4} color="#FF6F00" />
               </div>
 
               {/* Text */}
               <span
                 style={{
-                  fontSize: '15px',
+                  fontSize: '12.5px',
                   fontWeight: '600',
-                  color: '#17253B',
+                  color: '#0F172A',
                   fontFamily: 'var(--font-body)',
                   whiteSpace: 'nowrap',
                 }}
               >
-                {statement}
+                {statement.text}
               </span>
-            </div>
+            </motion.div>
           );
         })}
       </div>

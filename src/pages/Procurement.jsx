@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ProcessFlow } from '../components/procurement/ProcessFlow';
@@ -10,6 +11,7 @@ import { procurementSteps, procurementBenefits, procurementStats } from '../data
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export const Procurement = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -124,7 +126,7 @@ export const Procurement = ({ onNavigate }) => {
 
           {/* 3. 9-Step Horizontal Procurement Process Flow */}
           <div style={{ width: '100%', maxWidth: '1160px', marginBottom: '28px' }}>
-            <ProcessFlow steps={procurementSteps} />
+            <ProcessFlow steps={procurementSteps} loading={isLoading} />
           </div>
 
           {/* 4. Start Procurement CTA Button */}
@@ -154,7 +156,7 @@ export const Procurement = ({ onNavigate }) => {
           </button>
 
           {/* 5. Why Choose Our Procurement Solutions Section (6 Cards) */}
-          <BenefitSection benefits={procurementBenefits} />
+          <BenefitSection benefits={procurementBenefits} loading={isLoading} />
 
           {/* 6. Procurement Message Bar */}
           <ProcurementMessage />

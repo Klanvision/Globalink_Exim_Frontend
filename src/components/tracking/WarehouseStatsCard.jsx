@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const WarehouseStatsCard = ({ stats }) => {
   return (
@@ -7,11 +8,12 @@ export const WarehouseStatsCard = ({ stats }) => {
       style={{
         backgroundColor: '#FFFFFF',
         borderRadius: '14px',
-        border: '1px solid #EDF0F3',
-        boxShadow: '0 4px 14px rgba(8, 38, 83, 0.05)',
-        padding: '12px 10px',
+        border: '1px solid #E2E8F0',
+        boxShadow: '0 4px 14px rgba(15, 23, 42, 0.05)',
+        padding: '10px 8px',
         width: '100%',
-        marginBottom: '12px',
+        marginBottom: '10px',
+        boxSizing: 'border-box',
       }}
     >
       <div
@@ -27,57 +29,61 @@ export const WarehouseStatsCard = ({ stats }) => {
           const isLast = index === stats.length - 1;
 
           return (
-            <div
+            <motion.div
               key={stat.id}
+              whileHover={{ y: -2 }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
                 padding: '2px 6px',
-                borderRight: isLast ? 'none' : '1px solid #DDE3EA',
+                borderRight: isLast ? 'none' : '1px solid #F1F5F9',
               }}
             >
-              {/* Navy Icon */}
+              {/* Radiant Orange Icon */}
               <div
                 style={{
-                  color: '#082653',
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(255, 111, 0, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FF6F00',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={22} strokeWidth={1.8} color="#082653" />
+                <Icon size={16} strokeWidth={2} color="#FF6F00" />
               </div>
 
               {/* Value & Label */}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span
                   style={{
-                    fontSize: '18px',
-                    fontWeight: '700',
-                    color: '#D99A1E',
+                    fontSize: '16px',
+                    fontWeight: '800',
+                    color: '#FF6F00',
                     lineHeight: '1.1',
-                    letterSpacing: '-0.3px',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.value}
                 </span>
                 <span
                   style={{
-                    fontSize: '11px',
+                    fontSize: '10px',
                     fontWeight: '500',
-                    color: '#40516D',
+                    color: '#64748B',
                     lineHeight: '1.2',
-                    whiteSpace: 'pre-line',
-                    marginTop: '2px',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.label}
                 </span>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const TrackingFeatureCard = ({ features }) => {
   return (
@@ -7,11 +8,12 @@ export const TrackingFeatureCard = ({ features }) => {
       style={{
         backgroundColor: '#FFFFFF',
         borderRadius: '14px',
-        border: '1px solid #EDF0F3',
-        boxShadow: '0 4px 14px rgba(8, 38, 83, 0.06)',
+        border: '1px solid #E2E8F0',
+        boxShadow: '0 4px 14px rgba(15, 23, 42, 0.05)',
         padding: '12px 14px',
         width: '100%',
         marginTop: '10px',
+        boxSizing: 'border-box',
       }}
     >
       <div
@@ -26,30 +28,32 @@ export const TrackingFeatureCard = ({ features }) => {
           const Icon = feature.icon;
 
           return (
-            <div
+            <motion.div
               key={feature.id}
+              whileHover={{ y: -2 }}
               style={{
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: '8px',
               }}
             >
-              {/* Icon Container */}
+              {/* Radiant Orange Icon Container */}
               <div
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: '50%',
-                  backgroundColor: '#F0F4FA',
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '8px',
+                  backgroundColor: '#FFF5EB',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#082653',
+                  color: '#FF6F00',
                   flexShrink: 0,
                   marginTop: '1px',
+                  border: '1px solid rgba(255, 111, 0, 0.2)',
                 }}
               >
-                <Icon size={16} strokeWidth={2} color="#082653" />
+                <Icon size={15} strokeWidth={2.2} color="#FF6F00" />
               </div>
 
               {/* Title & Description */}
@@ -58,9 +62,9 @@ export const TrackingFeatureCard = ({ features }) => {
                   style={{
                     fontSize: '12px',
                     fontWeight: '700',
-                    color: '#082653',
+                    color: '#0F172A',
+                    lineHeight: '1.25',
                     marginBottom: '2px',
-                    lineHeight: '1.2',
                     fontFamily: 'var(--font-body)',
                   }}
                 >
@@ -69,16 +73,15 @@ export const TrackingFeatureCard = ({ features }) => {
                 <p
                   style={{
                     fontSize: '10.5px',
+                    color: '#64748B',
                     lineHeight: '1.3',
-                    color: '#40516D',
-                    whiteSpace: 'pre-line',
                     fontFamily: 'var(--font-body)',
                   }}
                 >
                   {feature.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

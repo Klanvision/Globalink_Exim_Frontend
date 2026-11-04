@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { QualityProcess } from '../components/quality/QualityProcess';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const QualityAssurance = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -111,6 +113,7 @@ export const QualityAssurance = ({ onNavigate }) => {
             {/* 5 Quality Process Items Row */}
             <QualityProcess
               steps={qualityProcessSteps}
+              loading={isLoading}
               onItemClick={() => openModal('quote')}
             />
 
