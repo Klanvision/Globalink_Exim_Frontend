@@ -28,10 +28,16 @@ export const TrackShipment = ({ onNavigate }) => {
     setModalOpen(true);
   };
 
+  const [isSearching, setIsSearching] = useState(false);
+
   const handleTrackSubmit = (query) => {
     setTrackingQuery(query);
-    // Simulate real-time mock tracking update
-    setActiveStep(Math.floor(Math.random() * 3) + 4);
+    setIsSearching(true);
+    // Simulate real-time mock tracking update with skeleton loading
+    setTimeout(() => {
+      setActiveStep(Math.floor(Math.random() * 3) + 4);
+      setIsSearching(false);
+    }, 450);
   };
 
   return (
@@ -116,6 +122,7 @@ export const TrackShipment = ({ onNavigate }) => {
               <TrackingTimeline
                 stages={trackingTimelineStages}
                 activeStep={activeStep}
+                loading={isSearching}
               />
 
               {/* View All Shipments Button */}

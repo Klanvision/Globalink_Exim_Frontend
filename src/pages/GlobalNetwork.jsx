@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { NetworkMapGraphic } from '../components/network/NetworkMapGraphic';
@@ -8,6 +9,7 @@ import { TrackModal } from '../components/common/TrackModal';
 import { globalNetworkStats } from '../data/globalNetworkData';
 
 export const GlobalNetwork = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -81,7 +83,7 @@ export const GlobalNetwork = ({ onNavigate }) => {
           </p>
 
           {/* Large World Network Map Graphic */}
-          <NetworkMapGraphic />
+          <NetworkMapGraphic loading={isLoading} />
 
           {/* 4 Network Statistics */}
           <NetworkStatsRow stats={globalNetworkStats} />

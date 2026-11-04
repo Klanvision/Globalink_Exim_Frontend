@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ServiceGrid } from '../components/services/ServiceGrid';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const Services = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -141,6 +143,7 @@ export const Services = ({ onNavigate }) => {
           <div style={{ flex: '1 1 65%', maxWidth: '750px' }}>
             <ServiceGrid
               services={globalServices}
+              loading={isLoading}
               onCardClick={handleCardClick}
             />
 

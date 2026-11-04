@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ProductTrustRow } from '../components/portfolio/ProductTrustRow';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const Products = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -133,6 +135,7 @@ export const Products = ({ onNavigate }) => {
           {/* 4 × 2 Product Category Grid */}
           <ProductCategoryGrid
             categories={globalProductCategories}
+            loading={isLoading}
             onCategoryClick={() => openModal('quote')}
           />
 

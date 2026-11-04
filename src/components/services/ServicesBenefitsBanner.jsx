@@ -1,24 +1,29 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const ServicesBenefitsBanner = ({ benefits }) => {
   return (
     <section
       className="clay-benefits-banner"
       style={{
-        background: 'linear-gradient(145deg, #092C5E 0%, #041738 100%)',
-        borderRadius: '24px',
-        border: '1.5px solid rgba(242, 181, 47, 0.35)',
-        boxShadow: 'inset 3px 3px 8px rgba(255, 255, 255, 0.14), inset -5px -5px 12px rgba(0, 0, 0, 0.65), 0 16px 36px rgba(0, 0, 0, 0.45)',
-        margin: '28px 28px 0 28px',
+        width: '100%',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF5EB 100%)',
+        borderRadius: '16px',
+        border: '1px solid rgba(255, 111, 0, 0.22)',
+        borderTop: '3px solid #FF6F00',
+        boxShadow: '0 6px 24px rgba(255, 111, 0, 0.08)',
+        margin: '26px 0 0 0',
         padding: '22px 18px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="services-benefits-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
           alignItems: 'flex-start',
+          gap: '16px',
         }}
       >
         {benefits.map((item, index) => {
@@ -26,47 +31,48 @@ export const ServicesBenefitsBanner = ({ benefits }) => {
           const isLast = index === benefits.length - 1;
 
           return (
-            <div
+            <motion.div
               key={item.id}
               className="services-benefit-item"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                padding: '0 14px',
-                borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.12)',
+                padding: '4px 12px',
+                borderRight: isLast ? 'none' : '1px solid rgba(226, 232, 240, 0.8)',
                 height: '100%',
-                transition: 'transform 0.2s ease',
               }}
             >
-              {/* 3D Clay Icon Orb */}
+              {/* Radiant Orange Icon Orb */}
               <div
                 style={{
-                  width: '42px',
-                  height: '42px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(145deg, #FFC94A 0%, #DE971B 100%)',
-                  boxShadow: 'inset 2px 2px 4px rgba(255, 255, 255, 0.5), inset -2px -2px 4px rgba(120, 70, 0, 0.45), 0 6px 14px rgba(222, 151, 27, 0.35)',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  boxShadow: '0 3px 10px rgba(255, 111, 0, 0.22)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FFFFFF',
                   marginBottom: '10px',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={22} strokeWidth={2.2} color="#03132D" />
+                <Icon size={20} strokeWidth={2.2} color="#FFFFFF" />
               </div>
 
               {/* Title */}
               <h4
                 style={{
-                  fontSize: '14.5px',
+                  fontSize: '13.5px',
                   fontWeight: '700',
-                  color: '#FFFFFF',
+                  color: '#0F172A',
                   lineHeight: '1.25',
                   marginBottom: '4px',
                   fontFamily: 'var(--font-body)',
-                  textShadow: '0 2px 4px rgba(0, 0, 0, 0.35)',
                 }}
               >
                 {item.title}
@@ -76,15 +82,15 @@ export const ServicesBenefitsBanner = ({ benefits }) => {
               <p
                 style={{
                   fontSize: '11.5px',
-                  lineHeight: '1.45',
-                  color: 'rgba(255, 255, 255, 0.85)',
-                  whiteSpace: 'pre-line',
+                  lineHeight: '1.35',
+                  color: '#64748B',
+                  fontWeight: '400',
                   fontFamily: 'var(--font-body)',
                 }}
               >
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </div>

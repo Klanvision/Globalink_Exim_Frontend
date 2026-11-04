@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const PartnerLogosRow = ({ partners }) => {
   return (
@@ -6,42 +7,44 @@ export const PartnerLogosRow = ({ partners }) => {
       className="partner-logos-wrapper"
       style={{
         width: '100%',
-        maxWidth: '1060px',
-        margin: '24px auto 26px auto',
-        padding: '0 10px',
+        maxWidth: '100%',
+        margin: '20px auto 22px auto',
+        padding: '0 6px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="partner-logos-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(7, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
           alignItems: 'center',
+          gap: '10px',
         }}
       >
         {partners.map((partner, index) => {
           const isLast = index === partners.length - 1;
 
           return (
-            <div
+            <motion.div
               key={partner.id}
+              whileHover={{ y: -2 }}
               className="partner-logo-item"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '8px 12px',
-                borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.14)',
+                padding: '6px 10px',
+                borderRight: isLast ? 'none' : '1px solid #E2E8F0',
                 textAlign: 'center',
-                transition: 'opacity 0.2s ease',
               }}
             >
               <span
                 style={{
-                  fontFamily: 'Inter, Arial, Helvetica, sans-serif',
-                  fontSize: '13.5px',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '12px',
                   fontWeight: '700',
-                  color: 'rgba(255, 255, 255, 0.88)',
+                  color: '#475569',
                   letterSpacing: '0.6px',
                   textTransform: 'uppercase',
                   whiteSpace: 'nowrap',
@@ -49,7 +52,7 @@ export const PartnerLogosRow = ({ partners }) => {
               >
                 {partner.name}
               </span>
-            </div>
+            </motion.div>
           );
         })}
       </div>

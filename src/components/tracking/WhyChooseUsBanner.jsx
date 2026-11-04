@@ -1,24 +1,27 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const WhyChooseUsBanner = ({ items }) => {
   return (
     <div
       className="why-choose-us-banner"
       style={{
-        backgroundColor: '#082653',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF5EB 100%)',
         borderRadius: '14px',
-        boxShadow: '0 4px 14px rgba(8, 38, 83, 0.15)',
+        border: '1px solid rgba(255, 111, 0, 0.2)',
+        boxShadow: '0 4px 16px rgba(255, 111, 0, 0.08)',
         padding: '12px 10px 10px 10px',
         width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Gold Title */}
+      {/* Radiant Orange Title */}
       <h4
         style={{
-          fontSize: '15px',
+          fontSize: '13px',
           fontWeight: '700',
-          color: '#F5B73A',
+          color: '#FF6F00',
           textAlign: 'center',
           marginBottom: '8px',
           fontFamily: 'var(--font-body)',
@@ -40,36 +43,37 @@ export const WhyChooseUsBanner = ({ items }) => {
           const isLast = index === items.length - 1;
 
           return (
-            <div
+            <motion.div
               key={item.id}
+              whileHover={{ y: -1 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: '2px 6px',
-                borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.25)',
+                padding: '2px 4px',
+                borderRight: isLast ? 'none' : '1px solid rgba(226, 232, 240, 0.8)',
               }}
             >
-              {/* Gold Check Circle */}
-              <div style={{ color: '#E8A52A', marginBottom: '3px' }}>
-                <CheckCircle2 size={15} strokeWidth={2.4} color="#E8A52A" />
+              {/* Radiant Orange Check Circle */}
+              <div style={{ color: '#FF6F00', marginBottom: '3px' }}>
+                <CheckCircle2 size={15} strokeWidth={2.4} color="#FF6F00" />
               </div>
 
               {/* Title */}
               <span
                 style={{
-                  fontSize: '11.5px',
+                  fontSize: '11px',
                   fontWeight: '600',
-                  color: '#FFFFFF',
-                  lineHeight: '1.2',
-                  whiteSpace: 'pre-line',
+                  color: '#0F172A',
+                  lineHeight: '1.25',
                   fontFamily: 'var(--font-body)',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {item.title}
               </span>
-            </div>
+            </motion.div>
           );
         })}
       </div>

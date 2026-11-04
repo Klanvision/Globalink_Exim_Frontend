@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const NetworkStatsRow = ({ stats }) => {
   return (
@@ -6,17 +7,18 @@ export const NetworkStatsRow = ({ stats }) => {
       className="network-stats-wrapper"
       style={{
         width: '100%',
-        maxWidth: '1000px',
-        margin: '0 auto 28px auto',
+        margin: '0 auto 24px auto',
         padding: '0 10px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="network-stats-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
           alignItems: 'center',
+          gap: '14px',
         }}
       >
         {stats.map((item, index) => {
@@ -24,66 +26,67 @@ export const NetworkStatsRow = ({ stats }) => {
           const isLast = index === stats.length - 1;
 
           return (
-            <div
+            <motion.div
               key={item.id}
               className="network-stat-item"
+              whileHover={{ y: -3 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                padding: '4px 14px',
-                borderRight: isLast ? 'none' : '1px solid #C7D3E3',
+                padding: '4px 12px',
+                borderRight: isLast ? 'none' : '1px solid #E2E8F0',
               }}
             >
-              {/* Elevated Circular White Icon Container */}
+              {/* Elevated Circular White Icon Container with Orange Ring */}
               <div
                 style={{
-                  width: '66px',
-                  height: '66px',
+                  width: '56px',
+                  height: '56px',
                   borderRadius: '50%',
                   backgroundColor: '#FFFFFF',
-                  boxShadow: '0 3px 12px rgba(8, 38, 83, 0.08)',
+                  border: '1.5px solid rgba(255, 111, 0, 0.28)',
+                  boxShadow: '0 4px 14px rgba(255, 111, 0, 0.12)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#0A4FC7',
+                  color: '#FF6F00',
                   marginBottom: '8px',
                   flexShrink: 0,
                   transition: 'transform 0.2s ease',
                 }}
               >
-                <Icon size={30} strokeWidth={1.8} color="#0A4FC7" />
+                <Icon size={24} strokeWidth={2} color="#FF6F00" />
               </div>
 
-              {/* Vibrant Blue Number */}
+              {/* Radiant Orange Number */}
               <span
                 style={{
                   fontSize: '24px',
-                  fontWeight: '700',
-                  color: '#0A4FC7',
+                  fontWeight: '800',
+                  color: '#FF6F00',
                   lineHeight: '1.1',
-                  letterSpacing: '-0.2px',
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: 'var(--font-heading)',
                   marginBottom: '2px',
                 }}
               >
                 {item.value}
               </span>
 
-              {/* Dark Navy Label */}
+              {/* Deep Slate Label */}
               <span
                 style={{
-                  fontSize: '14.5px',
+                  fontSize: '11.5px',
                   fontWeight: '600',
-                  color: '#071C3D',
-                  lineHeight: '1.2',
+                  color: '#0F172A',
+                  lineHeight: '1.25',
                   fontFamily: 'var(--font-body)',
                 }}
               >
                 {item.label}
               </span>
-            </div>
+            </motion.div>
           );
         })}
       </div>

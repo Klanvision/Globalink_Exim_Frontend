@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { DocumentationGrid } from '../components/documentation/DocumentationGrid';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const Documentation = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -110,6 +112,7 @@ export const Documentation = ({ onNavigate }) => {
             {/* 6 Documentation Categories Row */}
             <DocumentationGrid
               categories={documentationCategories}
+              loading={isLoading}
               onItemClick={() => openModal('quote')}
             />
 

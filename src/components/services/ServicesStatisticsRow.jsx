@@ -1,24 +1,28 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const ServicesStatisticsRow = ({ statistics }) => {
   return (
     <div
       className="clay-stats-row"
       style={{
-        background: 'linear-gradient(145deg, #092B5C 0%, #041738 100%)',
-        borderRadius: '22px',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        boxShadow: 'inset 3px 3px 7px rgba(255, 255, 255, 0.12), inset -4px -4px 10px rgba(0, 0, 0, 0.60), 0 14px 30px rgba(0, 0, 0, 0.40)',
-        margin: '24px 28px 0 28px',
+        width: '100%',
+        background: '#FFFFFF',
+        borderRadius: '16px',
+        border: '1px solid #E2E8F0',
+        boxShadow: '0 4px 16px rgba(15, 23, 42, 0.05)',
+        margin: '22px 0 0 0',
         padding: '18px 14px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="services-stats-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
           alignItems: 'center',
+          gap: '14px',
         }}
       >
         {statistics.map((stat, index) => {
@@ -26,33 +30,33 @@ export const ServicesStatisticsRow = ({ statistics }) => {
           const isLast = index === statistics.length - 1;
 
           return (
-            <div
+            <motion.div
               key={stat.id}
+              whileHover={{ y: -2 }}
               className="services-stat-item"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: '12px',
                 padding: '4px 10px',
-                borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.12)',
+                borderRight: isLast ? 'none' : '1px solid #F1F5F9',
               }}
             >
-              {/* 3D Clay Icon Orb */}
+              {/* Radiant Orange Icon */}
               <div
                 style={{
                   width: '38px',
                   height: '38px',
-                  borderRadius: '50%',
-                  background: 'linear-gradient(145deg, #FFC94A 0%, #DE971B 100%)',
-                  boxShadow: 'inset 2px 2px 4px rgba(255, 255, 255, 0.5), inset -2px -2px 4px rgba(120, 70, 0, 0.45), 0 5px 12px rgba(222, 151, 27, 0.3)',
+                  borderRadius: '10px',
+                  background: 'rgba(255, 111, 0, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FF6F00',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={20} strokeWidth={2.2} color="#03132D" />
+                <Icon size={19} strokeWidth={2.2} color="#FF6F00" />
               </div>
 
               {/* Stat Value & Label */}
@@ -60,31 +64,28 @@ export const ServicesStatisticsRow = ({ statistics }) => {
                 <span
                   style={{
                     fontSize: '20px',
-                    fontWeight: '700',
-                    color: '#FFC94A',
+                    fontWeight: '800',
+                    color: '#0F172A',
                     lineHeight: '1.1',
-                    letterSpacing: '-0.3px',
                     fontFamily: 'var(--font-body)',
-                    textShadow: '0 2px 6px rgba(0, 0, 0, 0.4)',
                   }}
                 >
                   {stat.value}
                 </span>
                 <span
                   style={{
-                    fontSize: '11.5px',
+                    fontSize: '11px',
                     fontWeight: '500',
-                    color: 'rgba(255, 255, 255, 0.88)',
-                    lineHeight: '1.2',
+                    color: '#64748B',
+                    lineHeight: '1.25',
                     marginTop: '2px',
-                    whiteSpace: 'nowrap',
                     fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.label}
                 </span>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

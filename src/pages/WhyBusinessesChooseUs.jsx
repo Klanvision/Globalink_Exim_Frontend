@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { AdvantageGrid } from '../components/whychooseus/AdvantageGrid';
@@ -10,6 +11,7 @@ import {
 } from '../data/whyChooseUsData';
 
 export const WhyBusinessesChooseUs = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -125,6 +127,7 @@ export const WhyBusinessesChooseUs = ({ onNavigate }) => {
           {/* 6 Advantages Grid */}
           <AdvantageGrid
             advantages={whyChooseUsAdvantages}
+            loading={isLoading}
             onAdvantageClick={() => openModal('quote')}
           />
 

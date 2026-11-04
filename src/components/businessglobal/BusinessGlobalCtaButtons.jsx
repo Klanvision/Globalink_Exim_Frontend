@@ -1,5 +1,6 @@
 import React from 'react';
 import { FileText, BarChart3, UsersRound } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const BusinessGlobalCtaButtons = ({ onQuoteClick, onTradeClick, onPartnerClick }) => {
   return (
@@ -8,86 +9,89 @@ export const BusinessGlobalCtaButtons = ({ onQuoteClick, onTradeClick, onPartner
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '16px',
+        gap: '14px',
         flexWrap: 'wrap',
-        marginTop: '32px',
+        marginTop: '24px',
       }}
     >
-      {/* 1. Primary Gold Button: Get a Quote */}
-      <button
+      {/* 1. Primary Radiant Orange Button: Get a Quote */}
+      <motion.button
+        whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(255, 111, 0, 0.35)' }}
+        whileTap={{ scale: 0.98 }}
         onClick={onQuoteClick}
         className="cta-btn-primary"
         style={{
-          height: '52px',
-          padding: '0 26px',
-          backgroundColor: '#F2B52F',
-          color: '#061A3A',
+          height: '46px',
+          padding: '0 24px',
+          background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+          color: '#FFFFFF',
           border: 'none',
-          borderRadius: '10px',
-          fontSize: '16px',
+          borderRadius: '999px',
+          fontSize: '14.5px',
           fontWeight: '700',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           cursor: 'pointer',
-          boxShadow: '0 4px 16px rgba(242, 181, 47, 0.35)',
-          transition: 'all 0.2s ease',
+          boxShadow: '0 4px 16px rgba(255, 111, 0, 0.28)',
           fontFamily: 'var(--font-body)',
         }}
       >
-        <FileText size={20} strokeWidth={2.2} color="#061A3A" />
+        <FileText size={18} strokeWidth={2.2} color="#FFFFFF" />
         <span>Get a Quote</span>
-      </button>
+      </motion.button>
 
       {/* 2. Secondary Outlined Button: Start Trading With Us */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.03, backgroundColor: 'rgba(255, 111, 0, 0.08)' }}
+        whileTap={{ scale: 0.98 }}
         onClick={onTradeClick || onQuoteClick}
         className="cta-btn-secondary"
         style={{
-          height: '52px',
-          padding: '0 24px',
-          backgroundColor: 'rgba(3, 27, 67, 0.65)',
-          color: '#FFFFFF',
-          border: '2px solid #F2B52F',
-          borderRadius: '10px',
-          fontSize: '15.5px',
-          fontWeight: '600',
+          height: '46px',
+          padding: '0 22px',
+          backgroundColor: '#FFFFFF',
+          color: '#FF6F00',
+          border: '2px solid #FF6F00',
+          borderRadius: '999px',
+          fontSize: '14px',
+          fontWeight: '700',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           cursor: 'pointer',
-          transition: 'all 0.2s ease',
           fontFamily: 'var(--font-body)',
         }}
       >
-        <BarChart3 size={20} strokeWidth={2.2} color="#F2B52F" />
+        <BarChart3 size={18} strokeWidth={2.2} color="#FF6F00" />
         <span>Start Trading With Us</span>
-      </button>
+      </motion.button>
 
       {/* 3. Third Outlined Button: Become a Partner */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.03, backgroundColor: 'rgba(255, 111, 0, 0.08)' }}
+        whileTap={{ scale: 0.98 }}
         onClick={onPartnerClick || onQuoteClick}
         className="cta-btn-secondary"
         style={{
-          height: '52px',
-          padding: '0 24px',
-          backgroundColor: 'rgba(3, 27, 67, 0.65)',
-          color: '#FFFFFF',
-          border: '2px solid #F2B52F',
-          borderRadius: '10px',
-          fontSize: '15.5px',
-          fontWeight: '600',
+          height: '46px',
+          padding: '0 22px',
+          backgroundColor: '#FFFFFF',
+          color: '#FF6F00',
+          border: '1.5px solid rgba(255, 111, 0, 0.35)',
+          borderRadius: '999px',
+          fontSize: '14px',
+          fontWeight: '700',
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
           cursor: 'pointer',
-          transition: 'all 0.2s ease',
           fontFamily: 'var(--font-body)',
         }}
       >
-        <UsersRound size={20} strokeWidth={2.2} color="#F2B52F" />
+        <UsersRound size={18} strokeWidth={2.2} color="#FF6F00" />
         <span>Become a Partner</span>
-      </button>
+      </motion.button>
     </div>
   );
 };

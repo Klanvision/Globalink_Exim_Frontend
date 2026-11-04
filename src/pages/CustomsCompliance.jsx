@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { CustomsServiceGrid } from '../components/customs/CustomsServiceGrid';
@@ -11,6 +12,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const CustomsCompliance = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -137,6 +139,7 @@ export const CustomsCompliance = ({ onNavigate }) => {
           {/* 6 Service Categories Grid */}
           <CustomsServiceGrid
             services={customsComplianceServices}
+            loading={isLoading}
             onServiceClick={() => openModal('quote')}
           />
 

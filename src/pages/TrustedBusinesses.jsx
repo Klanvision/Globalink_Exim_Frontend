@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { TestimonialCard } from '../components/trustedbusinesses/TestimonialCard';
@@ -12,6 +13,7 @@ import {
 } from '../data/trustedBusinessesData';
 
 export const TrustedBusinesses = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
@@ -151,6 +153,7 @@ export const TrustedBusinesses = ({ onNavigate }) => {
           {/* Customer Testimonial Card with Carousel Navigation */}
           <TestimonialCard
             testimonial={testimonialsData[currentTestimonialIndex]}
+            loading={isLoading}
             onPrev={handlePrev}
             onNext={handleNext}
           />

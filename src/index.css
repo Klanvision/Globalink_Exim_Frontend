@@ -66,7 +66,7 @@ html, body {
 /* Page Frame Container */
 .page-viewport {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   min-height: 678px;
   position: relative;
@@ -2884,3 +2884,176 @@ html, body {
   transform: scale(1.08);
   color: #D97706 !important;
 }
+
+
+/* =========================================================================
+   HIGH-PREMIUM SKELETON LOADING SYSTEM (White & Radiant Orange Luxe Shimmer)
+   ========================================================================= */
+
+@keyframes premiumSkeletonShimmer {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes skeletonPulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+
+.premium-skeleton-base {
+  position: relative;
+  overflow: hidden;
+  background-color: #F1F5F9;
+  border-radius: 8px;
+  animation: skeletonPulseSubtle 2.5s ease-in-out infinite;
+  box-sizing: border-box;
+}
+
+.premium-skeleton-base::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate3d(-100%, 0, 0);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 20%,
+    rgba(255, 168, 0, 0.16) 45%,
+    rgba(255, 255, 255, 0.75) 55%,
+    rgba(255, 111, 0, 0.14) 70%,
+    transparent 100%
+  );
+  animation: premiumSkeletonShimmer 1.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.premium-skeleton-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(255, 111, 0, 0.16);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.premium-skeleton-pill {
+  border-radius: 999px !important;
+}
+
+.premium-skeleton-circle {
+  border-radius: 50% !important;
+}
+
+/* Real-Time Micro Progress Bar */
+@keyframes realTimeProgressBar {
+  0% {
+    width: 0%;
+    opacity: 1;
+  }
+  30% {
+    width: 45%;
+    opacity: 1;
+  }
+  70% {
+    width: 82%;
+    opacity: 1;
+  }
+  95% {
+    width: 96%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0.9;
+  }
+}
+
+@keyframes progressGlowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(255, 111, 0, 0.6)) drop-shadow(0 0 10px rgba(255, 168, 0, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 111, 0, 0.9)) drop-shadow(0 0 16px rgba(255, 168, 0, 0.7));
+  }
+}
+
+.realtime-top-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, #FF6F00 0%, #FFA800 40%, #FFE082 70%, #FF6F00 100%);
+  background-size: 200% 100%;
+  z-index: 99999;
+  animation: realTimeProgressBar 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards, progressGlowPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 1px 8px rgba(255, 111, 0, 0.5);
+  pointer-events: none;
+}
+
+/* Real-Time Telemetry HUD Badge */
+@keyframes telemetryRadarPulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.telemetry-radar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10B981;
+  display: inline-block;
+  animation: telemetryRadarPulse 1.8s infinite ease-out;
+}
+
+/* 3-Column Interactive Self-Service Logistics Hub */
+@media (max-width: 992px) {
+  .logistics-hub-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .hub-col-customer {
+    border-right: none !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 20px !important;
+  }
+  .hub-col-track {
+    border-left: none !important;
+    border-top: 1px solid #E2E8F0 !important;
+    padding-left: 0 !important;
+    padding-top: 20px !important;
+  }
+  .hub-col-quote {
+    padding-right: 0 !important;
+  }
+  .quote-mode-tabs {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .quote-mode-tabs {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+

@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { BusinessGlobalCTA } from '../components/businessglobal/BusinessGlobalCTA';
@@ -5,6 +6,7 @@ import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
 
 export const BusinessGlobal = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -37,6 +39,7 @@ export const BusinessGlobal = ({ onNavigate }) => {
 
       <main style={{ padding: '20px 0 40px 0' }}>
         <BusinessGlobalCTA
+          loading={isLoading}
           onQuoteClick={() => openModal('quote')}
           onTradeClick={() => openModal('quote')}
           onPartnerClick={() => openModal('quote')}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const WarehousingCapabilities = ({ capabilities, onExploreClick }) => {
   return (
@@ -12,17 +12,19 @@ export const WarehousingCapabilities = ({ capabilities, onExploreClick }) => {
           alignItems: 'flex-start',
           justifyContent: 'space-between',
           gap: '8px',
-          marginTop: '14px',
-          marginBottom: '20px',
+          marginTop: '12px',
+          marginBottom: '16px',
         }}
       >
-        {capabilities.map((item) => {
+        {capabilities.map((item, index) => {
           const Icon = item.icon;
 
           return (
-            <div
+            <motion.div
               key={item.id}
               className="warehousing-capability-item"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -31,48 +33,42 @@ export const WarehousingCapabilities = ({ capabilities, onExploreClick }) => {
                 flex: 1,
                 minWidth: 0,
                 maxWidth: '120px',
-                transition: 'all 0.2s ease',
                 cursor: 'pointer',
               }}
               onClick={onExploreClick}
             >
-              {/* Circular Container */}
+              {/* Circular Container with Radiant Orange Theme */}
               <div
                 className="warehousing-circle"
                 style={{
-                  width: '68px',
-                  height: '68px',
+                  width: '58px',
+                  height: '58px',
                   borderRadius: '50%',
                   backgroundColor: '#FFFFFF',
-                  border: item.isHighlight ? '2px solid #E8A52A' : '1px solid #C9D2DE',
+                  border: item.isHighlight ? '2px solid #FF6F00' : '1px solid rgba(255, 111, 0, 0.25)',
                   boxShadow: item.isHighlight
-                    ? '0 4px 12px rgba(232, 165, 42, 0.22)'
-                    : '0 3px 8px rgba(8, 38, 83, 0.05)',
+                    ? '0 4px 14px rgba(255, 111, 0, 0.25)'
+                    : '0 2px 8px rgba(15, 23, 42, 0.05)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#082653',
-                  marginBottom: '8px',
+                  color: '#FF6F00',
+                  marginBottom: '6px',
                   transition: 'all 0.2s ease',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={28} strokeWidth={1.8} color="#082653" />
+                <Icon size={24} strokeWidth={1.9} color="#FF6F00" />
               </div>
 
               {/* Title */}
               <h4
                 style={{
-                  fontSize: '13px',
+                  fontSize: '11.5px',
                   fontWeight: '700',
-                  color: '#082653',
-                  lineHeight: '1.2',
-                  marginBottom: '4px',
-                  whiteSpace: 'pre-line',
-                  minHeight: '32px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  color: '#0F172A',
+                  lineHeight: '1.25',
+                  marginBottom: '2px',
                   fontFamily: 'var(--font-body)',
                 }}
               >
@@ -82,46 +78,18 @@ export const WarehousingCapabilities = ({ capabilities, onExploreClick }) => {
               {/* Description */}
               <p
                 style={{
-                  fontSize: '11px',
-                  lineHeight: '1.35',
-                  color: '#40516D',
-                  whiteSpace: 'pre-line',
-                  fontWeight: '400',
+                  fontSize: '10px',
+                  lineHeight: '1.3',
+                  color: '#64748B',
                   fontFamily: 'var(--font-body)',
                 }}
               >
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </div>
-
-      {/* Explore Warehousing CTA */}
-      <button
-        onClick={onExploreClick}
-        className="warehousing-cta-btn"
-        style={{
-          width: '250px',
-          height: '42px',
-          backgroundColor: '#082653',
-          borderRadius: '7px',
-          color: '#FFFFFF',
-          fontSize: '14px',
-          fontWeight: '600',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 18px',
-          boxShadow: '0 4px 14px rgba(8, 38, 83, 0.2)',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease',
-          border: 'none',
-        }}
-      >
-        <span>Explore Warehousing</span>
-        <ArrowRight size={16} strokeWidth={2.5} color="#E8A52A" />
-      </button>
     </div>
   );
 };
