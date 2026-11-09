@@ -2884,3 +2884,46 @@ html, body {
   transform: scale(1.08);
   color: #D97706 !important;
 }
+
+/* ==========================================================================
+   CORPORATE TRACK CARGO & SHIPMENT PAGE STYLES
+   ========================================================================== */
+.track-shipment-page-root {
+  font-family: var(--font-body);
+}
+
+@media (max-width: 960px) {
+  .tracking-columns-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .tracking-hero-banner-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  .tracking-hero-ship-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+  }
+  .trust-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .trust-features-grid > div {
+    border-left: none !important;
+    border-right: none !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .trust-features-grid > div:last-child {
+    border-bottom: none !important;
+  }
+  .warehousing-main-grid {
+    flex-direction: column !important;
+  }
+}
+

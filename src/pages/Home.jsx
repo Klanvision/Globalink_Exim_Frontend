@@ -208,10 +208,14 @@ export const Home = ({ onNavigate }) => {
       <div className="page-viewport" style={{ paddingBottom: 0, minHeight: 'unset' }}>
         {/* 1. Shared Navigation Header */}
         <Header
-          onTrackClick={() => scrollToSection('tracking-warehousing-section')}
+          onTrackClick={() => onNavigate('track-shipment')}
           onQuoteClick={() => openModal('quote')}
           currentRoute="home"
           onNavigate={(route) => {
+            if (route === 'track-shipment' || route === 'track-cargo' || route === 'tracking') {
+              onNavigate('track-shipment');
+              return;
+            }
             if (route === 'trusted-businesses' || route === 'testimonials') {
               scrollToSection('trusted-businesses-section');
             } else if (route === 'business-global' || route === 'cta') {
@@ -224,8 +228,6 @@ export const Home = ({ onNavigate }) => {
               scrollToSection('customs-compliance-section');
             } else if (route === 'buyers' || route === 'global-buyers') {
               scrollToSection('buyers-section');
-            } else if (route === 'track-shipment' || route === 'tracking' || route === 'warehousing') {
-              scrollToSection('tracking-warehousing-section');
             } else if (route === 'how-it-works' || route === 'about') {
               scrollToSection('how-it-works-section');
             } else if (route === 'quality' || route === 'quality-assurance') {

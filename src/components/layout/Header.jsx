@@ -72,7 +72,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
       hasDropdown: true,
       subItems: [
         { label: 'Air & Ocean Freight', route: 'freight' },
-        { label: 'Track Active Shipment', route: 'track-shipment' },
+        { label: 'Track Cargo (Live Status)', route: 'track-shipment' },
         { label: 'Warehousing & Storage', route: 'track-shipment' },
       ],
     },
@@ -128,7 +128,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
         onNavigate('business-global');
       } else if (route === 'customs-compliance' || route === 'compliance') {
         onNavigate('customs-compliance');
-      } else if (route === 'track-shipment' || route === 'tracking' || route === 'warehousing') {
+      } else if (route === 'track-shipment' || route === 'track-cargo' || route === 'tracking' || route === 'warehousing') {
         onNavigate('track-shipment');
       } else if (route === 'buyers' || route === 'global-buyers') {
         onNavigate('buyers');
@@ -287,7 +287,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
                 gap: '7px',
                 fontSize: '13.5px',
                 fontWeight: '600',
-                color: '#FFFFFF',
+                color: (currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '#FFE082' : '#FFFFFF',
                 background: 'none',
                 border: 'none',
                 padding: 0,
@@ -301,14 +301,16 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
                 if (icon) icon.style.transform = 'scale(1.18) translateY(-1px)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#FFFFFF';
+                if (currentRoute !== 'track-shipment' && currentRoute !== 'track-cargo') {
+                  e.currentTarget.style.color = '#FFFFFF';
+                }
                 const icon = e.currentTarget.querySelector('svg');
                 if (icon) icon.style.transform = 'scale(1) translateY(0)';
               }}
               className="desktop-nav"
             >
-              <MapPin size={22} style={{ transition: 'transform 0.2s ease', flexShrink: 0 }} />
-              <span>Track Cargo</span>
+              <MapPin size={22} color={(currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '#FFE082' : 'currentColor'} style={{ transition: 'transform 0.2s ease', flexShrink: 0 }} />
+              <span style={{ borderBottom: (currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '1.5px solid #FFE082' : 'none', paddingBottom: '2px' }}>Track Cargo</span>
             </button>
 
             {/* 3. Support Utility */}
@@ -1846,22 +1848,22 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
             >
               <button
                 onClick={() => {
-                  onTrackClick();
+                  handleNavClick('track-shipment');
                   setMobileMenuOpen(false);
                 }}
                 style={{
                   height: '36px',
                   borderRadius: '6px',
-                  background: '#F1F5F9',
-                  border: '1px solid #CBD5E1',
-                  color: '#0F172A',
+                  background: (currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '#FEF3C7' : '#F1F5F9',
+                  border: (currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '1px solid #FDE68A' : '1px solid #CBD5E1',
+                  color: (currentRoute === 'track-shipment' || currentRoute === 'track-cargo') ? '#D97706' : '#0F172A',
                   fontSize: '12px',
-                  fontWeight: '600',
+                  fontWeight: '700',
                   cursor: 'pointer',
                   fontFamily: 'var(--font-body)',
                 }}
               >
-                Track Shipment
+                Track Cargo
               </button>
               <button
                 onClick={() => {

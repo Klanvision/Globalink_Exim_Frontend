@@ -66,7 +66,7 @@ export default function App() {
       return <Buyers onNavigate={handleNavigate} />;
     }
 
-    if (currentRoute === 'track-shipment' || currentRoute === 'tracking' || currentRoute === 'warehousing') {
+    if (currentRoute === 'track-shipment' || currentRoute === 'track-cargo' || currentRoute === 'tracking' || currentRoute === 'warehousing') {
       return <TrackShipment onNavigate={handleNavigate} />;
     }
 
