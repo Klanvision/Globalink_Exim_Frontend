@@ -8,11 +8,11 @@ export const QualityProcess = ({ steps, onItemClick, loading = false }) => {
       style={{
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: '100%',
         marginTop: '22px',
         marginBottom: '26px',
-        gap: '10px',
+        gap: '24px',
         flexWrap: 'wrap',
       }}
     >

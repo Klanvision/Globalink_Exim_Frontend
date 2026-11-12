@@ -20,8 +20,8 @@ export const BusinessGlobal = ({ onNavigate }) => {
       className="business-global-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#02132F',
         position: 'relative',

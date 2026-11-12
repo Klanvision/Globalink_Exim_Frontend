@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useLoading } from '../context/LoadingContext';
 import { Header } from '../components/layout/Header';
 import { ProductCard } from '../components/products/ProductCard';
-import { ProductTrustBar } from '../components/products/ProductTrustBar';
-import { DarkStatsBanner } from '../components/products/DarkStatsBanner';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
 import { featuredProducts } from '../data/productsData';
@@ -39,8 +37,8 @@ export const FeaturedProducts = ({ onNavigate }) => {
     <div
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAF8F3',
         position: 'relative',
@@ -60,70 +58,110 @@ export const FeaturedProducts = ({ onNavigate }) => {
       <main
         style={{
           position: 'relative',
-          padding: '35px 28px 24px 28px',
+          padding: '35px var(--section-horizontal-padding, 132px) 24px var(--section-horizontal-padding, 132px)',
           background: '#FAF8F3'
         }}
       >
-        {/* Top Decorative Gold Label */}
+        {/* Top Eyebrow Pill */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '6px 20px',
+              borderRadius: '24px',
+              background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 100%)',
+              border: '1.5px solid #FED7AA',
+              boxShadow: '0 4px 14px rgba(234, 88, 12, 0.08)',
+              cursor: 'default',
+            }}
+          >
+            <span
+              style={{
+                fontSize: '11.5px',
+                fontWeight: '800',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: '#EA580C',
+                fontFamily: 'var(--font-body)'
+              }}
+            >
+              Quality Products. Global Reach.
+            </span>
+          </div>
+        </div>
+
+        {/* Main Page Heading */}
+        <h1
+          style={{
+            fontSize: 'clamp(32px, 3.5vw, 52px)',
+            fontWeight: '900',
+            color: '#1E293B',
+            textAlign: 'center',
+            lineHeight: '1.15',
+            letterSpacing: '-0.4px',
+            fontFamily: 'var(--font-heading)',
+            marginBottom: '10px'
+          }}
+        >
+          Featured{' '}
+          <span
+            style={{
+              background: 'linear-gradient(90deg, #FF7A00 0%, #FFA800 55%, #FF8C00 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              display: 'inline-block'
+            }}
+          >
+            Products
+          </span>
+        </h1>
+
+        {/* Subtitle with Glowing Dividers */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '14px',
-            marginBottom: '6px'
-          }}
-        >
-          <div style={{ width: '40px', height: '1.5px', backgroundColor: '#D99A20' }} />
-          <span
-            style={{
-              fontSize: '18px',
-              fontWeight: '600',
-              color: '#D99A20',
-              letterSpacing: '0.04em',
-              fontFamily: 'var(--font-body)'
-            }}
-          >
-            QUALITY PRODUCTS. GLOBAL REACH.
-          </span>
-          <div style={{ width: '40px', height: '1.5px', backgroundColor: '#D99A20' }} />
-        </div>
-
-        {/* Main Page Heading */}
-        <h1
-          style={{
-            fontSize: '58px',
-            fontWeight: '800',
-            color: '#082653',
-            textAlign: 'center',
-            lineHeight: '1.05',
-            letterSpacing: '-1px',
-            fontFamily: 'var(--font-body)',
-            marginBottom: '8px'
-          }}
-        >
-          Featured Products
-        </h1>
-
-        {/* Secondary Tagline with Gold Circular Dots */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '12px',
-            fontSize: '19px',
-            fontWeight: '500',
-            color: '#082653',
             marginBottom: '32px',
             flexWrap: 'wrap'
           }}
         >
-          <span>Handpicked Quality</span>
-          <span style={{ color: '#D99A20', fontSize: '14px' }}>•</span>
-          <span>Trusted Suppliers</span>
-          <span style={{ color: '#D99A20', fontSize: '14px' }}>•</span>
-          <span>Global Delivery</span>
+          <div
+            style={{
+              width: '42px',
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent 0%, #FF8C00 70%, #FFD000 100%)',
+              borderRadius: '1px',
+            }}
+          />
+          <span
+            style={{
+              fontSize: '16px',
+              fontWeight: '500',
+              color: '#475569',
+              fontFamily: 'var(--font-body)',
+              letterSpacing: '-0.1px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <span>Handpicked Quality</span>
+            <span style={{ color: '#EA580C', fontSize: '14px' }}>•</span>
+            <span>Trusted Suppliers</span>
+            <span style={{ color: '#EA580C', fontSize: '14px' }}>•</span>
+            <span>Global Delivery</span>
+          </span>
+          <div
+            style={{
+              width: '42px',
+              height: '2px',
+              background: 'linear-gradient(90deg, #FFD000 0%, #FF8C00 30%, transparent 100%)',
+              borderRadius: '1px',
+            }}
+          />
         </div>
 
         {/* 4 Product Cards Grid with Right Carousel Arrow */}
@@ -156,56 +194,53 @@ export const FeaturedProducts = ({ onNavigate }) => {
               right: '-24px',
               top: '42%',
               transform: 'translateY(-50%)',
-              width: '54px',
-              height: '54px',
+              width: '50px',
+              height: '50px',
               borderRadius: '50%',
               background: '#FFFFFF',
-              border: '1px solid #DDE1E6',
-              color: '#D99A20',
+              border: '1.5px solid #FED7AA',
+              color: '#EA580C',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 6px 20px rgba(8, 38, 83, 0.15)',
+              boxShadow: '0 6px 20px rgba(234, 88, 12, 0.14)',
               zIndex: 10,
               cursor: 'pointer',
-              transition: 'transform 0.2s ease, background 0.2s ease'
+              transition: 'transform 0.2s ease, background 0.2s ease, border-color 0.2s ease'
             }}
             className="carousel-arrow"
           >
-            <ChevronRight size={26} strokeWidth={2.5} />
+            <ChevronRight size={24} strokeWidth={2.5} />
           </button>
         </div>
 
         {/* Centered Explore All Products Button */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '28px' }}>
           <button
             onClick={() => openModal('quote')}
             style={{
-              width: '345px',
-              height: '48px',
-              background: '#102D5A',
+              padding: '12px 32px',
+              background: 'linear-gradient(135deg, #FF8C00 0%, #FF7A00 50%, #F57C00 100%)',
               color: '#FFFFFF',
-              borderRadius: '8px',
-              fontSize: '19px',
+              borderRadius: '999px',
+              fontSize: '15px',
               fontWeight: '700',
+              fontFamily: 'var(--font-body)',
+              letterSpacing: '0.01em',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '12px',
-              boxShadow: '0 4px 16px rgba(16, 45, 90, 0.25)',
+              gap: '10px',
+              boxShadow: '0 4px 18px rgba(245, 124, 0, 0.32)',
+              border: 'none',
+              cursor: 'pointer',
               transition: 'all 0.2s ease'
             }}
           >
             <span>Explore All Products</span>
-            <ArrowRight size={20} strokeWidth={2.5} />
+            <ArrowRight size={18} strokeWidth={2.5} />
           </button>
         </div>
-
-        {/* Product Trust Section */}
-        <ProductTrustBar />
-
-        {/* Dark Navy Statistics Banner */}
-        <DarkStatsBanner />
       </main>
 
       {/* 3. Shared Footer */}

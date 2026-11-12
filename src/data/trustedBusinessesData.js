@@ -40,6 +40,39 @@ export const testimonialsData = [
     avatar: '/avatars/david-wilson.jpg',
     initials: 'DW',
   },
+  {
+    id: 4,
+    quote:
+      'The cargo telemetry and compliance handling eliminated delays at European ports. Partnering with Global Link gave us unmatched operational peace of mind.',
+    name: 'Elena Rostova',
+    role: 'VP Supply Chain, EuroLogistics',
+    location: 'Germany',
+    rating: 5,
+    avatar: '/avatars/elena-rostova.jpg',
+    initials: 'ER',
+  },
+  {
+    id: 5,
+    quote:
+      'Outstanding sea freight coordination and rapid customs clearance. They consistently outperform our previous logistics partners across Southeast Asian routes.',
+    name: 'Marcus Chen',
+    role: 'Operations Head, Pacific Trade Co.',
+    location: 'Singapore',
+    rating: 5,
+    avatar: '/avatars/marcus-chen.jpg',
+    initials: 'MC',
+  },
+  {
+    id: 6,
+    quote:
+      'From quotation to final warehouse drop-off, every stage was seamless. Their end-to-end documentation reduced our cross-border processing lead time by 40%.',
+    name: 'Sarah Jenkins',
+    role: 'Procurement Director, Apex Global',
+    location: 'USA',
+    rating: 5,
+    avatar: '/avatars/sarah-jenkins.jpg',
+    initials: 'SJ',
+  },
 ];
 
 export const partnerLogos = [

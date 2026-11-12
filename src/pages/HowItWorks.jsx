@@ -28,8 +28,8 @@ export const HowItWorks = ({ onNavigate }) => {
       className="how-it-works-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAFBFD',
         position: 'relative',
@@ -51,6 +51,8 @@ export const HowItWorks = ({ onNavigate }) => {
           position: 'relative',
           paddingTop: '36px',
           paddingBottom: '20px',
+          paddingLeft: 'var(--section-horizontal-padding, 132px)',
+          paddingRight: 'var(--section-horizontal-padding, 132px)',
           background: '#FAFBFD',
         }}
       >
@@ -78,10 +80,10 @@ export const HowItWorks = ({ onNavigate }) => {
         >
           <h1
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '44px',
               fontWeight: '700',
-              color: '#082653',
+              color: '#0F172A',
               lineHeight: '1.08',
               letterSpacing: '-0.5px',
               marginBottom: '6px',
@@ -94,7 +96,7 @@ export const HowItWorks = ({ onNavigate }) => {
             style={{
               fontSize: '18px',
               fontWeight: '400',
-              color: '#082653',
+              color: '#475569',
               fontFamily: 'var(--font-body)',
               marginBottom: '10px',
               letterSpacing: '-0.2px',
@@ -125,14 +127,14 @@ export const HowItWorks = ({ onNavigate }) => {
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 24px',
+            padding: '0',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '16px',
           }}
         >
-          {/* Left Process Area */}
-          <div style={{ flex: '1 1 65%', maxWidth: '760px' }}>
+          {/* Process Area */}
+          <div style={{ width: '100%' }}>
             <ProcessFlow
               steps={processSteps}
               loading={isLoading}
@@ -147,7 +149,7 @@ export const HowItWorks = ({ onNavigate }) => {
                 style={{
                   width: '380px',
                   height: '48px',
-                  backgroundColor: '#082653',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FF8C00 45%, #E65100 100%)',
                   borderRadius: '9px',
                   color: '#FFFFFF',
                   fontSize: '16px',
@@ -156,7 +158,7 @@ export const HowItWorks = ({ onNavigate }) => {
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '0 24px',
-                  boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+                  boxShadow: '0 4px 14px rgba(230, 81, 0, 0.28)',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   border: 'none',
@@ -166,31 +168,6 @@ export const HowItWorks = ({ onNavigate }) => {
                 <ArrowRight size={18} strokeWidth={2.5} color="#E8A52A" />
               </button>
             </div>
-          </div>
-
-          {/* Right Hero Image Container */}
-          <div
-            className="process-hero-image-container"
-            style={{
-              flex: '0 0 35%',
-              maxWidth: '390px',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src="/how-it-works-hero.jpg"
-              alt="How Global Link Works - Process & Multi-Modal Logistics"
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
-              }}
-            />
           </div>
         </div>
 

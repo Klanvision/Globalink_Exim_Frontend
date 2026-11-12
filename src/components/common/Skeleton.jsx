@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Eye, Loader2, ShieldCheck, Activity, Globe, ArrowRight, Truck, Ship, Plane } from 'lucide-react';
+import { Eye, Loader2, ShieldCheck, Activity, Globe, ArrowRight, Truck, Ship, Plane } from 'lucide-react';
 import { useLoading } from '../../context/LoadingContext';
 
 /**
@@ -1651,51 +1651,6 @@ export const UniversalPageSkeleton = ({ route = 'home' }) => {
  * Allows one-click preview and admiration of the skeleton loading state!
  */
 export const SkeletonPreviewToggle = () => {
-  const { isSkeletonDemo, toggleSkeletonDemo } = useLoading();
-
-  return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={toggleSkeletonDemo}
-      aria-label="Toggle Skeleton Loading Preview"
-      style={{
-        position: 'fixed',
-        bottom: '22px',
-        left: '22px',
-        zIndex: 9999,
-        padding: '8px 14px',
-        borderRadius: '999px',
-        background: isSkeletonDemo
-          ? 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)'
-          : '#FFFFFF',
-        color: isSkeletonDemo ? '#FFFFFF' : '#0F172A',
-        border: '1.5px solid rgba(255, 111, 0, 0.35)',
-        boxShadow: isSkeletonDemo
-          ? '0 6px 20px rgba(255, 111, 0, 0.35)'
-          : '0 4px 16px rgba(15, 23, 42, 0.1)',
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '7px',
-        fontSize: '12px',
-        fontWeight: '700',
-        cursor: 'pointer',
-        fontFamily: 'var(--font-body)',
-        backdropFilter: 'blur(8px)',
-      }}
-    >
-      {isSkeletonDemo ? (
-        <>
-          <Loader2 size={14} className="animate-spin" />
-          <span>Skeleton Active</span>
-        </>
-      ) : (
-        <>
-          <Sparkles size={14} color="#FF6F00" />
-          <span>Preview Skeleton</span>
-        </>
-      )}
-    </motion.button>
-  );
+  return null;
 };
 

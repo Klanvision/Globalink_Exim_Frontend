@@ -21,7 +21,6 @@ import { PortalLogin } from './pages/PortalLogin';
 import { AirplaneScrollbar } from './components/common/AirplaneScrollbar';
 import { LoadingProvider, useLoading } from './context/LoadingContext';
 import {
-  SkeletonPreviewToggle,
   TopProgressBar,
   LiveTelemetryBadge,
 } from './components/common/Skeleton';
@@ -117,7 +116,6 @@ function AppContent() {
       <AirplaneScrollbar />
       <TopProgressBar />
       <LiveTelemetryBadge />
-      <SkeletonPreviewToggle />
 
       <AnimatePresence mode="wait">
         <motion.div

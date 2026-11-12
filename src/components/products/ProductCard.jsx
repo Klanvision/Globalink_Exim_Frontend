@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useAnimation } from 'framer-motion';
-import { ArrowRight, Leaf, Sparkles, Shirt, Settings } from 'lucide-react';
+import { ArrowRight, Leaf, Award, Shirt, Settings } from 'lucide-react';
 import { ProductCardSkeleton } from '../common/Skeleton';
 
 const SPRING = { type: 'spring', stiffness: 460, damping: 24 };
@@ -42,7 +42,7 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
 
   const getBadgeIcon = () => {
     if (name.includes('Mangos')) return <Leaf size={11} color="#FFFFFF" />;
-    if (name.includes('Decor')) return <Sparkles size={11} color="#FFFFFF" />;
+    if (name.includes('Decor')) return <Award size={11} color="#FFFFFF" />;
     if (name.includes('Garments')) return <Shirt size={11} color="#FFFFFF" />;
     return <Settings size={11} color="#FFFFFF" />;
   };
@@ -73,17 +73,17 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
         transformStyle: 'preserve-3d',
         perspective: 800,
         background: '#FFFFFF',
-        border: hovered ? '1.5px solid rgba(255, 111, 0, 0.7)' : '1px solid #E2E8F0',
+        border: hovered ? '1.5px solid #FB923C' : '1.5px solid #FED7AA',
         borderRadius: '16px',
         overflow: 'hidden',
         boxShadow: hovered
-          ? '0 20px 40px rgba(255, 111, 0, 0.16), 0 0 16px rgba(255, 111, 0, 0.1)'
-          : '0 4px 18px rgba(0, 0, 0, 0.04)',
+          ? '0 18px 36px rgba(234, 88, 12, 0.14), 0 4px 12px rgba(0, 0, 0, 0.04)'
+          : '0 4px 18px rgba(15, 23, 42, 0.04)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+        transition: 'border-color 0.28s ease, box-shadow 0.28s ease',
         boxSizing: 'border-box',
       }}
       className="product-card"
@@ -140,18 +140,18 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
             style={{
               position: 'absolute',
               ...getBadgePositionStyle(),
-              background: 'linear-gradient(135deg, #FF7A00 0%, #FF6600 100%)',
+              background: 'linear-gradient(135deg, #FF8C00 0%, #FF7A00 100%)',
               color: '#FFFFFF',
               padding: '4px 10px',
               borderRadius: '20px',
               fontSize: '10px',
-              fontWeight: '700',
+              fontWeight: '800',
               lineHeight: 1.15,
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
               letterSpacing: '0.04em',
-              boxShadow: '0 4px 12px rgba(255, 111, 0, 0.35)',
+              boxShadow: '0 4px 12px rgba(245, 124, 0, 0.35)',
               zIndex: 4,
             }}
           >
@@ -164,14 +164,25 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
       {/* Card Body Information */}
       <div style={{ padding: '16px 14px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, boxSizing: 'border-box' }}>
         {/* Product Name */}
-        <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0F172A', textAlign: 'center', marginBottom: '4px', lineHeight: 1.25 }}>
+        <h3
+          style={{
+            fontSize: '17px',
+            fontWeight: '800',
+            color: '#1E293B',
+            textAlign: 'center',
+            marginBottom: '4px',
+            lineHeight: 1.25,
+            letterSpacing: '-0.2px',
+            fontFamily: 'var(--font-body)',
+          }}
+        >
           {name}
         </h3>
 
         {/* Origin → Destination */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13.5px', fontWeight: '600', color: '#FF6F00', marginBottom: '4px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700', color: '#EA580C', marginBottom: '4px', letterSpacing: '0.01em' }}>
           <span>{origin}</span>
-          <ArrowRight size={13} color="#FF6F00" strokeWidth={2.5} />
+          <ArrowRight size={13} color="#EA580C" strokeWidth={2.5} />
           <span>{destination}</span>
         </div>
 
@@ -195,10 +206,10 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
             const Icon = b.icon;
             return (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '3px' }}>
-                <div style={{ color: '#FF6F00', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Icon size={18} strokeWidth={1.8} />
+                <div style={{ color: '#EA580C', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon size={18} strokeWidth={2} />
                 </div>
-                <span style={{ fontSize: '10px', fontWeight: '600', color: '#475569', lineHeight: 1.15 }}>
+                <span style={{ fontSize: '10.5px', fontWeight: '600', color: '#334155', lineHeight: 1.15 }}>
                   {b.label}
                 </span>
               </div>
@@ -206,21 +217,21 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
           })}
         </div>
 
-        {/* Vibrant Orange & White CTA Button */}
+        {/* Sunset Pill Luxury CTA Button */}
         <motion.button
           onClick={onViewDetails}
           whileHover={{
             scale: 1.03,
             y: -1.5,
-            boxShadow: '0 8px 22px rgba(255, 111, 0, 0.45)',
+            boxShadow: '0 8px 22px rgba(245, 124, 0, 0.42)',
           }}
           whileTap={{ scale: 0.96, y: 0 }}
           transition={SPRING}
           style={{
-            height: '35px',
+            height: '36px',
             width: '100%',
             maxWidth: '220px',
-            background: 'linear-gradient(135deg, #FF7A00 0%, #FF6600 50%, #F55000 100%)',
+            background: 'linear-gradient(135deg, #FF8C00 0%, #FF7A00 50%, #F57C00 100%)',
             color: '#FFFFFF',
             borderRadius: '8px',
             fontSize: '12.5px',
@@ -231,9 +242,10 @@ export const ProductCard = ({ product, onViewDetails, delay = 0, loading = false
             gap: '8px',
             border: 'none',
             cursor: 'pointer',
-            boxShadow: '0 4px 14px rgba(245, 80, 0, 0.25)',
+            boxShadow: '0 4px 14px rgba(245, 124, 0, 0.28)',
             marginTop: 'auto',
             fontFamily: 'var(--font-body)',
+            letterSpacing: '0.01em',
           }}
         >
           <span>View Details</span>

@@ -25,7 +25,7 @@ export const TrackingForm = ({ onTrack }) => {
           display: 'flex',
           alignItems: 'center',
           width: '100%',
-          boxShadow: '0 4px 14px rgba(8, 38, 83, 0.06)',
+          boxShadow: '0 4px 14px rgba(15, 23, 42, 0.06)',
           borderRadius: '8px',
         }}
       >
@@ -45,7 +45,7 @@ export const TrackingForm = ({ onTrack }) => {
             gap: '10px',
           }}
         >
-          <PackageSearch size={22} color="#082653" strokeWidth={1.8} />
+          <PackageSearch size={22} color="#FF6F00" strokeWidth={1.8} />
           <input
             type="text"
             value={trackingNumber}
@@ -59,7 +59,7 @@ export const TrackingForm = ({ onTrack }) => {
               border: 'none',
               outline: 'none',
               fontSize: '13.5px',
-              color: '#082653',
+              color: '#0F172A',
               fontFamily: 'var(--font-body)',
               backgroundColor: 'transparent',
             }}

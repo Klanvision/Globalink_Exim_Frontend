@@ -23,8 +23,8 @@ export const GlobalNetwork = ({ onNavigate }) => {
       className="global-network-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#F7FAFE',
         position: 'relative',
@@ -48,14 +48,14 @@ export const GlobalNetwork = ({ onNavigate }) => {
           id="global-network-section"
           style={{
             position: 'relative',
-            padding: '38px 28px 28px 28px',
+            padding: '38px var(--section-horizontal-padding, 132px) 28px var(--section-horizontal-padding, 132px)',
             background: '#F7FAFE',
           }}
         >
           {/* Main Two-Tone Sans-Serif Heading */}
           <h1
             style={{
-              fontFamily: 'Inter, Arial, Helvetica, sans-serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '36px',
               fontWeight: '800',
               lineHeight: '1.1',
@@ -64,7 +64,7 @@ export const GlobalNetwork = ({ onNavigate }) => {
               marginBottom: '4px',
             }}
           >
-            <span style={{ color: '#082653' }}>Global </span>
+            <span style={{ color: '#0F172A' }}>Global </span>
             <span style={{ color: '#0A4FC7' }}>Network</span>
           </h1>
 

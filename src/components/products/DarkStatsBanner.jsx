@@ -13,7 +13,7 @@ const StatItem = ({ item, isLast, index }) => {
     setHovered(true);
     shimmer.start({
       x: ['-110%', '160%'],
-      transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+      transition: { duration: 0.52, ease: [0.4, 0, 0.2, 1] },
     });
   };
 
@@ -24,10 +24,10 @@ const StatItem = ({ item, isLast, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.07, ease: 'easeOut' }}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: 'easeOut' }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       whileHover={{ y: -2 }}
@@ -36,31 +36,53 @@ const StatItem = ({ item, isLast, index }) => {
         alignItems: 'center',
         justifyContent: 'center',
         gap: '12px',
-        borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.25)',
-        padding: '0 12px',
+        borderRight: isLast ? 'none' : '1px solid #FED7AA',
+        padding: '0 14px',
         position: 'relative',
         zIndex: 2,
         cursor: 'default',
       }}
     >
-      {/* Circular icon badge with shimmer */}
+      {/* Subtle Warm Hover Pill Backdrop */}
       <motion.div
-        animate={{ scale: hovered ? 1.12 : 1 }}
+        animate={{ opacity: hovered ? 1 : 0, scaleX: hovered ? 1 : 0.85 }}
+        transition={{ type: 'spring', stiffness: 480, damping: 32 }}
+        style={{
+          position: 'absolute',
+          inset: '-6px 4px',
+          background: 'linear-gradient(90deg, rgba(255, 247, 237, 0.95) 0%, rgba(255, 237, 213, 0.45) 100%)',
+          borderRadius: '10px',
+          transformOrigin: 'center',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Luxury Circular Icon Badge */}
+      <motion.div
+        animate={{ scale: hovered ? 1.08 : 1 }}
         transition={SPRING}
         style={{
           width: '42px',
           height: '42px',
           borderRadius: '50%',
-          background: 'rgba(255, 255, 255, 0.2)',
-          border: '1.5px solid rgba(255, 255, 255, 0.4)',
+          background: hovered
+            ? 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)'
+            : '#FFF7ED',
+          border: hovered
+            ? '1.5px solid #FB923C'
+            : '1.5px solid #FED7AA',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#FFFFFF',
+          color: '#EA580C',
           flexShrink: 0,
           position: 'relative',
           overflow: 'hidden',
-          boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
+          boxShadow: hovered
+            ? '0 6px 16px rgba(234, 88, 12, 0.22)'
+            : '0 2px 6px rgba(234, 88, 12, 0.06)',
+          transition: 'all 0.25s ease',
+          zIndex: 2,
         }}
       >
         <motion.span
@@ -72,25 +94,26 @@ const StatItem = ({ item, isLast, index }) => {
             bottom: 0,
             width: '60%',
             skewX: '-15deg',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
         />
-        <Icon size={20} strokeWidth={1.8} style={{ zIndex: 2 }} />
+        <Icon size={20} strokeWidth={2.4} style={{ zIndex: 2 }} />
       </motion.div>
 
-      {/* Number & Label */}
-      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.1 }}>
+      {/* Number & Label — Styled in Navbar Reference Style */}
+      <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, zIndex: 2 }}>
         <motion.span
-          animate={{ scale: hovered ? 1.05 : 1 }}
+          animate={{ scale: hovered ? 1.04 : 1 }}
           transition={SPRING}
           style={{
-            fontSize: '24px',
-            fontWeight: '900',
-            color: '#FFFFFF',
-            fontFamily: "'Georgia', serif",
-            letterSpacing: '-0.3px',
+            fontSize: '25px',
+            fontWeight: '800',
+            color: hovered ? '#EA580C' : '#1E293B',
+            fontFamily: 'var(--font-body)',
+            letterSpacing: '-0.02em',
+            transition: 'color 0.22s ease',
           }}
         >
           {item.number}
@@ -98,10 +121,14 @@ const StatItem = ({ item, isLast, index }) => {
         <span
           style={{
             fontSize: '11px',
-            fontWeight: '500',
-            color: 'rgba(255, 255, 255, 0.92)',
-            marginTop: '2px',
+            fontWeight: '700',
+            color: hovered ? '#334155' : '#64748B',
+            marginTop: '3px',
             fontFamily: 'var(--font-body)',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            whiteSpace: 'nowrap',
+            transition: 'color 0.22s ease',
           }}
         >
           {item.label}
@@ -128,33 +155,36 @@ export const DarkStatsBanner = () => {
         overflow: 'hidden',
         position: 'relative',
         minHeight: '88px',
-        background: 'linear-gradient(90deg, #F95A00 0%, #FF6C00 45%, #FF7B00 100%)',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF8F0 100%)',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
         alignItems: 'center',
-        padding: '16px 20px',
-        boxShadow: '0 6px 24px rgba(249, 90, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35)',
-        border: '1px solid rgba(255, 255, 255, 0.22)',
+        padding: '18px 20px',
+        boxShadow: '0 8px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.95)',
+        border: '1.5px solid #FED7AA',
       }}
       className="dark-stats-grid"
     >
-      {/* Background dot pattern */}
+      {/* Top Sunset Glow Accent Ribbon */}
       <div
         style={{
           position: 'absolute',
-          inset: 0,
-          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)',
-          backgroundSize: '14px 14px',
-          pointerEvents: 'none',
-          zIndex: 0,
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: 'linear-gradient(90deg, #FF8C00 0%, #FFA800 50%, #FF7A00 100%)',
+          zIndex: 3,
         }}
       />
-      {/* Shine overlay */}
+
+      {/* Subtle Architectural Dot Pattern */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(90deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(0,0,0,0.04) 100%)',
+          backgroundImage: 'radial-gradient(circle, rgba(234, 88, 12, 0.05) 1px, transparent 1px)',
+          backgroundSize: '16px 16px',
           pointerEvents: 'none',
           zIndex: 0,
         }}

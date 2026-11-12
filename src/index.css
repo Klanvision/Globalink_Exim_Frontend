@@ -1,6 +1,22 @@
 @import './styles/variables.css';
 
 /* Global Reset */
+:root {
+  --section-horizontal-padding: 132px;
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --section-horizontal-padding: clamp(32px, 8vw, 132px);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-horizontal-padding: 20px;
+  }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -27,9 +43,9 @@ section {
   scroll-margin-top: 72px;
 }
 
-/* Typography Defaults */
+/* Typography Defaults - Unified Navbar Font */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   color: #0f172a;
 }
 
@@ -42,7 +58,7 @@ button {
   transition: all 0.2s ease;
 }
 
-input, select {
+input, select, textarea {
   font-family: var(--font-body);
 }
 
@@ -108,7 +124,7 @@ html, body {
 /* Hover effects */
 .freight-card:hover, .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.10) !important;
 }
 
 .carousel-arrow:hover {
@@ -116,10 +132,9 @@ html, body {
   background: #FAF8F3 !important;
 }
 
+/* Handled cleanly via Framer Motion spring in ProcessStep.jsx */
 .procurement-step-circle:hover {
-  transform: translateY(-3px);
-  border-color: #F2A922 !important;
-  box-shadow: 0 8px 20px rgba(242, 169, 34, 0.25) !important;
+  cursor: pointer;
 }
 
 .procurement-cta-btn:hover {
@@ -130,7 +145,7 @@ html, body {
 
 .procurement-benefit-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(8, 38, 83, 0.12) !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08) !important;
   border-color: #C3D0E0 !important;
 }
 
@@ -139,18 +154,39 @@ html, body {
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.procurement-flow-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.procurement-flow-container::-webkit-scrollbar-track {
+  background: rgba(254, 215, 170, 0.2);
+  border-radius: 999px;
+}
+
+.procurement-flow-container::-webkit-scrollbar-thumb {
+  background: #FED7AA;
+  border-radius: 999px;
+}
+
+.procurement-flow-container::-webkit-scrollbar-thumb:hover {
+  background: #FB923C;
 }
 
 .doc-category-item:hover .doc-category-circle {
   transform: translateY(-3px);
-  border-color: #082653 !important;
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.14) !important;
+  border-color: #FF6F00 !important;
+  box-shadow: 0 8px 24px rgba(255, 111, 0, 0.20) !important;
 }
 
 .doc-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .compliance-benefit-item {
@@ -163,13 +199,13 @@ html, body {
 
 .quality-process-item:hover .quality-process-circle {
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08) !important;
 }
 
 .quality-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .quality-assurance-item {
@@ -181,29 +217,29 @@ html, body {
 }
 
 .clay-service-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: inset 4px 4px 8px rgba(255, 255, 255, 0.18), inset -5px -5px 10px rgba(0, 0, 0, 0.65), 0 18px 32px rgba(0, 0, 0, 0.50), 0 0 24px rgba(242, 181, 47, 0.20) !important;
-  border-color: rgba(242, 181, 47, 0.5) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(255, 111, 0, 0.14) !important;
+  border-color: rgba(255, 111, 0, 0.4) !important;
 }
 
 .clay-service-card:active {
-  transform: translateY(2px) scale(0.98);
-  box-shadow: inset 5px 5px 12px rgba(0, 0, 0, 0.8), inset -3px -3px 6px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 111, 0, 0.12) !important;
 }
 
 .clay-service-card:hover .clay-service-icon-wrap {
-  transform: translateY(-2px) scale(1.08);
-  box-shadow: inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.7), inset -2.5px -2.5px 5px rgba(110, 60, 0, 0.5), 0 10px 24px rgba(242, 181, 47, 0.55) !important;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 16px rgba(255, 111, 0, 0.22) !important;
 }
 
 .clay-cta-btn:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: inset 2.5px 2.5px 6px rgba(255, 255, 255, 0.75), inset -3px -3px 6px rgba(110, 60, 0, 0.55), 0 14px 28px rgba(222, 151, 27, 0.55) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 111, 0, 0.32) !important;
 }
 
 .clay-cta-btn:active {
-  transform: translateY(2px) scale(0.98);
-  box-shadow: inset 4px 4px 8px rgba(110, 60, 0, 0.8), inset -2px -2px 4px rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(255, 111, 0, 0.22) !important;
 }
 
 .clay-benefits-banner,
@@ -222,13 +258,13 @@ html, body {
 .process-step-item:hover .process-step-circle {
   transform: translateY(-3px);
   border-color: #E8A52A !important;
-  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important;
 }
 
 .process-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .process-trust-item:hover {
@@ -243,23 +279,23 @@ html, body {
 .view-all-shipments-btn:hover {
   filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .warehousing-capability-item:hover .warehousing-circle {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.12) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important;
 }
 
 .warehousing-cta-btn:hover {
   filter: brightness(1.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .portfolio-category-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important;
 }
 
 .portfolio-category-card:hover .portfolio-card-img {
@@ -269,7 +305,7 @@ html, body {
 .portfolio-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 .portfolio-trust-item:hover {
@@ -282,7 +318,7 @@ html, body {
 
 .buyer-category-item:hover .buyer-circle-container {
   border-color: #E8A52A !important;
-  box-shadow: 0 6px 18px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
 }
 
 .buyer-action-card:hover {
@@ -297,13 +333,13 @@ html, body {
 
 .customs-service-item:hover .customs-circle-container {
   border-color: #E8A52A !important;
-  box-shadow: 0 6px 18px rgba(8, 38, 83, 0.14) !important;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08) !important;
 }
 
 .customs-cta-btn:hover {
   transform: translateY(-2px);
   filter: brightness(1.08);
-  box-shadow: 0 8px 24px rgba(8, 38, 83, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.35) !important;
 }
 
 @keyframes hubPulseAnim {
@@ -460,15 +496,18 @@ html, body {
     display: none !important;
   }
 
-  /* Procurement Responsive Tablet */
+  /* Procurement Responsive Tablet — within a single line */
   .procurement-flow-container {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 24px 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 12px !important;
   }
 
   .procurement-connector {
-    display: none !important;
+    display: flex !important;
   }
 
   .procurement-benefits-grid {
@@ -854,12 +893,14 @@ html, body {
     padding-right: 0 !important;
   }
 
-  /* Procurement Mobile Responsive */
+  /* Procurement Mobile Responsive — within a single line */
   .procurement-flow-container {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 24px !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding-bottom: 12px !important;
   }
 
   .procurement-benefits-grid {
@@ -3024,8 +3065,26 @@ html, body {
   animation: telemetryRadarPulse 1.8s infinite ease-out;
 }
 
-/* 3-Column Interactive Self-Service Logistics Hub */
+/* ── Hero Interactive Logistics Hub Overlap (Header Bar Only ~58px) ── */
+.hero-logistics-hub-wrapper {
+  margin-top: -58px;
+  position: relative;
+  z-index: 10;
+  transition: margin-top 0.3s ease;
+}
+
+/* 3-Column Interactive Self-Service Logistics Hub (25% - 50% - 25% Ratio) */
+.logistics-hub-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
 @media (max-width: 992px) {
+  .hero-logistics-hub-wrapper {
+    margin-top: -46px;
+  }
   .logistics-hub-grid {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
@@ -3051,9 +3110,91 @@ html, body {
 }
 
 @media (max-width: 576px) {
+  .hero-logistics-hub-wrapper {
+    margin-top: -30px;
+  }
   .quote-mode-tabs {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* ── Interactive Hub Advanced Keyframe Animations ── */
+@keyframes pulseGlowHead {
+  0%, 100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 0 6px #FF6F00, 0 0 12px rgba(255, 111, 0, 0.6);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.35);
+    box-shadow: 0 0 10px #FFA800, 0 0 20px rgba(255, 168, 0, 0.9);
+  }
+}
+
+.telemetry-pulse-head {
+  animation: pulseGlowHead 1.5s infinite ease-in-out;
+}
+
+@keyframes launcherFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.floating-launcher-btn {
+  animation: launcherFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes dotFlashingAnim {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+  100% { opacity: 0.2; transform: scale(0.8); }
+}
+
+.dot-flashing-1 { animation: dotFlashingAnim 1.2s infinite ease-in-out; }
+.dot-flashing-2 { animation: dotFlashingAnim 1.2s infinite ease-in-out 0.2s; }
+.dot-flashing-3 { animation: dotFlashingAnim 1.2s infinite ease-in-out 0.4s; }
+
+/* Interactive Hover Shimmer & Input Ring Animations */
+@keyframes shineSweep {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(250%) rotate(25deg); }
+}
+
+.shine-sweep-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-sweep-hover::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: rotate(25deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.shine-sweep-hover:hover::after {
+  opacity: 1;
+  animation: shineSweep 0.85s ease-in-out;
+}
+
+.logistics-input-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logistics-input-hover:hover {
+  border-color: #FF6F00 !important;
+  box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.14) !important;
+}
+
+.logistics-input-hover:focus-within {
+  border-color: #FF6F00 !important;
+  box-shadow: 0 0 0 3.5px rgba(255, 111, 0, 0.2) !important;
 }
 
 

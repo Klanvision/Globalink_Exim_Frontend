@@ -2,37 +2,19 @@ import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { TestimonialCard } from '../components/trustedbusinesses/TestimonialCard';
-import { PartnerLogosRow } from '../components/trustedbusinesses/PartnerLogosRow';
-import { TrustStatsBanner } from '../components/trustedbusinesses/TrustStatsBanner';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
 import {
   testimonialsData,
-  partnerLogos,
-  trustStatsData,
 } from '../data/trustedBusinessesData';
 
 export const TrustedBusinesses = ({ onNavigate }) => {
   const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
-  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
-
   const openModal = (type = 'quote') => {
     setModalType(type);
     setModalOpen(true);
-  };
-
-  const handlePrev = () => {
-    setCurrentTestimonialIndex((prev) =>
-      prev === 0 ? testimonialsData.length - 1 : prev - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentTestimonialIndex((prev) =>
-      prev === testimonialsData.length - 1 ? 0 : prev + 1
-    );
   };
 
   return (
@@ -40,8 +22,8 @@ export const TrustedBusinesses = ({ onNavigate }) => {
       className="trusted-businesses-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: 'linear-gradient(180deg, #020F2D 0%, #03183B 52%, #02132F 100%)',
         position: 'relative',
@@ -65,7 +47,7 @@ export const TrustedBusinesses = ({ onNavigate }) => {
           id="trusted-businesses-section"
           style={{
             position: 'relative',
-            padding: '38px 28px 28px 28px',
+            padding: '38px var(--section-horizontal-padding, 132px) 28px var(--section-horizontal-padding, 132px)',
             background: 'linear-gradient(180deg, #020F2D 0%, #03183B 52%, #02132F 100%)',
           }}
         >
@@ -112,7 +94,7 @@ export const TrustedBusinesses = ({ onNavigate }) => {
           {/* Main Serif Heading */}
           <h1
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '30px',
               fontWeight: '700',
               color: '#FFFFFF',
@@ -150,19 +132,12 @@ export const TrustedBusinesses = ({ onNavigate }) => {
             }}
           />
 
-          {/* Customer Testimonial Card with Carousel Navigation */}
+          {/* 3-Comment Auto-Moving Testimonials Carousel */}
           <TestimonialCard
-            testimonial={testimonialsData[currentTestimonialIndex]}
+            testimonials={testimonialsData}
             loading={isLoading}
-            onPrev={handlePrev}
-            onNext={handleNext}
+            autoPlay={true}
           />
-
-          {/* 7 Partner Logos Row */}
-          <PartnerLogosRow partners={partnerLogos} />
-
-          {/* Bottom 5-Metric Statistics Banner */}
-          <TrustStatsBanner stats={trustStatsData} />
         </section>
       </main>
 

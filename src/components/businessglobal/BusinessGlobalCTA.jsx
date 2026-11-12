@@ -1,6 +1,6 @@
 import React from 'react';
 import { BusinessGlobalCtaButtons } from './BusinessGlobalCtaButtons';
-import { Sparkles, Globe2, ShieldCheck, Zap } from 'lucide-react';
+import { Globe2, ShieldCheck, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const BusinessGlobalCTA = ({ onQuoteClick, onTradeClick, onPartnerClick, loading = false }) => {
@@ -43,7 +43,7 @@ export const BusinessGlobalCTA = ({ onQuoteClick, onTradeClick, onPartnerClick, 
         border: '1.5px solid rgba(255, 111, 0, 0.25)',
         boxShadow: '0 10px 36px rgba(255, 111, 0, 0.08)',
         margin: '0 0 28px 0',
-        padding: '42px 28px',
+        padding: '42px var(--section-horizontal-padding, 132px)',
       }}
     >
       {/* Background Subtle Orange Ambient Discs */}
@@ -95,7 +95,6 @@ export const BusinessGlobalCTA = ({ onQuoteClick, onTradeClick, onPartnerClick, 
             marginBottom: '10px',
           }}
         >
-          <Sparkles size={12} color="#FF6F00" />
           <span
             style={{
               fontSize: '11px',

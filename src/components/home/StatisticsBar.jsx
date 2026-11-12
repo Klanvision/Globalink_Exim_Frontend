@@ -100,7 +100,7 @@ const StatCard = ({ icon: Icon, number, label, isLast, delay }) => {
           style={{
             fontSize: '22px',
             fontWeight: '800',
-            fontFamily: "'Georgia', serif",
+            fontFamily: 'var(--font-body)',
             color: '#FFFFFF',
             letterSpacing: '-0.3px',
             display: 'inline-block',

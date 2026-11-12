@@ -3,13 +3,11 @@ import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ProductTrustRow } from '../components/portfolio/ProductTrustRow';
 import { ProductCategoryGrid } from '../components/portfolio/ProductCategoryGrid';
-import { PortfolioStatsBanner } from '../components/portfolio/PortfolioStatsBanner';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
 import {
   portfolioTrustFeatures,
   globalProductCategories,
-  portfolioStatistics,
 } from '../data/globalPortfolioData';
 import { ArrowRight } from 'lucide-react';
 
@@ -28,8 +26,8 @@ export const Products = ({ onNavigate }) => {
       className="products-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAFBFD',
         position: 'relative',
@@ -53,7 +51,7 @@ export const Products = ({ onNavigate }) => {
           id="global-portfolio-section"
           style={{
             position: 'relative',
-            padding: '36px 28px 30px 28px',
+            padding: '36px var(--section-horizontal-padding, 132px) 30px var(--section-horizontal-padding, 132px)',
             background: '#FAFBFD',
           }}
         >
@@ -100,10 +98,10 @@ export const Products = ({ onNavigate }) => {
           {/* Main Serif Heading */}
           <h1
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '44px',
               fontWeight: '700',
-              color: '#082653',
+              color: '#0F172A',
               lineHeight: '1.1',
               letterSpacing: '-0.5px',
               textAlign: 'center',
@@ -147,7 +145,7 @@ export const Products = ({ onNavigate }) => {
               style={{
                 width: '290px',
                 height: '48px',
-                backgroundColor: '#082653',
+                background: 'linear-gradient(135deg, #FF6F00 0%, #FF8C00 45%, #E65100 100%)',
                 borderRadius: '8px',
                 color: '#FFFFFF',
                 fontSize: '16px',
@@ -156,7 +154,7 @@ export const Products = ({ onNavigate }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0 22px',
-                boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+                boxShadow: '0 4px 14px rgba(230, 81, 0, 0.28)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 border: 'none',
@@ -166,9 +164,6 @@ export const Products = ({ onNavigate }) => {
               <ArrowRight size={18} strokeWidth={2.5} color="#F5B73A" />
             </button>
           </div>
-
-          {/* Bottom Dark Navy Statistics Banner */}
-          <PortfolioStatsBanner statistics={portfolioStatistics} />
         </section>
       </main>
 

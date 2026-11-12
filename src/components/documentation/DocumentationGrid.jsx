@@ -6,13 +6,15 @@ export const DocumentationGrid = ({ categories, onItemClick, loading = false }) 
     <div
       className="doc-categories-grid"
       style={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-        gap: '16px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        gap: '24px 18px',
         marginTop: '22px',
         marginBottom: '26px',
-        flexWrap: 'wrap',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
       {(loading ? Array.from({ length: 6 }) : categories).map((cat, index) => (
