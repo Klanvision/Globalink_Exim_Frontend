@@ -56,13 +56,13 @@ export const CorporateTrackingHero = ({ onNavigate }) => {
         }}
       />
 
-      {/* 3. Text Overlay — left-aligned to exact same pixel as navbar "Home" button (32px outer pad + 100px nav marginLeft = 132px) */}
+      {/* 3. Text Overlay — aligned to exact same margin guides as navbar "Home" and "Get a Quote" */}
       <div
         style={{
           position: 'relative',
           zIndex: 2,
           width: '100%',
-          padding: '0 32px 0 132px',
+          padding: '0 var(--section-horizontal-padding, 132px)',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',

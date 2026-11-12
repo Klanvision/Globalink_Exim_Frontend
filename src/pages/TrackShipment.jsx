@@ -98,7 +98,7 @@ export const TrackShipment = ({ onNavigate }) => {
       <main
         style={{
           width: '100%',
-          padding: '0 32px 40px 132px',
+          padding: '0 var(--section-horizontal-padding, 132px) 60px var(--section-horizontal-padding, 132px)',
           boxSizing: 'border-box',
         }}
       >

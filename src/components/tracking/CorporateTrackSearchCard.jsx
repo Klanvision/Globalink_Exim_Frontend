@@ -133,6 +133,7 @@ export const CorporateTrackSearchCard = ({
         border: '1px solid #E2E8F0',
         boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.04)',
         width: '100%',
+        boxSizing: 'border-box',
         marginBottom: '20px',
         marginTop: '-40px',
       }}
