@@ -1,46 +1,34 @@
 import React from 'react';
 import { BuyerCategoryItem } from './BuyerCategoryItem';
 
-export const BuyerCategoriesRow = ({ categories, onCategoryClick }) => {
+export const BuyerCategoriesRow = ({ categories, onCategoryClick, loading = false }) => {
   return (
     <div
       className="buyer-categories-wrapper"
       style={{
         position: 'relative',
         width: '100%',
-        margin: '28px auto 32px auto',
-        padding: '10px 0',
+        margin: '22px auto 26px auto',
+        padding: '6px 0',
       }}
     >
-      {/* Subtle World Map Dotted Pattern Background */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `radial-gradient(circle, rgba(8, 38, 83, 0.08) 1.2px, transparent 1.2px)`,
-          backgroundSize: '24px 24px',
-          opacity: 0.7,
-          pointerEvents: 'none',
-          zIndex: 0,
-          borderRadius: '16px',
-        }}
-      />
-
       {/* 6 Buyer Categories Grid */}
       <div
         className="buyer-categories-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
           gap: '14px',
           position: 'relative',
           zIndex: 1,
         }}
       >
-        {categories.map((category) => (
+        {(loading ? Array.from({ length: 6 }) : categories).map((category, index) => (
           <BuyerCategoryItem
-            key={category.id}
+            key={category ? category.id : index}
             category={category}
+            loading={loading}
+            index={index}
             onClick={onCategoryClick}
           />
         ))}

@@ -1,12 +1,33 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
-export const BuyerCategoryItem = ({ category, onClick }) => {
+export const BuyerCategoryItem = ({ category, onClick, index = 0, loading = false }) => {
+  if (loading || !category) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, padding: '0 8px' }}>
+        <div
+          className="premium-skeleton-base premium-skeleton-circle"
+          style={{ width: '74px', height: '74px', marginBottom: '10px' }}
+        />
+        <div
+          className="premium-skeleton-base"
+          style={{ width: '70px', height: '12px', borderRadius: '4px' }}
+        />
+      </div>
+    );
+  }
+
   const Icon = category.icon;
 
   return (
-    <div
+    <motion.div
       className="buyer-category-item"
       onClick={() => onClick && onClick(category)}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35, delay: index * 0.05 }}
+      whileHover={{ y: -4 }}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -16,69 +37,67 @@ export const BuyerCategoryItem = ({ category, onClick }) => {
         minWidth: 0,
         padding: '0 8px',
         cursor: 'pointer',
-        transition: 'transform 0.2s ease',
       }}
     >
-      {/* Large Circular Icon Container */}
+      {/* Circular Icon Container with Radiant Orange Theme */}
       <div
         className="buyer-circle-container"
         style={{
-          width: '120px',
-          height: '120px',
+          width: '74px',
+          height: '74px',
           borderRadius: '50%',
           backgroundColor: '#FFFFFF',
-          border: '2px solid #B9C6D7',
-          boxShadow: '0 3px 10px rgba(8, 38, 83, 0.08)',
+          border: '1.5px solid rgba(255, 111, 0, 0.28)',
+          boxShadow: '0 4px 14px rgba(255, 111, 0, 0.1)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#082653',
-          marginBottom: '16px',
+          color: '#FF6F00',
+          marginBottom: '10px',
           transition: 'all 0.22s ease',
           flexShrink: 0,
         }}
       >
-        <Icon size={48} strokeWidth={1.7} color="#082653" />
+        <Icon size={30} strokeWidth={1.8} color="#FF6F00" />
       </div>
 
       {/* Category Title */}
       <h3
         style={{
-          fontSize: '17.5px',
-          fontWeight: '600',
-          color: '#082653',
+          fontSize: '13.5px',
+          fontWeight: '700',
+          color: '#0F172A',
           fontFamily: 'var(--font-body)',
-          marginBottom: '6px',
+          marginBottom: '4px',
+          lineHeight: '1.25',
         }}
       >
         {category.title}
       </h3>
 
-      {/* Short Gold Underline */}
+      {/* Short Radiant Orange Underline */}
       <div
         style={{
-          width: '42px',
-          height: '3px',
-          backgroundColor: '#E8A52A',
-          borderRadius: '2px',
-          margin: '0 auto 10px auto',
+          width: '28px',
+          height: '2px',
+          backgroundColor: '#FF6F00',
+          borderRadius: '1px',
+          marginBottom: '4px',
         }}
       />
 
-      {/* Description (approx 3 lines) */}
+      {/* Category Description */}
       <p
         style={{
-          fontSize: '13px',
-          lineHeight: '1.42',
-          color: '#29364B',
-          textAlign: 'center',
-          whiteSpace: 'pre-line',
+          fontSize: '11px',
+          fontWeight: '400',
+          color: '#64748B',
+          lineHeight: '1.35',
           fontFamily: 'var(--font-body)',
-          maxWidth: '200px',
         }}
       >
         {category.description}
       </p>
-    </div>
+    </motion.div>
   );
 };

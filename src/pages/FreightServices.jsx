@@ -1,6 +1,7 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Header } from '../components/layout/Header';
-import { TopDecoration } from '../components/freight/TopDecoration';
 import { FreightCard } from '../components/freight/FreightCard';
 import { TrustBar } from '../components/freight/TrustBar';
 import { Footer } from '../components/layout/Footer';
@@ -8,6 +9,7 @@ import { TrackModal } from '../components/common/TrackModal';
 import { Plane, Ship, Truck, TrainFront, Globe } from 'lucide-react';
 
 export const FreightServices = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('track');
 
@@ -83,8 +85,8 @@ export const FreightServices = ({ onNavigate }) => {
     <div
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FFFFFF',
         position: 'relative',
@@ -100,25 +102,43 @@ export const FreightServices = ({ onNavigate }) => {
         onNavigate={onNavigate}
       />
 
-      {/* Main Page Canvas with Light Background & Map Watermark */}
+      {/* Main Page Canvas with High-Premium Architectural Background */}
       <main
         style={{
           position: 'relative',
-          paddingTop: '32px',
-          paddingBottom: '20px',
-          background: '#FFFFFF'
+          paddingTop: '46px',
+          paddingBottom: '36px',
+          paddingLeft: 'var(--section-horizontal-padding, 132px)',
+          paddingRight: 'var(--section-horizontal-padding, 132px)',
+          background: 'linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 18%, #FFFDF9 50%, #FFFFFF 82%, #F8FAFC 100%)',
+          backgroundImage: 'radial-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          borderBottom: '1px solid rgba(226, 232, 240, 0.9)',
+          overflow: 'hidden',
         }}
       >
-        {/* Top Left Decorative Shape */}
-        <TopDecoration />
+        {/* Ambient Top Radiant Lighting Aura */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-60px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '820px',
+            height: '340px',
+            background: 'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 140, 0, 0.08), transparent 70%)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
 
-        {/* Subtle World Map Watermark Top Right */}
+        {/* Executive Watermark Globe */}
         <div
           style={{
             position: 'absolute',
             top: '20px',
             right: '20px',
-            color: 'rgba(9, 37, 84, 0.04)',
+            color: 'rgba(234, 88, 12, 0.04)',
             pointerEvents: 'none',
             zIndex: 1
           }}
@@ -126,7 +146,7 @@ export const FreightServices = ({ onNavigate }) => {
           <Globe size={420} strokeWidth={0.75} />
         </div>
 
-        {/* 2. Main Page Titles */}
+        {/* 2. Main Page Titles with High-End Animations */}
         <div
           style={{
             textAlign: 'center',
@@ -136,42 +156,118 @@ export const FreightServices = ({ onNavigate }) => {
             padding: '0 20px'
           }}
         >
-          <h1
+          {/* Animated Eyebrow badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            whileHover={{ scale: 1.03 }}
             style={{
-              fontSize: '52px',
-              fontWeight: '800',
-              color: '#092554',
-              lineHeight: '1.1',
-              letterSpacing: '-0.5px',
-              fontFamily: 'var(--font-body)',
-              marginBottom: '10px'
+              display: 'inline-flex',
+              alignItems: 'center',
+              padding: '6px 18px',
+              borderRadius: '24px',
+              background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 100%)',
+              border: '1.5px solid #FED7AA',
+              marginBottom: '10px',
+              boxShadow: '0 4px 14px rgba(234, 88, 12, 0.08)',
+              cursor: 'default',
             }}
           >
-            Your Global Freight, Our Priority
-          </h1>
+            <span
+              style={{
+                fontSize: '11px',
+                fontWeight: '800',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: '#EA580C',
+                fontFamily: 'var(--font-body)'
+              }}
+            >
+              Multi-Modal Logistics &amp; Freight Forwarding
+            </span>
+          </motion.div>
 
-          {/* Subtitle with Gold Horizontal Lines */}
-          <div
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.08, ease: 'easeOut' }}
+            style={{
+              fontSize: 'clamp(24px, 2.3vw, 34px)',
+              fontWeight: '900',
+              color: '#1E293B',
+              lineHeight: '1.18',
+              letterSpacing: '-0.3px',
+              fontFamily: 'var(--font-heading)',
+              marginBottom: '8px'
+            }}
+          >
+            Your Global Freight,{' '}
+            <span
+              style={{
+                background: 'linear-gradient(90deg, #FF7A00 0%, #FFA800 55%, #FF8C00 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}
+            >
+              Our Priority
+            </span>
+          </motion.h1>
+
+          {/* Subtitle with High-End Glowing Dividers */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '16px'
+              gap: '14px'
             }}
           >
-            <div style={{ width: '45px', height: '1.5px', backgroundColor: '#F5AD24' }} />
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              style={{
+                width: '42px',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent 0%, #FF8C00 70%, #FFD000 100%)',
+                borderRadius: '1px',
+                transformOrigin: 'right center',
+              }}
+            />
             <span
               style={{
-                fontSize: '28px',
-                fontWeight: '400',
-                color: '#4A5568',
-                fontFamily: 'var(--font-body)'
+                fontSize: '15px',
+                fontWeight: '500',
+                color: '#475569',
+                fontFamily: 'var(--font-body)',
+                letterSpacing: '-0.1px'
               }}
             >
               Fast. Reliable. Worldwide.
             </span>
-            <div style={{ width: '45px', height: '1.5px', backgroundColor: '#F5AD24' }} />
-          </div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              style={{
+                width: '42px',
+                height: '2px',
+                background: 'linear-gradient(90deg, #FFD000 0%, #FF8C00 30%, transparent 100%)',
+                borderRadius: '1px',
+                transformOrigin: 'left center',
+              }}
+            />
+          </motion.div>
         </div>
 
         {/* 3. 4-Column Freight Cards Grid */}
@@ -180,28 +276,32 @@ export const FreightServices = ({ onNavigate }) => {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '16px',
-            margin: '0 28px',
+            gap: '18px',
+            margin: '0',
             position: 'relative',
             zIndex: 2
           }}
         >
-          {cardsData.map((card) => (
+          {cardsData.map((card, idx) => (
             <FreightCard
               key={card.id}
+              loading={isLoading}
               title={card.title}
               subtitle={card.subtitle}
               icon={card.icon}
               bullets={card.bullets}
               image={card.image}
               buttonText={card.buttonText}
+              delay={idx * 0.1}
               onExplore={() => openModal('quote')}
             />
           ))}
         </div>
 
         {/* 4. Horizontal Trust Section */}
-        <TrustBar />
+        <div style={{ padding: '0' }}>
+          <TrustBar style={{ margin: '30px 0 0 0' }} />
+        </div>
       </main>
 
       {/* 5. Common Global Footer */}

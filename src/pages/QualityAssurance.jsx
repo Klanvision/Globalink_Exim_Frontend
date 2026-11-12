@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { QualityProcess } from '../components/quality/QualityProcess';
@@ -13,6 +14,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 
 export const QualityAssurance = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -26,8 +28,8 @@ export const QualityAssurance = ({ onNavigate }) => {
       className="quality-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAFBFD',
         position: 'relative',
@@ -49,6 +51,8 @@ export const QualityAssurance = ({ onNavigate }) => {
           position: 'relative',
           paddingTop: '40px',
           paddingBottom: '20px',
+          paddingLeft: 'var(--section-horizontal-padding, 132px)',
+          paddingRight: 'var(--section-horizontal-padding, 132px)',
           background: '#FAFBFD',
         }}
       >
@@ -71,21 +75,21 @@ export const QualityAssurance = ({ onNavigate }) => {
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 36px',
+            padding: '0',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '20px',
           }}
         >
-          {/* Left Hero Content Area */}
-          <div style={{ flex: '1 1 62%', maxWidth: '720px' }}>
+          {/* Hero Content Area */}
+          <div style={{ width: '100%' }}>
             {/* Elegant Georgia Serif Heading */}
             <h1
               style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-body)',
                 fontSize: '44px',
                 fontWeight: '700',
-                color: '#082653',
+                color: '#0F172A',
                 lineHeight: '1.08',
                 letterSpacing: '-0.5px',
                 marginBottom: '8px',
@@ -111,6 +115,7 @@ export const QualityAssurance = ({ onNavigate }) => {
             {/* 5 Quality Process Items Row */}
             <QualityProcess
               steps={qualityProcessSteps}
+              loading={isLoading}
               onItemClick={() => openModal('quote')}
             />
 
@@ -121,7 +126,7 @@ export const QualityAssurance = ({ onNavigate }) => {
               style={{
                 width: '320px',
                 height: '46px',
-                backgroundColor: '#082653',
+                background: 'linear-gradient(135deg, #FF6F00 0%, #FF8C00 45%, #E65100 100%)',
                 borderRadius: '7px',
                 color: '#FFFFFF',
                 fontSize: '15px',
@@ -130,7 +135,7 @@ export const QualityAssurance = ({ onNavigate }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0 20px',
-                boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+                boxShadow: '0 4px 14px rgba(230, 81, 0, 0.28)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 border: 'none',
@@ -139,31 +144,6 @@ export const QualityAssurance = ({ onNavigate }) => {
               <span>Our Quality Process</span>
               <ArrowRight size={18} strokeWidth={2.5} color="#E8A52A" />
             </button>
-          </div>
-
-          {/* Right Hero Image Container */}
-          <div
-            className="quality-hero-image-container"
-            style={{
-              flex: '0 0 38%',
-              maxWidth: '430px',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src="/quality-assurance-hero.jpg"
-              alt="Quality Assurance & Scientific Inspection"
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
-              }}
-            />
           </div>
         </div>
 

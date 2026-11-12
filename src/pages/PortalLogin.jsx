@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useEffect, useState } from 'react';
 import { User, Briefcase, ArrowUpRight, ArrowDownLeft, Truck, Settings, Building, Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 
@@ -53,7 +54,8 @@ const portalConfig = {
   }
 };
 
-export const PortalLogin = ({ type = 'client-access' }) => {
+export const PortalLogin = ({ type = 'client-access', onNavigate }) => {
+  const { isLoading } = useLoading();
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -78,6 +80,30 @@ export const PortalLogin = ({ type = 'client-access' }) => {
       overflow: 'hidden',
       padding: '20px'
     }}>
+      {/* Back to Home Button */}
+      <button
+        onClick={() => onNavigate && onNavigate('home')}
+        style={{
+          position: 'absolute',
+          top: '24px',
+          left: '24px',
+          zIndex: 20,
+          background: 'rgba(255, 255, 255, 0.9)',
+          border: '1px solid #E2E8F0',
+          padding: '8px 16px',
+          borderRadius: '999px',
+          fontSize: '13px',
+          fontWeight: '600',
+          color: '#334155',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+        }}
+      >
+        ← Back to Global Link
+      </button>
       {/* Dynamic Background Blob */}
       <div style={{
         position: 'absolute',

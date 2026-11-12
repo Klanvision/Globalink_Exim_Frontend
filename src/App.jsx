@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Home } from './pages/Home';
 import { FreightServices } from './pages/FreightServices';
 import { FeaturedProducts } from './pages/FeaturedProducts';
@@ -18,8 +19,13 @@ import { TrustedBusinesses } from './pages/TrustedBusinesses';
 import { PortalLogin } from './pages/PortalLogin';
 
 import { AirplaneScrollbar } from './components/common/AirplaneScrollbar';
+import { LoadingProvider, useLoading } from './context/LoadingContext';
+import {
+  TopProgressBar,
+  LiveTelemetryBadge,
+} from './components/common/Skeleton';
 
-export default function App() {
+function AppContent() {
   const [currentRoute, setCurrentRoute] = useState('home');
 
   const handleNavigate = (route) => {
@@ -108,9 +114,28 @@ export default function App() {
   return (
     <>
       <AirplaneScrollbar />
-      {renderContent()}
+      <TopProgressBar />
+      <LiveTelemetryBadge />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentRoute}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {renderContent()}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
 
-
+export default function App() {
+  return (
+    <LoadingProvider>
+      <AppContent />
+    </LoadingProvider>
+  );
+}

@@ -1,24 +1,28 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const ProcessStatisticsRow = ({ statistics }) => {
   return (
     <div
       className="process-stats-row"
       style={{
+        width: '100%',
         backgroundColor: '#FFFFFF',
-        borderRadius: '14px',
-        border: '1px solid #DDE3EA',
-        boxShadow: '0 2px 10px rgba(8, 38, 83, 0.04)',
-        margin: '24px 28px 0 28px',
-        padding: '20px 14px',
+        borderRadius: '16px',
+        border: '1px solid #E2E8F0',
+        boxShadow: '0 4px 16px rgba(15, 23, 42, 0.05)',
+        margin: '22px 0 0 0',
+        padding: '18px 14px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="process-stats-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
           alignItems: 'center',
+          gap: '14px',
         }}
       >
         {statistics.map((stat, index) => {
@@ -26,58 +30,62 @@ export const ProcessStatisticsRow = ({ statistics }) => {
           const isLast = index === statistics.length - 1;
 
           return (
-            <div
+            <motion.div
               key={stat.id}
+              whileHover={{ y: -2 }}
               className="process-stat-item"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
                 gap: '12px',
                 padding: '4px 10px',
-                borderRight: isLast ? 'none' : '1px solid #DDE3EA',
+                borderRight: isLast ? 'none' : '1px solid #F1F5F9',
               }}
             >
-              {/* Navy Icon */}
+              {/* Radiant Orange Icon */}
               <div
                 style={{
-                  color: '#082653',
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: 'rgba(255, 111, 0, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FF6F00',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={30} strokeWidth={1.8} color="#082653" />
+                <Icon size={19} strokeWidth={2.2} color="#FF6F00" />
               </div>
 
               {/* Stat Value & Label */}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span
                   style={{
-                    fontSize: '22px',
-                    fontWeight: '700',
-                    color: '#082653',
+                    fontSize: '20px',
+                    fontWeight: '800',
+                    color: '#0F172A',
                     lineHeight: '1.1',
-                    letterSpacing: '-0.3px',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.value}
                 </span>
                 <span
                   style={{
-                    fontSize: '12.5px',
-                    fontWeight: '400',
-                    color: '#40516D',
-                    lineHeight: '1.2',
+                    fontSize: '11px',
+                    fontWeight: '500',
+                    color: '#64748B',
+                    lineHeight: '1.25',
                     marginTop: '2px',
-                    whiteSpace: 'nowrap',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.label}
                 </span>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

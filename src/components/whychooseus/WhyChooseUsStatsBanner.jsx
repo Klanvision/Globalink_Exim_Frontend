@@ -1,26 +1,28 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const WhyChooseUsStatsBanner = ({ stats }) => {
   return (
     <div
       className="why-choose-us-stats-banner"
       style={{
-        backgroundColor: 'rgba(4, 24, 58, 0.75)',
-        border: '1px solid rgba(100, 160, 220, 0.40)',
-        borderRadius: '18px',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.28)',
-        padding: '16px 10px',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF5EB 100%)',
+        border: '1px solid rgba(255, 111, 0, 0.22)',
+        borderRadius: '16px',
+        boxShadow: '0 6px 24px rgba(255, 111, 0, 0.08)',
+        padding: '18px 12px',
         width: '100%',
         margin: '10px auto 0 auto',
-        backdropFilter: 'blur(8px)',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="why-choose-us-stats-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
           alignItems: 'center',
+          gap: '14px',
         }}
       >
         {stats.map((stat, index) => {
@@ -28,60 +30,63 @@ export const WhyChooseUsStatsBanner = ({ stats }) => {
           const isLast = index === stats.length - 1;
 
           return (
-            <div
+            <motion.div
               key={stat.id}
+              whileHover={{ y: -2 }}
               className="why-choose-us-stat-item"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
+                gap: '12px',
                 padding: '4px 8px',
-                borderRight: isLast ? 'none' : '1px solid rgba(232, 165, 42, 0.30)',
+                borderRight: isLast ? 'none' : '1px solid rgba(226, 232, 240, 0.8)',
               }}
             >
-              {/* Gold Icon */}
+              {/* Radiant Orange Icon */}
               <div
                 style={{
-                  color: '#F5B73A',
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  boxShadow: '0 3px 10px rgba(255, 111, 0, 0.22)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FFFFFF',
                   flexShrink: 0,
                 }}
               >
-                <Icon size={32} strokeWidth={1.8} color="#F5B73A" />
+                <Icon size={20} strokeWidth={2.2} color="#FFFFFF" />
               </div>
 
               {/* Number and Label Stack */}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span
                   style={{
-                    fontSize: '21px',
-                    fontWeight: '700',
-                    color: '#F5B73A',
+                    fontSize: '20px',
+                    fontWeight: '800',
+                    color: '#0F172A',
                     lineHeight: '1.1',
-                    letterSpacing: '-0.2px',
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: 'var(--font-heading)',
                   }}
                 >
                   {stat.value}
                 </span>
                 <span
                   style={{
-                    fontSize: '12px',
+                    fontSize: '11px',
                     fontWeight: '500',
-                    color: '#FFFFFF',
-                    lineHeight: '1.2',
-                    fontFamily: 'var(--font-body)',
+                    color: '#64748B',
+                    lineHeight: '1.25',
                     marginTop: '2px',
-                    whiteSpace: 'nowrap',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   {stat.label}
                 </span>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

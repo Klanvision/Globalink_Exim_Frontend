@@ -1,16 +1,16 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { CustomsServiceGrid } from '../components/customs/CustomsServiceGrid';
-import { CustomsLogisticsSection } from '../components/customs/CustomsLogisticsSection';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
 import {
   customsComplianceServices,
-  customsComplianceStats,
 } from '../data/customsComplianceData';
 import { ArrowRight } from 'lucide-react';
 
 export const CustomsCompliance = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -24,8 +24,8 @@ export const CustomsCompliance = ({ onNavigate }) => {
       className="customs-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAFBFD',
         position: 'relative',
@@ -49,7 +49,7 @@ export const CustomsCompliance = ({ onNavigate }) => {
           id="customs-compliance-section"
           style={{
             position: 'relative',
-            padding: '36px 28px 24px 28px',
+            padding: '36px var(--section-horizontal-padding, 132px) 24px var(--section-horizontal-padding, 132px)',
             background: '#FAFBFD',
           }}
         >
@@ -96,10 +96,10 @@ export const CustomsCompliance = ({ onNavigate }) => {
           {/* Main Serif Heading */}
           <h1
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '34px',
               fontWeight: '700',
-              color: '#082653',
+              color: '#0F172A',
               lineHeight: '1.1',
               letterSpacing: '-0.4px',
               textAlign: 'center',
@@ -137,6 +137,7 @@ export const CustomsCompliance = ({ onNavigate }) => {
           {/* 6 Service Categories Grid */}
           <CustomsServiceGrid
             services={customsComplianceServices}
+            loading={isLoading}
             onServiceClick={() => openModal('quote')}
           />
 
@@ -148,7 +149,7 @@ export const CustomsCompliance = ({ onNavigate }) => {
               style={{
                 width: '220px',
                 height: '44px',
-                backgroundColor: '#082653',
+                background: 'linear-gradient(135deg, #FF6F00 0%, #FF8C00 45%, #E65100 100%)',
                 borderRadius: '10px',
                 color: '#FFFFFF',
                 fontSize: '14.5px',
@@ -157,7 +158,7 @@ export const CustomsCompliance = ({ onNavigate }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0 20px',
-                boxShadow: '0 3px 12px rgba(8, 38, 83, 0.20)',
+                boxShadow: '0 3px 12px rgba(230, 81, 0, 0.28)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 border: 'none',
@@ -167,9 +168,6 @@ export const CustomsCompliance = ({ onNavigate }) => {
               <ArrowRight size={18} strokeWidth={2.4} color="#F5B73A" />
             </button>
           </div>
-
-          {/* Bottom Logistics Visual & Statistics Section */}
-          <CustomsLogisticsSection stats={customsComplianceStats} />
         </section>
       </main>
 

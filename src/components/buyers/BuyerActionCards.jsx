@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const BuyerActionCards = ({ actions, onActionClick }) => {
   return (
@@ -9,44 +10,49 @@ export const BuyerActionCards = ({ actions, onActionClick }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '24px',
+        gap: '18px',
         width: '100%',
-        margin: '10px auto 30px auto',
+        margin: '10px auto 24px auto',
         flexWrap: 'wrap',
       }}
     >
-      {actions.map((action) => {
+      {actions.map((action, index) => {
         const Icon = action.icon;
 
         return (
-          <div
+          <motion.div
             key={action.id}
             onClick={() => onActionClick && onActionClick(action.action)}
             className="buyer-action-card"
+            whileHover={{ y: -4, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
             style={{
-              width: '450px',
+              width: '420px',
               maxWidth: '100%',
-              height: '84px',
-              backgroundColor: '#E8A52A',
-              borderRadius: '14px',
-              boxShadow: '0 5px 14px rgba(0, 0, 0, 0.12)',
+              minHeight: '74px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1.5px solid rgba(255, 111, 0, 0.25)',
+              boxShadow: '0 6px 20px rgba(255, 111, 0, 0.08)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '0 24px',
+              padding: '0 20px',
               cursor: 'pointer',
-              transition: 'all 0.22s ease',
+              boxSizing: 'border-box',
             }}
           >
-            {/* Left Content (Navy Icon Circle + Text) */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              {/* Navy Circular Icon Container */}
+            {/* Left Content (Orange Icon Circle + Text) */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+              {/* Radiant Orange Circular Icon Container */}
               <div
                 style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '50%',
-                  backgroundColor: '#082653',
+                  width: '42px',
+                  height: '42px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  boxShadow: '0 4px 12px rgba(255, 111, 0, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -54,29 +60,28 @@ export const BuyerActionCards = ({ actions, onActionClick }) => {
                   flexShrink: 0,
                 }}
               >
-                <Icon size={22} strokeWidth={2.2} color="#FFFFFF" />
+                <Icon size={20} strokeWidth={2.2} color="#FFFFFF" />
               </div>
 
               {/* Text Area */}
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <h4
+                <span
                   style={{
-                    fontSize: '18px',
+                    fontSize: '14px',
                     fontWeight: '700',
-                    color: '#082653',
-                    lineHeight: '1.2',
+                    color: '#0F172A',
+                    lineHeight: '1.25',
                     fontFamily: 'var(--font-body)',
-                    marginBottom: '2px',
                   }}
                 >
                   {action.title}
-                </h4>
+                </span>
                 <span
                   style={{
-                    fontSize: '13.5px',
+                    fontSize: '11.5px',
                     fontWeight: '500',
-                    color: '#082653',
-                    opacity: 0.9,
+                    color: '#64748B',
+                    lineHeight: '1.25',
                     fontFamily: 'var(--font-body)',
                   }}
                 >
@@ -85,11 +90,23 @@ export const BuyerActionCards = ({ actions, onActionClick }) => {
               </div>
             </div>
 
-            {/* Right Dark Navy Arrow */}
-            <div style={{ color: '#082653', display: 'flex', alignItems: 'center' }}>
-              <ArrowRight size={24} strokeWidth={2.6} color="#082653" />
+            {/* Right Arrow Icon */}
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FF6F00',
+                flexShrink: 0,
+              }}
+            >
+              <ArrowRight size={16} strokeWidth={2.4} color="#FF6F00" />
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>

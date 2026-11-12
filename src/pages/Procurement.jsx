@@ -1,15 +1,16 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { ProcessFlow } from '../components/procurement/ProcessFlow';
 import { BenefitSection } from '../components/procurement/BenefitSection';
 import { ProcurementMessage } from '../components/procurement/ProcurementMessage';
-import { ProcurementStats } from '../components/procurement/ProcurementStats';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
-import { procurementSteps, procurementBenefits, procurementStats } from '../data/procurementData';
+import { procurementSteps, procurementBenefits } from '../data/procurementData';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export const Procurement = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -23,8 +24,8 @@ export const Procurement = ({ onNavigate }) => {
       className="procurement-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FFFFFF',
         position: 'relative',
@@ -67,7 +68,7 @@ export const Procurement = ({ onNavigate }) => {
           style={{
             position: 'relative',
             zIndex: 2,
-            padding: '38px 24px 0 24px',
+            padding: '38px var(--section-horizontal-padding, 132px) 0 var(--section-horizontal-padding, 132px)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -78,7 +79,7 @@ export const Procurement = ({ onNavigate }) => {
             style={{
               fontSize: '58px',
               fontWeight: '800',
-              color: '#082653',
+              color: '#0F172A',
               textAlign: 'center',
               lineHeight: '1.05',
               letterSpacing: '-1px',
@@ -95,7 +96,7 @@ export const Procurement = ({ onNavigate }) => {
               fontSize: '28px',
               fontWeight: '500',
               textAlign: 'center',
-              color: '#082653',
+              color: '#0F172A',
               fontFamily: 'var(--font-body)',
               marginBottom: '10px',
               letterSpacing: '-0.2px',
@@ -123,8 +124,8 @@ export const Procurement = ({ onNavigate }) => {
           </div>
 
           {/* 3. 9-Step Horizontal Procurement Process Flow */}
-          <div style={{ width: '100%', maxWidth: '1160px', marginBottom: '28px' }}>
-            <ProcessFlow steps={procurementSteps} />
+          <div style={{ width: '100%', maxWidth: '100%', marginBottom: '28px' }}>
+            <ProcessFlow steps={procurementSteps} loading={isLoading} />
           </div>
 
           {/* 4. Start Procurement CTA Button */}
@@ -135,7 +136,7 @@ export const Procurement = ({ onNavigate }) => {
               width: '325px',
               height: '50px',
               backgroundColor: '#F2A922',
-              color: '#082653',
+              color: '#0F172A',
               borderRadius: '7px',
               fontSize: '20px',
               fontWeight: '700',
@@ -150,18 +151,15 @@ export const Procurement = ({ onNavigate }) => {
             }}
           >
             <span>Start Procurement</span>
-            <ArrowRight size={22} strokeWidth={2.5} color="#082653" />
+            <ArrowRight size={22} strokeWidth={2.5} color="#0F172A" />
           </button>
 
           {/* 5. Why Choose Our Procurement Solutions Section (6 Cards) */}
-          <BenefitSection benefits={procurementBenefits} />
+          <BenefitSection benefits={procurementBenefits} loading={isLoading} />
 
           {/* 6. Procurement Message Bar */}
           <ProcurementMessage />
         </div>
-
-        {/* 7. Bottom Dark Navy Statistics Banner */}
-        <ProcurementStats stats={procurementStats} />
       </main>
 
       {/* 3. Shared Footer */}

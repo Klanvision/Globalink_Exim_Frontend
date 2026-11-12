@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Logo } from './Logo';
-import { Search, ChevronDown, Menu, X, ArrowRight, ExternalLink, Globe, User, LogIn, Lock, MapPin, Briefcase, ArrowUpRight, ArrowDownLeft, Truck, Settings, Building, Ship, Package, Plane, Calendar, Shield, Route, ChevronRight, FileText, Handshake, Warehouse, Cpu, Layers, Snowflake, ShoppingBag, Network, HardHat, Leaf, Shirt, Store, FlaskConical, Car, Laptop, HeartPulse, Apple, Users, Megaphone, BarChart2, Star, Award, GraduationCap, TrendingUp, PieChart, GitBranch, Box, Coffee, Factory, Sparkles, Headphones } from 'lucide-react';
+import { Search, ChevronDown, Menu, X, ArrowRight, ExternalLink, Globe, User, LogIn, Lock, MapPin, Briefcase, ArrowUpRight, ArrowDownLeft, Truck, Settings, Building, Ship, Package, Plane, Calendar, Shield, Route, ChevronRight, FileText, Handshake, Warehouse, Cpu, Layers, Snowflake, ShoppingBag, Network, HardHat, Leaf, Shirt, Store, FlaskConical, Car, Laptop, HeartPulse, Apple, Users, Megaphone, BarChart2, Star, Award, GraduationCap, TrendingUp, PieChart, GitBranch, Box, Coffee, Factory, Headphones } from 'lucide-react';
 import kplLogo from '../../../Images/KPL_Logo.png';
 
 const LuxuryLoginIcon = ({ size = 26, color = 'currentColor' }) => (
@@ -389,7 +389,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '0 32px',
+            padding: '0 var(--section-horizontal-padding, 132px)',
             boxSizing: 'border-box',
             position: 'relative',
           }}
@@ -400,7 +400,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
               display: 'flex',
               alignItems: 'center',
               gap: '24px',
-              marginLeft: '100px',
+              marginLeft: '0',
             }}
             className="desktop-nav"
           >
@@ -1118,7 +1118,7 @@ export const Header = ({ onTrackClick, onQuoteClick, currentRoute = 'home', onNa
 
                             <button onClick={(e) => { e.stopPropagation(); handleNavClick('products'); }} className="mega-menu-item">
                               <div className="mega-menu-icon-wrapper lcl-icon">
-                                <Sparkles size={18} />
+                                <Award size={18} />
                               </div>
                               <div className="mega-menu-text">
                                 <div className="mega-menu-title">Heritage Handicrafts</div>

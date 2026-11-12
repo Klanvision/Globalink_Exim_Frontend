@@ -1,3 +1,4 @@
+import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { AdvantageGrid } from '../components/whychooseus/AdvantageGrid';
@@ -10,6 +11,7 @@ import {
 } from '../data/whyChooseUsData';
 
 export const WhyBusinessesChooseUs = ({ onNavigate }) => {
+  const { isLoading } = useLoading();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('quote');
 
@@ -23,8 +25,8 @@ export const WhyBusinessesChooseUs = ({ onNavigate }) => {
       className="why-choose-us-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: 'linear-gradient(180deg, #020F2D 0%, #03183B 50%, #061B43 100%)',
         position: 'relative',
@@ -48,7 +50,7 @@ export const WhyBusinessesChooseUs = ({ onNavigate }) => {
           id="why-choose-us-section"
           style={{
             position: 'relative',
-            padding: '38px 28px 28px 28px',
+            padding: '38px var(--section-horizontal-padding, 132px) 28px var(--section-horizontal-padding, 132px)',
             background: 'linear-gradient(180deg, #020F2D 0%, #03183B 50%, #061B43 100%)',
           }}
         >
@@ -95,7 +97,7 @@ export const WhyBusinessesChooseUs = ({ onNavigate }) => {
           {/* Main Serif Heading */}
           <h1
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-body)',
               fontSize: '36px',
               fontWeight: '700',
               color: '#FFFFFF',
@@ -125,6 +127,7 @@ export const WhyBusinessesChooseUs = ({ onNavigate }) => {
           {/* 6 Advantages Grid */}
           <AdvantageGrid
             advantages={whyChooseUsAdvantages}
+            loading={isLoading}
             onAdvantageClick={() => openModal('quote')}
           />
 

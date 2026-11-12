@@ -1,24 +1,29 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const ProcessTrustBanner = ({ items }) => {
   return (
     <section
       className="process-trust-banner"
       style={{
-        backgroundColor: '#082F62',
-        borderRadius: '22px',
-        border: '2px solid #E8A52A',
-        boxShadow: '0 7px 16px rgba(8, 47, 98, 0.25)',
-        margin: '28px 28px 0 28px',
-        padding: '24px 18px',
+        width: '100%',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF5EB 100%)',
+        borderRadius: '16px',
+        border: '1px solid rgba(255, 111, 0, 0.22)',
+        borderTop: '3px solid #FF6F00',
+        boxShadow: '0 6px 24px rgba(255, 111, 0, 0.08)',
+        margin: '26px 0 0 0',
+        padding: '22px 18px',
+        boxSizing: 'border-box',
       }}
     >
       <div
         className="process-trust-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
           alignItems: 'flex-start',
+          gap: '16px',
         }}
       >
         {items.map((item, index) => {
@@ -26,40 +31,47 @@ export const ProcessTrustBanner = ({ items }) => {
           const isLast = index === items.length - 1;
 
           return (
-            <div
+            <motion.div
               key={item.id}
               className="process-trust-item"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-start',
-                padding: '0 16px',
-                borderRight: isLast ? 'none' : '1px solid rgba(255, 255, 255, 0.25)',
+                padding: '4px 12px',
+                borderRight: isLast ? 'none' : '1px solid rgba(226, 232, 240, 0.8)',
                 height: '100%',
-                transition: 'transform 0.2s ease',
               }}
             >
-              {/* Large Gold Icon */}
+              {/* Radiant Orange Circular Icon */}
               <div
                 style={{
-                  color: '#F5B73A',
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #FF6F00 0%, #FFA800 100%)',
+                  boxShadow: '0 3px 10px rgba(255, 111, 0, 0.22)',
                   marginBottom: '10px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  color: '#FFFFFF',
+                  flexShrink: 0,
                 }}
               >
-                <Icon size={36} strokeWidth={2} color="#F5B73A" />
+                <Icon size={20} strokeWidth={2.2} color="#FFFFFF" />
               </div>
 
               {/* Title */}
               <h4
                 style={{
-                  fontSize: '15.5px',
+                  fontSize: '13.5px',
                   fontWeight: '700',
-                  color: '#FFFFFF',
+                  color: '#0F172A',
                   lineHeight: '1.25',
-                  marginBottom: '6px',
+                  marginBottom: '4px',
                   fontFamily: 'var(--font-body)',
                 }}
               >
@@ -69,16 +81,16 @@ export const ProcessTrustBanner = ({ items }) => {
               {/* Description */}
               <p
                 style={{
-                  fontSize: '12.5px',
-                  lineHeight: '1.45',
-                  color: 'rgba(255, 255, 255, 0.92)',
-                  whiteSpace: 'pre-line',
+                  fontSize: '11.5px',
+                  fontWeight: '400',
+                  color: '#64748B',
+                  lineHeight: '1.35',
                   fontFamily: 'var(--font-body)',
                 }}
               >
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </div>

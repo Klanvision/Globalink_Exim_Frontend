@@ -7,17 +7,18 @@ export const ServiceGrid = ({ services, onCardClick }) => {
       className="global-services-grid"
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        gap: '14px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+        gap: '16px',
         width: '100%',
-        marginTop: '24px',
-        marginBottom: '24px',
+        marginTop: '22px',
+        marginBottom: '22px',
       }}
     >
-      {services.map((service) => (
+      {services.map((service, index) => (
         <ServiceCard
           key={service.id}
           service={service}
+          index={index}
           onClick={() => onCardClick && onCardClick(service)}
         />
       ))}

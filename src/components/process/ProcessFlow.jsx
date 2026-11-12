@@ -2,7 +2,7 @@ import React from 'react';
 import { ProcessStep } from './ProcessStep';
 import { ArrowRight } from 'lucide-react';
 
-export const ProcessFlow = ({ steps, onStepClick }) => {
+export const ProcessFlow = ({ steps, onStepClick, loading = false }) => {
   return (
     <div
       className="process-flow-container"
@@ -11,22 +11,25 @@ export const ProcessFlow = ({ steps, onStepClick }) => {
         alignItems: 'flex-start',
         justifyContent: 'center',
         width: '100%',
-        marginTop: '28px',
-        marginBottom: '32px',
-        gap: '6px',
+        marginTop: '22px',
+        marginBottom: '26px',
+        gap: '8px',
+        flexWrap: 'wrap',
       }}
     >
-      {steps.map((step, index) => {
-        const isLast = index === steps.length - 1;
+      {(loading ? Array.from({ length: 6 }) : steps).map((step, index) => {
+        const isLast = index === (loading ? 5 : steps.length - 1);
 
         return (
-          <React.Fragment key={step.id}>
+          <React.Fragment key={step ? step.id : index}>
             <ProcessStep
               step={step}
+              loading={loading}
+              index={index}
               onClick={() => onStepClick && onStepClick(step)}
             />
 
-            {/* Gold Arrow between Steps */}
+            {/* Radiant Orange Arrow between Steps */}
             {!isLast && (
               <div
                 className="process-step-arrow"
@@ -34,12 +37,12 @@ export const ProcessFlow = ({ steps, onStepClick }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#E8A52A',
-                  paddingTop: '32px',
+                  color: '#FF6F00',
+                  paddingTop: '26px',
                   flexShrink: 0,
                 }}
               >
-                <ArrowRight size={26} strokeWidth={2.4} color="#E8A52A" />
+                <ArrowRight size={20} strokeWidth={2.4} color="#FF6F00" />
               </div>
             )}
           </React.Fragment>

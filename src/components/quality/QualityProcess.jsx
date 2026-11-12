@@ -1,24 +1,27 @@
 import React from 'react';
 import { QualityProcessItem } from './QualityProcessItem';
 
-export const QualityProcess = ({ steps, onItemClick }) => {
+export const QualityProcess = ({ steps, onItemClick, loading = false }) => {
   return (
     <div
       className="quality-process-grid"
       style={{
         display: 'flex',
         alignItems: 'flex-start',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         width: '100%',
-        marginTop: '28px',
-        marginBottom: '32px',
-        gap: '12px',
+        marginTop: '22px',
+        marginBottom: '26px',
+        gap: '24px',
+        flexWrap: 'wrap',
       }}
     >
-      {steps.map((step) => (
+      {(loading ? Array.from({ length: 5 }) : steps).map((step, index) => (
         <QualityProcessItem
-          key={step.id}
+          key={step ? step.id : index}
           step={step}
+          loading={loading}
+          index={index}
           onClick={() => onItemClick && onItemClick(step)}
         />
       ))}
