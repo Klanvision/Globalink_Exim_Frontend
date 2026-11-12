@@ -2,12 +2,11 @@ import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Header } from '../components/layout/Header';
-import { TopDecoration } from '../components/freight/TopDecoration';
 import { FreightCard } from '../components/freight/FreightCard';
 import { TrustBar } from '../components/freight/TrustBar';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
-import { Plane, Ship, Truck, TrainFront, Globe, Sparkles } from 'lucide-react';
+import { Plane, Ship, Truck, TrainFront, Globe } from 'lucide-react';
 
 export const FreightServices = ({ onNavigate }) => {
   const { isLoading } = useLoading();
@@ -86,8 +85,8 @@ export const FreightServices = ({ onNavigate }) => {
     <div
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FFFFFF',
         position: 'relative',
@@ -103,25 +102,43 @@ export const FreightServices = ({ onNavigate }) => {
         onNavigate={onNavigate}
       />
 
-      {/* Main Page Canvas with Light Background & Map Watermark */}
+      {/* Main Page Canvas with High-Premium Architectural Background */}
       <main
         style={{
           position: 'relative',
-          paddingTop: '42px',
-          paddingBottom: '30px',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(255, 111, 0, 0.07) 0%, #FFFFFF 65%)'
+          paddingTop: '46px',
+          paddingBottom: '36px',
+          paddingLeft: 'var(--section-horizontal-padding, 132px)',
+          paddingRight: 'var(--section-horizontal-padding, 132px)',
+          background: 'linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 18%, #FFFDF9 50%, #FFFFFF 82%, #F8FAFC 100%)',
+          backgroundImage: 'radial-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          borderBottom: '1px solid rgba(226, 232, 240, 0.9)',
+          overflow: 'hidden',
         }}
       >
-        {/* Top Left Decorative Shape */}
-        <TopDecoration />
+        {/* Ambient Top Radiant Lighting Aura */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-60px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '820px',
+            height: '340px',
+            background: 'radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 140, 0, 0.08), transparent 70%)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
 
-        {/* Subtle World Map Watermark Top Right - Warm Orange */}
+        {/* Executive Watermark Globe */}
         <div
           style={{
             position: 'absolute',
             top: '20px',
             right: '20px',
-            color: 'rgba(255, 111, 0, 0.05)',
+            color: 'rgba(234, 88, 12, 0.04)',
             pointerEvents: 'none',
             zIndex: 1
           }}
@@ -135,38 +152,36 @@ export const FreightServices = ({ onNavigate }) => {
             textAlign: 'center',
             position: 'relative',
             zIndex: 2,
-            marginBottom: '30px',
+            marginBottom: '32px',
             padding: '0 20px'
           }}
         >
-          {/* Animated Eyebrow badge - White & Orange */}
+          {/* Animated Eyebrow badge */}
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            whileHover={{ scale: 1.04 }}
+            whileHover={{ scale: 1.03 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '7px',
-              padding: '6px 16px',
+              padding: '6px 18px',
               borderRadius: '24px',
-              background: '#FFFFFF',
-              border: '1.5px solid rgba(255, 111, 0, 0.4)',
+              background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 100%)',
+              border: '1.5px solid #FED7AA',
               marginBottom: '10px',
-              boxShadow: '0 4px 12px rgba(255, 111, 0, 0.12)',
+              boxShadow: '0 4px 14px rgba(234, 88, 12, 0.08)',
               cursor: 'default',
             }}
           >
-            <Sparkles size={13} color="#FF6F00" />
             <span
               style={{
-                fontSize: '10.5px',
-                fontWeight: '700',
-                letterSpacing: '0.07em',
+                fontSize: '11px',
+                fontWeight: '800',
+                letterSpacing: '0.06em',
                 textTransform: 'uppercase',
-                color: '#FF6F00',
+                color: '#EA580C',
                 fontFamily: 'var(--font-body)'
               }}
             >
@@ -182,7 +197,7 @@ export const FreightServices = ({ onNavigate }) => {
             style={{
               fontSize: 'clamp(24px, 2.3vw, 34px)',
               fontWeight: '900',
-              color: '#092554',
+              color: '#1E293B',
               lineHeight: '1.18',
               letterSpacing: '-0.3px',
               fontFamily: 'var(--font-heading)',
@@ -192,7 +207,7 @@ export const FreightServices = ({ onNavigate }) => {
             Your Global Freight,{' '}
             <span
               style={{
-                background: 'linear-gradient(90deg, #FF6F00 0%, #FFA800 60%, #FFB700 100%)',
+                background: 'linear-gradient(90deg, #FF7A00 0%, #FFA800 55%, #FF8C00 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 display: 'inline-block'
@@ -262,7 +277,7 @@ export const FreightServices = ({ onNavigate }) => {
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '18px',
-            margin: '0 24px',
+            margin: '0',
             position: 'relative',
             zIndex: 2
           }}
@@ -284,7 +299,7 @@ export const FreightServices = ({ onNavigate }) => {
         </div>
 
         {/* 4. Horizontal Trust Section */}
-        <div style={{ padding: '0 24px' }}>
+        <div style={{ padding: '0' }}>
           <TrustBar style={{ margin: '30px 0 0 0' }} />
         </div>
       </main>

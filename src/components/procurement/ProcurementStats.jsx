@@ -9,7 +9,7 @@ export const ProcurementStats = ({ stats }) => {
         width: '100%',
         background: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF9 50%, #FFF5EB 100%)',
         borderTop: '1px solid rgba(255, 111, 0, 0.16)',
-        padding: '24px 20px',
+        padding: '24px var(--section-horizontal-padding, 132px)',
         marginTop: '32px',
         boxSizing: 'border-box',
       }}

@@ -22,12 +22,6 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
     shimmer.set({ x: '-110%' });
   };
 
-  const particles = [
-    { left: '20%', delay: 0, dx: -2 },
-    { left: '50%', delay: 0.08, dx: 0 },
-    { left: '76%', delay: 0.15, dx: 2 },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -40,24 +34,24 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '10px',
-        borderRight: isLast ? 'none' : '1px solid rgba(255, 111, 0, 0.15)',
+        gap: '12px',
+        borderRight: isLast ? 'none' : '1px solid #FED7AA',
         paddingRight: isLast ? '0' : '14px',
         paddingLeft: isFirst ? '0' : '14px',
         cursor: 'default',
         position: 'relative',
       }}
     >
-      {/* Glow pill background */}
+      {/* Subtle Warm Hover Pill Backdrop */}
       <motion.div
         variants={{ hov: { opacity: 1, scaleX: 1 } }}
-        initial={{ opacity: 0, scaleX: 0.7 }}
+        initial={{ opacity: 0, scaleX: 0.85 }}
         transition={{ type: 'spring', stiffness: 480, damping: 32 }}
         style={{
           position: 'absolute',
-          inset: '-4px 2px',
-          background: 'linear-gradient(90deg, rgba(255, 243, 224, 0.7) 0%, rgba(255, 224, 178, 0.35) 100%)',
-          borderRadius: '8px',
+          inset: '-6px 2px',
+          background: 'linear-gradient(90deg, rgba(255, 247, 237, 0.95) 0%, rgba(255, 237, 213, 0.45) 100%)',
+          borderRadius: '10px',
           transformOrigin: 'left center',
           pointerEvents: 'none',
         }}
@@ -65,27 +59,28 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
 
       {/* Circular Icon Badge */}
       <motion.div
-        variants={{ hov: { scale: 1.08, y: -2, boxShadow: '0 6px 16px rgba(255, 111, 0, 0.28)' } }}
+        variants={{ hov: { scale: 1.08, y: -2, boxShadow: '0 6px 16px rgba(234, 88, 12, 0.22)' } }}
         transition={SPRING}
         style={{
-          width: '36px',
-          height: '36px',
+          width: '38px',
+          height: '38px',
           borderRadius: '50%',
           background: hovered
-            ? 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)'
+            ? 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)'
             : '#FFF7ED',
           border: hovered
-            ? '1.5px solid #FF6F00'
-            : '1.5px solid rgba(255, 111, 0, 0.4)',
+            ? '1.5px solid #FB923C'
+            : '1.5px solid #FED7AA',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#FF6F00',
+          color: '#EA580C',
           flexShrink: 0,
-          boxShadow: '0 2px 5px rgba(255, 111, 0, 0.08)',
+          boxShadow: '0 2px 6px rgba(234, 88, 12, 0.06)',
           position: 'relative',
           overflow: 'hidden',
           zIndex: 1,
+          transition: 'all 0.25s ease',
         }}
       >
         <motion.span
@@ -97,47 +92,24 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
             bottom: 0,
             width: '55%',
             skewX: '-15deg',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
         />
 
-        {particles.map((p, i) => (
-          <motion.span
-            key={i}
-            animate={hovered
-              ? { y: [-1, -12, -20], opacity: [0, 0.9, 0], x: p.dx }
-              : { y: 0, opacity: 0 }
-            }
-            transition={{ duration: 0.6, delay: p.delay, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              bottom: '10%',
-              left: p.left,
-              width: '2px',
-              height: '2px',
-              borderRadius: '50%',
-              background: '#FF6F00',
-              boxShadow: '0 0 3px rgba(255, 111, 0, 0.85)',
-              pointerEvents: 'none',
-              zIndex: 4,
-            }}
-          />
-        ))}
-
-        <Icon size={17} strokeWidth={1.8} style={{ zIndex: 2 }} />
+        <Icon size={18} strokeWidth={2.2} style={{ zIndex: 2 }} />
       </motion.div>
 
       {/* Typography */}
       <div style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          variants={{ hov: { x: 2, color: '#FF6F00' } }}
+          variants={{ hov: { x: 2, color: '#EA580C' } }}
           transition={SPRING}
           style={{
             fontSize: '11.5px',
             fontWeight: '700',
-            color: '#0F172A',
+            color: '#1E293B',
             letterSpacing: '0.03em',
             fontFamily: 'var(--font-body)',
             textTransform: 'uppercase',
@@ -148,11 +120,12 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
         </motion.div>
         <div
           style={{
-            fontSize: '10px',
+            fontSize: '10.5px',
             color: '#64748B',
-            marginTop: '1.5px',
+            marginTop: '2px',
             fontWeight: '400',
             lineHeight: 1.25,
+            fontFamily: 'var(--font-body)',
           }}
         >
           {item.desc}
@@ -177,10 +150,10 @@ export const ProductTrustBar = () => {
       style={{
         margin: '24px 0 0 0',
         padding: '14px 20px',
-        borderRadius: '14px',
-        background: '#FFFFFF',
-        border: '1px solid rgba(255, 111, 0, 0.22)',
-        boxShadow: '0 4px 18px rgba(255, 111, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+        borderRadius: '16px',
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%)',
+        border: '1.5px solid #FED7AA',
+        boxShadow: '0 4px 18px rgba(15, 23, 42, 0.04)',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
         alignItems: 'center',

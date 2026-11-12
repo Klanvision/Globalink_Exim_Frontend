@@ -22,70 +22,61 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
     shimmer.set({ x: '-110%' });
   };
 
-  const particles = [
-    { left: '20%', delay: 0, dx: -2 },
-    { left: '50%', delay: 0.08, dx: 0 },
-    { left: '76%', delay: 0.15, dx: 2 },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.06, ease: 'easeOut' }}
+      transition={{ duration: 0.45, delay: index * 0.05, ease: 'easeOut' }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       whileHover="hov"
       style={{
         display: 'flex',
         alignItems: 'center',
-        gap: '10px',
-        borderRight: isLast ? 'none' : '1px solid rgba(255, 111, 0, 0.15)',
-        paddingRight: isLast ? '0' : '14px',
-        paddingLeft: isFirst ? '0' : '14px',
+        gap: '12px',
+        borderRight: isLast ? 'none' : '1px solid rgba(226, 232, 240, 0.85)',
+        paddingRight: isLast ? '0' : '16px',
+        paddingLeft: isFirst ? '0' : '16px',
         cursor: 'default',
         position: 'relative',
       }}
     >
-      {/* Warm glow pill background on hover */}
+      {/* Individual Themed Glow Pill Background on Hover */}
       <motion.div
         variants={{ hov: { opacity: 1, scaleX: 1 } }}
-        initial={{ opacity: 0, scaleX: 0.7 }}
+        initial={{ opacity: 0, scaleX: 0.85 }}
         transition={{ type: 'spring', stiffness: 480, damping: 32 }}
         style={{
           position: 'absolute',
-          inset: '-4px 2px',
-          background: 'linear-gradient(90deg, rgba(255, 243, 224, 0.7) 0%, rgba(255, 224, 178, 0.35) 100%)',
-          borderRadius: '8px',
+          inset: '-6px 2px',
+          background: item.hoverBg,
+          borderRadius: '10px',
           transformOrigin: 'left center',
           pointerEvents: 'none',
         }}
       />
 
-      {/* Luxury White & Orange Circular Icon Badge */}
+      {/* Themed Circular Icon Badge */}
       <motion.div
-        variants={{ hov: { scale: 1.08, y: -2, boxShadow: '0 6px 16px rgba(255, 111, 0, 0.28)' } }}
+        variants={{ hov: { scale: 1.08, y: -1, boxShadow: item.hoverShadow } }}
         transition={SPRING}
         style={{
-          width: '36px',
-          height: '36px',
+          width: '38px',
+          height: '38px',
           borderRadius: '50%',
-          background: hovered
-            ? 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)'
-            : '#FFF7ED',
-          border: hovered
-            ? '1.5px solid #FF6F00'
-            : '1.5px solid rgba(255, 111, 0, 0.4)',
+          background: hovered ? item.pillBg : item.bg,
+          border: hovered ? `1.5px solid ${item.hoverBorder}` : `1.5px solid ${item.border}`,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#FF6F00',
+          color: item.color,
           flexShrink: 0,
-          boxShadow: '0 2px 5px rgba(255, 111, 0, 0.08)',
+          boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)',
           position: 'relative',
           overflow: 'hidden',
           zIndex: 1,
+          transition: 'background 0.25s ease, border-color 0.25s ease',
         }}
       >
         {/* Shimmer sweep effect */}
@@ -98,75 +89,48 @@ const TrustItem = ({ item, isLast, isFirst, index }) => {
             bottom: 0,
             width: '55%',
             skewX: '-15deg',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.85) 50%, transparent 100%)',
             pointerEvents: 'none',
             zIndex: 3,
           }}
         />
 
-        {/* Micro-particles */}
-        {particles.map((p, i) => (
-          <motion.span
-            key={i}
-            animate={hovered
-              ? { y: [-1, -12, -20], opacity: [0, 0.9, 0], x: p.dx }
-              : { y: 0, opacity: 0 }
-            }
-            transition={{ duration: 0.6, delay: p.delay, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              bottom: '10%',
-              left: p.left,
-              width: '2px',
-              height: '2px',
-              borderRadius: '50%',
-              background: '#FF6F00',
-              boxShadow: '0 0 3px rgba(255, 111, 0, 0.85)',
-              pointerEvents: 'none',
-              zIndex: 4,
-            }}
-          />
-        ))}
-
-        <motion.div
-          variants={{ hov: { rotate: [0, -5, 5, 0] } }}
-          transition={{ duration: 0.35 }}
-          style={{ display: 'flex', zIndex: 2 }}
-        >
-          <Icon size={17} strokeWidth={1.8} />
-        </motion.div>
+        <div style={{ display: 'flex', zIndex: 2 }}>
+          <Icon size={19} strokeWidth={2.6} />
+        </div>
       </motion.div>
 
-      {/* Typography */}
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      {/* Typography with Themed Hover Transition */}
+      <div style={{ position: 'relative', zIndex: 1, minWidth: 0 }}>
         <motion.div
-          variants={{ hov: { x: 2, color: '#FF6F00' } }}
+          variants={{ hov: { x: 1, color: item.color } }}
           transition={SPRING}
           style={{
-            fontSize: '11.5px',
-            fontWeight: '700',
-            color: '#0F172A',
+            fontSize: '11px',
+            fontWeight: '800',
+            color: '#1E293B',
             letterSpacing: '0.03em',
             fontFamily: 'var(--font-body)',
             textTransform: 'uppercase',
-            lineHeight: 1.2,
+            lineHeight: 1.25,
+            transition: 'color 0.22s ease',
+            whiteSpace: 'nowrap',
           }}
         >
           {item.title}
         </motion.div>
-        <motion.div
-          variants={{ hov: { x: 2 } }}
-          transition={{ ...SPRING, delay: 0.02 }}
+        <div
           style={{
-            fontSize: '10px',
+            fontSize: '10.5px',
             color: '#64748B',
-            marginTop: '1.5px',
-            fontWeight: '400',
+            marginTop: '2px',
+            fontWeight: '500',
             lineHeight: 1.25,
+            whiteSpace: 'nowrap',
           }}
         >
           {item.desc}
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );
@@ -178,26 +142,61 @@ export const TrustBar = ({ style = {} }) => {
       icon: Globe,
       title: 'GLOBAL NETWORK',
       desc: 'Across 120+ Countries',
+      color: '#0284C7', // Sky Blue
+      bg: '#F0F9FF',
+      border: '#BAE6FD',
+      hoverBg: 'linear-gradient(90deg, rgba(240, 249, 255, 0.95) 0%, rgba(224, 242, 254, 0.5) 100%)',
+      hoverShadow: '0 6px 16px rgba(2, 132, 199, 0.22)',
+      hoverBorder: '#38BDF8',
+      pillBg: '#E0F2FE',
     },
     {
       icon: ShieldCheck,
       title: 'SAFE & SECURE',
       desc: 'Your Cargo, Our Responsibility',
+      color: '#4F46E5', // Indigo
+      bg: '#EEF2FF',
+      border: '#C7D2FE',
+      hoverBg: 'linear-gradient(90deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.5) 100%)',
+      hoverShadow: '0 6px 16px rgba(79, 70, 229, 0.22)',
+      hoverBorder: '#818CF8',
+      pillBg: '#E0E7FF',
     },
     {
       icon: Clock3,
       title: 'ON-TIME DELIVERY',
       desc: 'Because Time Matters',
+      color: '#EA580C', // Sunset Amber
+      bg: '#FFF7ED',
+      border: '#FED7AA',
+      hoverBg: 'linear-gradient(90deg, rgba(255, 247, 237, 0.95) 0%, rgba(255, 237, 213, 0.5) 100%)',
+      hoverShadow: '0 6px 16px rgba(234, 88, 12, 0.22)',
+      hoverBorder: '#FB923C',
+      pillBg: '#FFEDD5',
     },
     {
       icon: Headphones,
       title: '24/7 CUSTOMER SUPPORT',
       desc: "We're Here, Anytime",
+      color: '#9333EA', // Violet/Purple
+      bg: '#FAF5FF',
+      border: '#E9D5FF',
+      hoverBg: 'linear-gradient(90deg, rgba(250, 245, 255, 0.95) 0%, rgba(243, 232, 255, 0.5) 100%)',
+      hoverShadow: '0 6px 16px rgba(147, 51, 234, 0.22)',
+      hoverBorder: '#C084FC',
+      pillBg: '#F3E8FF',
     },
     {
       icon: Leaf,
       title: 'SUSTAINABLE LOGISTICS',
       desc: 'Moving Forward Responsibly',
+      color: '#16A34A', // Emerald Green
+      bg: '#F0FDF4',
+      border: '#BBF7D0',
+      hoverBg: 'linear-gradient(90deg, rgba(240, 253, 244, 0.95) 0%, rgba(220, 252, 231, 0.5) 100%)',
+      hoverShadow: '0 6px 16px rgba(22, 163, 74, 0.22)',
+      hoverBorder: '#4ADE80',
+      pillBg: '#DCFCE7',
     },
   ];
 
@@ -205,15 +204,15 @@ export const TrustBar = ({ style = {} }) => {
     <div
       className="trust-bar-container"
       style={{
-        margin: '24px 0 0 0',
-        padding: '14px 20px',
-        border: '1px solid rgba(255, 111, 0, 0.22)',
-        borderRadius: '14px',
-        background: '#FFFFFF',
+        margin: '26px 0 0 0',
+        padding: '16px 22px',
+        border: '1.5px solid rgba(226, 232, 240, 0.95)',
+        borderRadius: '16px',
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%)',
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
         alignItems: 'center',
-        boxShadow: '0 4px 18px rgba(255, 111, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+        boxShadow: '0 4px 20px rgba(15, 23, 42, 0.04)',
         position: 'relative',
         overflow: 'hidden',
         ...style,

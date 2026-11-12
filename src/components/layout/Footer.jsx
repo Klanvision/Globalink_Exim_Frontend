@@ -462,7 +462,7 @@ export const Footer = ({ onNavigate }) => {
       <div
         style={{
           position: 'relative', zIndex: 1, width: '100%',
-          padding: '36px 36px 22px 36px', boxSizing: 'border-box',
+          padding: '36px var(--section-horizontal-padding, 132px) 22px var(--section-horizontal-padding, 132px)', boxSizing: 'border-box',
         }}
       >
         {/* 7-Column Grid */}

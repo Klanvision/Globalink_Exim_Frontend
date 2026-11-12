@@ -94,10 +94,10 @@ export const TradeSearch = ({ onSearch, containerStyle = {} }) => {
         transition={{ duration: 0.4 }}
         style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.12, flexShrink: 0, zIndex: 1 }}
       >
-        <span style={{ fontSize: '15px', fontFamily: "'Georgia', serif", color: '#FFFFFF', fontWeight: '700' }}>
+        <span style={{ fontSize: '15px', fontFamily: 'var(--font-body)', color: '#FFFFFF', fontWeight: '700' }}>
           What are you
         </span>
-        <span style={{ fontSize: '15px', fontFamily: "'Georgia', serif", color: '#FFFFFF', fontWeight: '700' }}>
+        <span style={{ fontSize: '15px', fontFamily: 'var(--font-body)', color: '#FFFFFF', fontWeight: '700' }}>
           looking for?
         </span>
       </motion.div>

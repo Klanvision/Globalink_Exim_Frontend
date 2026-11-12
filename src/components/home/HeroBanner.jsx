@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { HeroFeature } from './HeroFeature';
 import { CTAButtons } from './CTAButtons';
 import { InteractiveLogisticsHub } from './InteractiveLogisticsHub';
@@ -25,13 +26,14 @@ export const HeroBanner = ({
       }}
     >
       {/* ── Image area with gradient + text overlay ── */}
-      <div style={{ position: 'relative', lineHeight: '0', fontSize: '0' }}>
+      <div style={{ position: 'relative', minHeight: '560px', lineHeight: '0', fontSize: '0' }}>
         {/* Full-width Banner Image */}
         <img
           src="/hero-section-banner-v2.png"
           alt="GlobalLink Exim – Bridging Global Trade"
           style={{
             width: '100%',
+            minHeight: '560px',
             height: 'auto',
             display: 'block',
             objectFit: 'cover',
@@ -76,13 +78,18 @@ export const HeroBanner = ({
             zIndex: 2,
             display: 'flex',
             alignItems: 'center',
-            padding: '0 5% 0 32px',
+            padding: '24px var(--section-horizontal-padding, 132px) 76px var(--section-horizontal-padding, 132px)',
             boxSizing: 'border-box',
             fontSize: 'initial',
             lineHeight: 'initial',
           }}
         >
-          <div style={{ maxWidth: '820px' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            style={{ maxWidth: '840px', width: '100%' }}
+          >
             {/* Main Brand Name — orange-to-yellow gradient, bold */}
             <h1
               className="hero-heading"
@@ -110,8 +117,18 @@ export const HeroBanner = ({
 
             {/* Decorative separator bars */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginTop: '16px', marginBottom: '18px' }}>
-              <div style={{ width: '54px', height: '3.5px', background: 'linear-gradient(90deg, #FF8C00, #FFD000)', borderRadius: '2px' }} />
-              <div style={{ width: '18px', height: '3.5px', background: 'linear-gradient(90deg, #FFD000, rgba(255,208,0,0.2))', borderRadius: '2px' }} />
+              <motion.div
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                style={{ width: '54px', height: '3.5px', background: 'linear-gradient(90deg, #FF8C00, #FFD000)', borderRadius: '2px' }}
+              />
+              <motion.div
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.5, delay: 0.28 }}
+                style={{ width: '18px', height: '3.5px', background: 'linear-gradient(90deg, #FFD000, rgba(255,208,0,0.2))', borderRadius: '2px' }}
+              />
             </div>
 
             {/* Description */}
@@ -139,16 +156,20 @@ export const HeroBanner = ({
               onExploreServices={onExploreServices}
               onExploreProducts={onExploreProducts}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* ── Interactive 3-Column Logistics Hub (Self-Service Enterprise Suite) ── */}
       <div
+        className="hero-logistics-hub-wrapper"
         style={{
           width: '100%',
           boxSizing: 'border-box',
-          padding: '16px 24px 24px 24px',
+          padding: '0 var(--section-horizontal-padding, 132px) 28px var(--section-horizontal-padding, 132px)',
+          position: 'relative',
+          zIndex: 10,
+          marginTop: '-58px',
           fontSize: 'initial',
           lineHeight: 'initial',
         }}

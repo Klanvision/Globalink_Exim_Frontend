@@ -78,4 +78,14 @@ npm run dev
 - **Adaptive Layout:** Responsive drawer sidebar, mobile navigation header, dynamic grid math, and fluid typography.
 - **Data Visualizations & Tables:** Interactive metric cards, searchable dynamic data tables with status pills, pagination, and actionable modals.
 - **Live Health Monitor:** Real-time API connection ping status indicator integrated directly into the top navigation.
-"# KPH-Exports-Imports_Frontend" 
+
+---
+
+## 🌟 Logistics Hub Suite
+
+Enterprise-grade booking interface (`InteractiveLogisticsHub.jsx`) built with Framer Motion:
+
+- **Customer Access:** Fast login portal and account registration.
+- **Quote Engine:** Multimodal freight pricing (Road, Air, Sea, Contract) with port autocomplete, 180° swap, and live rate breakdowns.
+- **Shipment Tracking:** GPS tracking, quick demo lookups, progress meters, and status timelines.
+- **AI Assistant:** 24/7 interactive logistics co-pilot drawer.

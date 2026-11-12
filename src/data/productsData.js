@@ -1,4 +1,4 @@
-import { Leaf, ShieldCheck, Sparkles, Shirt, Settings, Award, CheckCircle } from 'lucide-react';
+import { Leaf, ShieldCheck, Shirt, Settings, Award, CheckCircle } from 'lucide-react';
 
 export const featuredProducts = [
   {
@@ -26,11 +26,11 @@ export const featuredProducts = [
     moq: 'MOQ: 300 Pcs',
     image: '/decor.jpg',
     badgeText: 'HANDCRAFTED',
-    badgeBg: '#082653', // Dark navy
+    badgeBg: '#0F172A', // Charcoal slate
     badgeTextColor: '#FAAE2B', // Gold text
     badgePosition: 'top-left',
     benefits: [
-      { label: 'Artisan Made', icon: Sparkles },
+      { label: 'Artisan Made', icon: CheckCircle },
       { label: 'Unique Designs', icon: Award },
       { label: 'Sustainable', icon: Leaf },
     ]
@@ -43,13 +43,13 @@ export const featuredProducts = [
     moq: 'MOQ: 2000 Pcs',
     image: '/garments.jpg',
     badgeText: 'PREMIUM\nFABRIC',
-    badgeBg: '#082653', // Dark navy
+    badgeBg: '#0F172A', // Charcoal slate
     badgeTextColor: '#FFFFFF',
     badgePosition: 'bottom-right',
     benefits: [
       { label: 'Soft & Durable', icon: Shirt },
       { label: 'Export Quality', icon: Award },
-      { label: 'Trendy Styles', icon: Sparkles },
+      { label: 'Trendy Styles', icon: ShieldCheck },
     ]
   },
   {
@@ -60,7 +60,7 @@ export const featuredProducts = [
     moq: 'MOQ: 1000 Pcs',
     image: '/automotive.jpg',
     badgeText: 'PRECISION\nENGINEERED',
-    badgeBg: '#082653', // Dark navy
+    badgeBg: '#0F172A', // Charcoal slate
     badgeTextColor: '#FFFFFF',
     badgePosition: 'right',
     benefits: [

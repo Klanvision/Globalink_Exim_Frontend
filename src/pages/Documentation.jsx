@@ -2,15 +2,9 @@ import { useLoading } from '../context/LoadingContext';
 import React, { useState } from 'react';
 import { Header } from '../components/layout/Header';
 import { DocumentationGrid } from '../components/documentation/DocumentationGrid';
-import { BenefitPanel } from '../components/documentation/BenefitPanel';
-import { BrandValueBar } from '../components/documentation/BrandValueBar';
 import { Footer } from '../components/layout/Footer';
 import { TrackModal } from '../components/common/TrackModal';
-import {
-  documentationCategories,
-  complianceBenefits,
-  brandValues,
-} from '../data/documentationData';
+import { documentationCategories } from '../data/documentationData';
 import { ArrowRight } from 'lucide-react';
 
 export const Documentation = ({ onNavigate }) => {
@@ -28,8 +22,8 @@ export const Documentation = ({ onNavigate }) => {
       className="documentation-page-root"
       style={{
         width: '100%',
-        maxWidth: '1200px',
-        margin: '0 auto',
+        maxWidth: '100%',
+        margin: '0',
         minHeight: '100vh',
         background: '#FAFBFC',
         position: 'relative',
@@ -50,6 +44,9 @@ export const Documentation = ({ onNavigate }) => {
         style={{
           position: 'relative',
           paddingTop: '40px',
+          paddingBottom: '40px',
+          paddingLeft: 'var(--section-horizontal-padding, 132px)',
+          paddingRight: 'var(--section-horizontal-padding, 132px)',
           background: '#FAFBFC',
         }}
       >
@@ -58,8 +55,8 @@ export const Documentation = ({ onNavigate }) => {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(8, 38, 83, 0.035) 0%, transparent 60%),
-                              radial-gradient(ellipse at 20% 80%, rgba(8, 38, 83, 0.025) 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(ellipse at 80% 20%, rgba(255, 111, 0, 0.035) 0%, transparent 60%),
+                              radial-gradient(ellipse at 20% 80%, rgba(255, 111, 0, 0.025) 0%, transparent 50%)`,
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -72,21 +69,21 @@ export const Documentation = ({ onNavigate }) => {
             display: 'flex',
             position: 'relative',
             zIndex: 1,
-            padding: '0 40px',
+            padding: '0',
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: '24px',
           }}
         >
-          {/* Left Hero Content Area */}
-          <div style={{ flex: '1 1 68%', maxWidth: '780px' }}>
+          {/* Hero Content Area */}
+          <div style={{ width: '100%' }}>
             {/* Elegant Georgia Serif Heading */}
             <h1
               style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-body)',
                 fontSize: '44px',
                 fontWeight: '700',
-                color: '#082653',
+                color: '#0F172A',
                 lineHeight: '1.08',
                 letterSpacing: '-0.5px',
                 marginBottom: '8px',
@@ -123,7 +120,7 @@ export const Documentation = ({ onNavigate }) => {
               style={{
                 width: '320px',
                 height: '46px',
-                backgroundColor: '#082653',
+                background: 'linear-gradient(135deg, #FF6F00 0%, #FF8C00 45%, #E65100 100%)',
                 borderRadius: '7px',
                 color: '#FFFFFF',
                 fontSize: '15px',
@@ -132,7 +129,7 @@ export const Documentation = ({ onNavigate }) => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '0 20px',
-                boxShadow: '0 4px 14px rgba(8, 38, 83, 0.22)',
+                boxShadow: '0 4px 14px rgba(230, 81, 0, 0.28)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 border: 'none',
@@ -142,38 +139,7 @@ export const Documentation = ({ onNavigate }) => {
               <ArrowRight size={18} strokeWidth={2.5} color="#F4B52E" />
             </button>
           </div>
-
-          {/* Right Hero Image Container */}
-          <div
-            className="doc-hero-image-container"
-            style={{
-              flex: '0 0 32%',
-              maxWidth: '380px',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <img
-              src="/documentation-hero.jpg"
-              alt="Trade Documentation & Compliance"
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                filter: 'drop-shadow(0 10px 25px rgba(8, 38, 83, 0.12))',
-              }}
-            />
-          </div>
         </div>
-
-        {/* 3. 5-Column Compliance Benefit Panel */}
-        <BenefitPanel benefits={complianceBenefits} />
-
-        {/* 4. Bottom 4-Item Brand Value Strip */}
-        <BrandValueBar items={brandValues} />
       </main>
 
       {/* 3. Shared Footer */}
